@@ -1,0 +1,119 @@
+import type { Metadata } from "next";
+import { Fraunces, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import Link from "next/link";
+import Script from "next/script";
+import { NavLinks } from "@/components/NavLinks";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import "./globals.css";
+
+const THEME_INIT_SCRIPT = `
+(function () {
+  try {
+    var stored = localStorage.getItem("theme");
+    var dark = stored ? stored === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (dark) document.documentElement.classList.add("dark");
+  } catch (e) {}
+})();
+`;
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-display",
+  style: ["normal", "italic"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const DESCRIPTION =
+  "Buy-now-or-wait price comparisons for textbooks and dorm essentials.";
+
+export const metadata: Metadata = {
+  title: {
+    default: "Student Price Copilot",
+    template: "%s — Student Price Copilot",
+  },
+  description: DESCRIPTION,
+  openGraph: {
+    title: "Student Price Copilot",
+    description: DESCRIPTION,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Student Price Copilot",
+    description: DESCRIPTION,
+  },
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html
+      lang="en"
+      className={`${fraunces.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+    >
+      <body className="flex min-h-screen flex-col font-sans">
+        <Script
+          id="theme-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }}
+        />
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-20 focus:rounded-md focus:bg-ink focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:uppercase focus:text-paper"
+        >
+          Skip to content
+        </a>
+        <header className="sticky top-0 z-10 border-b border-line bg-paper/90 backdrop-blur">
+          <div className="mx-auto flex max-w-4xl flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-0">
+            <Link
+              href="/"
+              className="group flex items-center gap-2.5 self-start rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald"
+            >
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-ink font-mono text-sm font-semibold text-paper transition-colors group-hover:bg-emerald">
+                $
+              </span>
+              <span className="whitespace-nowrap font-display text-base leading-none text-ink sm:text-lg">
+                Student Price <em className="not-italic text-emerald">Copilot</em>
+              </span>
+            </Link>
+            <div className="flex items-center justify-between gap-4 sm:justify-end sm:gap-5">
+              <NavLinks />
+              <ThemeToggle />
+            </div>
+          </div>
+        </header>
+
+        <main id="main" className="mx-auto w-full max-w-4xl flex-1 px-4 py-10">
+          {children}
+        </main>
+
+        <footer className="border-t border-dashed border-line">
+          <div className="mx-auto flex max-w-4xl flex-col gap-1 px-4 py-6 text-xs text-ink-faint sm:flex-row sm:items-center sm:justify-between">
+            <p className="font-mono uppercase tracking-[0.14em]">
+              One engine &middot; two categories &middot; zero overpaying
+            </p>
+            <p>Built as a portfolio project — prices update on search.</p>
+          </div>
+        </footer>
+      </body>
+    </html>
+  );
+}

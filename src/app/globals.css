@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-paper: 250 246 237;
+  --color-paper-raised: 255 255 255;
+  --color-ink: 27 24 18;
+  --color-ink-soft: 114 106 89;
+  --color-ink-faint: 167 156 134;
+  --color-line: 230 220 198;
+  --color-line-soft: 239 232 216;
+  --color-emerald: 13 110 79;
+  --color-emerald-soft: 225 240 230;
+  --color-emerald-deep: 10 89 64;
+  --color-amber: 173 122 22;
+  --color-amber-soft: 250 240 217;
+  --color-amber-deep: 138 98 16;
+}
+
+.dark {
+  --color-paper: 23 20 15;
+  --color-paper-raised: 31 27 20;
+  --color-ink: 243 238 225;
+  --color-ink-soft: 184 173 148;
+  --color-ink-faint: 124 115 96;
+  --color-line: 58 53 39;
+  --color-line-soft: 44 40 32;
+  --color-emerald: 52 181 121;
+  --color-emerald-soft: 22 58 42;
+  --color-emerald-deep: 79 203 148;
+  --color-amber: 216 155 61;
+  --color-amber-soft: 58 46 18;
+  --color-amber-deep: 227 181 100;
+}
+
+body {
+  @apply bg-paper text-ink transition-colors duration-200;
+  background-image: repeating-linear-gradient(
+      180deg,
+      transparent,
+      transparent 27px,
+      rgb(var(--color-ink) / 0.035) 28px
+    ),
+    radial-gradient(rgb(var(--color-ink) / 0.05) 0.6px, transparent 0.6px);
+  background-size: auto, 13px 13px;
+}
+
+::selection {
+  background-color: rgb(var(--color-emerald));
+  color: rgb(var(--color-paper));
+}
+
+@layer utilities {
+  .tear-edge {
+    background-image: radial-gradient(
+      circle at 7px 7px,
+      rgb(var(--color-paper)) 7px,
+      transparent 7.5px
+    );
+    background-size: 16px 15px;
+    background-repeat: repeat-x;
+    background-position: bottom -7.5px left -8px;
+  }
+
+  .animate-fade-up {
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .animate-stamp {
+    animation: stampIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes stampIn {
+  from {
+    opacity: 0;
+    transform: rotate(-14deg) scale(1.4);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-8deg) scale(1);
+  }
+}

@@ -1,0 +1,203 @@
+[
+  {
+    "title": "Mini Fridge (3.2 cu ft)",
+    "category": "Appliances",
+    "shareable": true,
+    "prices": [
+      { "vendor": "Target", "price": 149.99 },
+      { "vendor": "Walmart", "price": 129.0 },
+      { "vendor": "Amazon", "price": 139.99 },
+      { "vendor": "Best Buy", "price": 159.99 }
+    ]
+  },
+  {
+    "title": "Microwave (0.7 cu ft)",
+    "category": "Appliances",
+    "shareable": true,
+    "prices": [
+      { "vendor": "Target", "price": 64.99 },
+      { "vendor": "Walmart", "price": 59.0 },
+      { "vendor": "Amazon", "price": 62.99 }
+    ]
+  },
+  {
+    "title": "Twin XL Fitted Sheet Set",
+    "category": "Bedding",
+    "shareable": false,
+    "prices": [
+      { "vendor": "Target", "price": 29.99 },
+      { "vendor": "Amazon", "price": 24.99 },
+      { "vendor": "Bed Bath & Beyond", "price": 34.99 }
+    ]
+  },
+  {
+    "title": "Twin XL Comforter",
+    "category": "Bedding",
+    "shareable": false,
+    "prices": [
+      { "vendor": "Target", "price": 39.99 },
+      { "vendor": "Amazon", "price": 34.99 },
+      { "vendor": "IKEA", "price": 29.99 }
+    ]
+  },
+  {
+    "title": "Mattress Topper (Twin XL)",
+    "category": "Bedding",
+    "shareable": false,
+    "prices": [
+      { "vendor": "Target", "price": 49.99 },
+      { "vendor": "Amazon", "price": 44.99 },
+      { "vendor": "Walmart", "price": 39.99 }
+    ]
+  },
+  {
+    "title": "Under-Bed Storage Bins (Set of 2)",
+    "category": "Storage",
+    "shareable": false,
+    "prices": [
+      { "vendor": "Target", "price": 24.99 },
+      { "vendor": "Walmart", "price": 19.99 },
+      { "vendor": "The Container Store", "price": 34.99 }
+    ]
+  },
+  {
+    "title": "Closet Organizer Shelves",
+    "category": "Storage",
+    "shareable": false,
+    "prices": [
+      { "vendor": "Amazon", "price": 22.99 },
+      { "vendor": "Target", "price": 26.99 },
+      { "vendor": "IKEA", "price": 19.99 }
+    ]
+  },
+  {
+    "title": "Command Strips & Hooks Variety Pack",
+    "category": "Storage",
+    "shareable": false,
+    "prices": [
+      { "vendor": "Target", "price": 14.99 },
+      { "vendor": "Amazon", "price": 12.99 },
+      { "vendor": "Walmart", "price": 13.49 }
+    ]
+  },
+  {
+    "title": "Area Rug (5x7)",
+    "category": "Decor",
+    "shareable": true,
+    "prices": [
+      { "vendor": "Target", "price": 79.99 },
+      { "vendor": "Amazon", "price": 69.99 },
+      { "vendor": "IKEA", "price": 59.99 }
+    ]
+  },
+  {
+    "title": "String Lights (LED, 33ft)",
+    "category": "Decor",
+    "shareable": true,
+    "prices": [
+      { "vendor": "Amazon", "price": 15.99 },
+      { "vendor": "Target", "price": 17.99 },
+      { "vendor": "Walmart", "price": 14.49 }
+    ]
+  },
+  {
+    "title": "Desk Lamp with USB Port",
+    "category": "Electronics",
+    "shareable": false,
+    "prices": [
+      { "vendor": "Target", "price": 24.99 },
+      { "vendor": "Amazon", "price": 21.99 },
+      { "vendor": "Best Buy", "price": 27.99 }
+    ]
+  },
+  {
+    "title": "Power Strip with Surge Protector",
+    "category": "Electronics",
+    "shareable": false,
+    "prices": [
+      { "vendor": "Amazon", "price": 18.99 },
+      { "vendor": "Target", "price": 21.99 },
+      { "vendor": "Best Buy", "price": 19.99 }
+    ]
+  },
+  {
+    "title": "Portable Bluetooth Speaker",
+    "category": "Electronics",
+    "shareable": true,
+    "prices": [
+      { "vendor": "Best Buy", "price": 49.99 },
+      { "vendor": "Amazon", "price": 44.99 },
+      { "vendor": "Target", "price": 47.99 }
+    ]
+  },
+  {
+    "title": "Shower Caddy",
+    "category": "Bathroom",
+    "shareable": false,
+    "prices": [
+      { "vendor": "Target", "price": 16.99 },
+      { "vendor": "Amazon", "price": 14.99 },
+      { "vendor": "Walmart", "price": 12.99 }
+    ]
+  },
+  {
+    "title": "Memory Foam Desk Chair Cushion",
+    "category": "Furniture",
+    "shareable": false,
+    "prices": [
+      { "vendor": "Amazon", "price": 19.99 },
+      { "vendor": "Target", "price": 22.99 },
+      { "vendor": "Walmart", "price": 17.99 }
+    ]
+  },
+  {
+    "title": "Folding Storage Ottoman",
+    "category": "Furniture",
+    "shareable": true,
+    "prices": [
+      { "vendor": "Target", "price": 34.99 },
+      { "vendor": "Amazon", "price": 29.99 },
+      { "vendor": "Walmart", "price": 27.99 }
+    ]
+  },
+  {
+    "title": "Laundry Hamper (Collapsible)",
+    "category": "Storage",
+    "shareable": false,
+    "prices": [
+      { "vendor": "Target", "price": 14.99 },
+      { "vendor": "Amazon", "price": 12.49 },
+      { "vendor": "Walmart", "price": 11.99 }
+    ]
+  },
+  {
+    "title": "Electric Kettle",
+    "category": "Appliances",
+    "shareable": true,
+    "prices": [
+      { "vendor": "Target", "price": 24.99 },
+      { "vendor": "Amazon", "price": 21.99 },
+      { "vendor": "Walmart", "price": 19.99 }
+    ]
+  },
+  {
+    "title": "Whiteboard Calendar (Wall Mount)",
+    "category": "Decor",
+    "shareable": true,
+    "prices": [
+      { "vendor": "Amazon", "price": 18.99 },
+      { "vendor": "Target", "price": 21.99 },
+      { "vendor": "Staples", "price": 19.99 }
+    ]
+  },
+  {
+    "title": "Blackout Curtains (Twin Window)",
+    "category": "Bedding",
+    "shareable": false,
+    "prices": [
+      { "vendor": "Target", "price": 29.99 },
+      { "vendor": "Amazon", "price": 26.99 },
+      { "vendor": "IKEA", "price": 24.99 }
+    ]
+  }
+]
