@@ -3,6 +3,7 @@
     "title": "Mini Fridge (3.2 cu ft)",
     "category": "Appliances",
     "shareable": true,
+    "shoppingQuery": "3.2 cu ft mini fridge",
     "bestBuyQuery": "3.2 cu ft mini fridge",
     "prices": [
       { "vendor": "Target", "price": 149.99 },
@@ -15,6 +16,7 @@
     "title": "Microwave (0.7 cu ft)",
     "category": "Appliances",
     "shareable": true,
+    "shoppingQuery": "0.7 cu ft microwave",
     "bestBuyQuery": "0.7 cu ft microwave",
     "imageUrl": "https://live.staticflickr.com/2766/13069290114_c33c4ca6dd_c.jpg",
     "imageCredit": "Photo by Goedeker's, CC BY 2.0",
@@ -29,6 +31,7 @@
     "title": "Twin XL Fitted Sheet Set",
     "category": "Bedding",
     "shareable": false,
+    "shoppingQuery": "twin xl fitted sheet set",
     "prices": [
       { "vendor": "Target", "price": 29.99 },
       { "vendor": "Amazon", "price": 24.99 },
@@ -39,6 +42,7 @@
     "title": "Twin XL Comforter",
     "category": "Bedding",
     "shareable": false,
+    "shoppingQuery": "twin xl comforter",
     "prices": [
       { "vendor": "Target", "price": 39.99 },
       { "vendor": "Amazon", "price": 34.99 },
@@ -49,6 +53,7 @@
     "title": "Mattress Topper (Twin XL)",
     "category": "Bedding",
     "shareable": false,
+    "shoppingQuery": "twin xl mattress topper",
     "prices": [
       { "vendor": "Target", "price": 49.99 },
       { "vendor": "Amazon", "price": 44.99 },
@@ -56,9 +61,21 @@
     ]
   },
   {
+    "title": "Fleece Throw Blanket",
+    "category": "Bedding",
+    "shareable": false,
+    "shoppingQuery": "fleece throw blanket",
+    "prices": [
+      { "vendor": "Target", "price": 19.99 },
+      { "vendor": "Amazon", "price": 16.99 },
+      { "vendor": "Walmart", "price": 14.99 }
+    ]
+  },
+  {
     "title": "Under-Bed Storage Bins (Set of 2)",
     "category": "Storage",
     "shareable": false,
+    "shoppingQuery": "under bed storage bins set of 2",
     "prices": [
       { "vendor": "Target", "price": 24.99 },
       { "vendor": "Walmart", "price": 19.99 },
@@ -69,6 +86,7 @@
     "title": "Closet Organizer Shelves",
     "category": "Storage",
     "shareable": false,
+    "shoppingQuery": "closet organizer shelves",
     "prices": [
       { "vendor": "Amazon", "price": 22.99 },
       { "vendor": "Target", "price": 26.99 },
@@ -79,6 +97,7 @@
     "title": "Command Strips & Hooks Variety Pack",
     "category": "Storage",
     "shareable": false,
+    "shoppingQuery": "command strips hooks variety pack",
     "prices": [
       { "vendor": "Target", "price": 14.99 },
       { "vendor": "Amazon", "price": 12.99 },
@@ -89,6 +108,7 @@
     "title": "Area Rug (5x7)",
     "category": "Decor",
     "shareable": true,
+    "shoppingQuery": "area rug 5x7",
     "prices": [
       { "vendor": "Target", "price": 79.99 },
       { "vendor": "Amazon", "price": 69.99 },
@@ -99,6 +119,7 @@
     "title": "String Lights (LED, 33ft)",
     "category": "Decor",
     "shareable": true,
+    "shoppingQuery": "led string lights 33ft",
     "imageUrl": "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcHgxMTYyNTYzLWltYWdlLWt3dnc4aHV6LmpwZw.jpg",
     "prices": [
       { "vendor": "Amazon", "price": 15.99 },
@@ -107,9 +128,21 @@
     ]
   },
   {
+    "title": "Decorative Throw Pillows (Set of 2)",
+    "category": "Decor",
+    "shareable": false,
+    "shoppingQuery": "decorative throw pillows set of 2",
+    "prices": [
+      { "vendor": "Target", "price": 24.99 },
+      { "vendor": "Amazon", "price": 21.99 },
+      { "vendor": "IKEA", "price": 17.99 }
+    ]
+  },
+  {
     "title": "Desk Lamp with USB Port",
     "category": "Electronics",
     "shareable": false,
+    "shoppingQuery": "desk lamp with usb port",
     "imageUrl": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9zdGF0aWMvaW1hZ2Uvd2Vic2l0ZS8yMDIyLTA0L2xyL25zODAxOS1pbWFnZS1rd3Z3azV3dS5qcGc.jpg",
     "prices": [
       { "vendor": "Target", "price": 24.99 },
@@ -121,6 +154,7 @@
     "title": "Power Strip with Surge Protector",
     "category": "Electronics",
     "shareable": false,
+    "shoppingQuery": "power strip surge protector",
     "prices": [
       { "vendor": "Amazon", "price": 18.99 },
       { "vendor": "Target", "price": 21.99 },
@@ -131,6 +165,7 @@
     "title": "Portable Bluetooth Speaker",
     "category": "Electronics",
     "shareable": true,
+    "shoppingQuery": "portable bluetooth speaker",
     "imageUrl": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA0L2JzMzYxLWltYWdlLmpwZw.jpg",
     "prices": [
       { "vendor": "Best Buy", "price": 49.99 },
@@ -142,6 +177,7 @@
     "title": "Shower Caddy",
     "category": "Bathroom",
     "shareable": false,
+    "shoppingQuery": "shower caddy",
     "prices": [
       { "vendor": "Target", "price": 16.99 },
       { "vendor": "Amazon", "price": 14.99 },
@@ -152,6 +188,7 @@
     "title": "Memory Foam Desk Chair Cushion",
     "category": "Furniture",
     "shareable": false,
+    "shoppingQuery": "memory foam desk chair cushion",
     "prices": [
       { "vendor": "Amazon", "price": 19.99 },
       { "vendor": "Target", "price": 22.99 },
@@ -162,6 +199,7 @@
     "title": "Folding Storage Ottoman",
     "category": "Furniture",
     "shareable": true,
+    "shoppingQuery": "folding storage ottoman",
     "prices": [
       { "vendor": "Target", "price": 34.99 },
       { "vendor": "Amazon", "price": 29.99 },
@@ -169,9 +207,21 @@
     ]
   },
   {
+    "title": "Mini Bar Cart (Coffee Station)",
+    "category": "Furniture",
+    "shareable": true,
+    "shoppingQuery": "small rolling bar cart",
+    "prices": [
+      { "vendor": "Target", "price": 89.99 },
+      { "vendor": "Amazon", "price": 79.99 },
+      { "vendor": "Walmart", "price": 74.99 }
+    ]
+  },
+  {
     "title": "Laundry Hamper (Collapsible)",
     "category": "Storage",
     "shareable": false,
+    "shoppingQuery": "collapsible laundry hamper",
     "prices": [
       { "vendor": "Target", "price": 14.99 },
       { "vendor": "Amazon", "price": 12.49 },
@@ -182,6 +232,7 @@
     "title": "Electric Kettle",
     "category": "Appliances",
     "shareable": true,
+    "shoppingQuery": "electric kettle",
     "imageUrl": "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvZnJlbGVjdHJpY19rZXR0bGVfcGxhc3RpY193aGl0ZS1pbWFnZS1reWNoOGlieC5qcGc.jpg",
     "prices": [
       { "vendor": "Target", "price": 24.99 },
@@ -190,9 +241,23 @@
     ]
   },
   {
+    "title": "Single-Serve Coffee Maker",
+    "category": "Appliances",
+    "shareable": true,
+    "shoppingQuery": "single serve coffee maker compact",
+    "bestBuyQuery": "single serve coffee maker compact",
+    "prices": [
+      { "vendor": "Target", "price": 34.99 },
+      { "vendor": "Amazon", "price": 29.99 },
+      { "vendor": "Walmart", "price": 27.99 },
+      { "vendor": "Best Buy", "price": 39.99 }
+    ]
+  },
+  {
     "title": "Whiteboard Calendar (Wall Mount)",
     "category": "Decor",
     "shareable": true,
+    "shoppingQuery": "whiteboard calendar wall mount",
     "prices": [
       { "vendor": "Amazon", "price": 18.99 },
       { "vendor": "Target", "price": 21.99 },
@@ -203,6 +268,7 @@
     "title": "Blackout Curtains (Twin Window)",
     "category": "Bedding",
     "shareable": false,
+    "shoppingQuery": "blackout curtains",
     "prices": [
       { "vendor": "Target", "price": 29.99 },
       { "vendor": "Amazon", "price": 26.99 },

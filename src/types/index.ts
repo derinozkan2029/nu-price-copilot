@@ -42,10 +42,16 @@ export interface DormItemSeed {
   title: string;
   category: string;
   shareable: boolean; // true if commonly split with a roommate (fridge, rug)
-  // If set, the dorm page fetches a live price + photo from the Best Buy
-  // Products API for this item's "Best Buy" row (see src/lib/bestbuy.ts).
-  // Only set this for items Best Buy actually carries — most of the catalog
-  // has no live source and stays curated.
+  // If set, the dorm page fetches real multi-vendor prices + a real photo
+  // from SerpApi's Google Shopping engine (see src/lib/serpapi.ts), fully
+  // replacing the curated `prices` array below. This is the primary live
+  // source and works for any item.
+  shoppingQuery?: string;
+  // If set, fetches a live price + photo from the Best Buy Products API
+  // for this item's "Best Buy" row (see src/lib/bestbuy.ts) — only swaps
+  // that one row, doesn't replace the array. Secondary fallback, tried
+  // only when shoppingQuery is unset or SerpApi returns nothing; Best Buy
+  // only carries a fraction of the catalog (mostly appliances/electronics).
   bestBuyQuery?: string;
   // A real, freely-licensed representative photo (not the live vendor's own
   // listing image — those are copyrighted). CC0 sources need no credit;

@@ -7,31 +7,54 @@ import { PriceTable } from "@/components/PriceTable";
 import { RecommendationBadge } from "@/components/RecommendationBadge";
 import { CostSplitCalculator } from "@/components/CostSplitCalculator";
 import type { DormItemSeed, RecommendationSignal } from "@/types";
-import type { LiveProduct } from "@/lib/bestbuy";
+import type { VendorPrice } from "@/lib/bookscouter";
 
 interface Recommendation {
   signal: RecommendationSignal;
   rationale: string;
 }
 
+type CuratedPrice = DormItemSeed["prices"][number];
+
+interface LiveResult {
+  source: "serpapi" | "bestbuy" | null;
+  prices: VendorPrice[] | null;
+  imageUrl: string | null;
+}
+
 const items = dormItems as DormItemSeed[];
 
-// items[].prices with the "Best Buy" row swapped for a live price when we
-// have one — the rest of the vendor list stays curated either way.
-function mergedPrices(item: DormItemSeed, live: LiveProduct | null | undefined) {
-  if (!live) return item.prices;
-  return item.prices.map((p) =>
-    p.vendor === "Best Buy" ? { ...p, price: live.price, url: live.productUrl ?? p.url } : p
-  );
+// Real multi-vendor prices (SerpApi) fully replace the curated array;
+// a real single-vendor result (Best Buy) only swaps that one row; nothing
+// live falls back to the curated array either way.
+function effectivePrices(
+  item: DormItemSeed,
+  live: LiveResult | null | undefined
+): (CuratedPrice | VendorPrice)[] {
+  if (live?.source === "serpapi" && live.prices) return live.prices;
+  if (live?.source === "bestbuy" && live.prices) {
+    const bestBuyPrice = live.prices[0];
+    return item.prices.map((p) =>
+      p.vendor === "Best Buy" ? { ...p, price: bestBuyPrice.price, url: bestBuyPrice.url ?? p.url } : p
+    );
+  }
+  return item.prices;
+}
+
+function effectiveImage(
+  item: DormItemSeed,
+  live: LiveResult | null | undefined
+): { url: string | null; isLive: boolean; source: LiveResult["source"] } {
+  if (live?.imageUrl) return { url: live.imageUrl, isLive: true, source: live.source };
+  if (item.imageUrl) return { url: item.imageUrl, isLive: false, source: null };
+  return { url: null, isLive: false, source: null };
 }
 
 function categoryMonogram(category: string) {
   return category.slice(0, 2).toUpperCase();
 }
 
-function resolvedLive(
-  state: LiveProduct | null | "loading" | undefined
-): LiveProduct | null {
+function resolvedLive(state: LiveResult | null | "loading" | undefined): LiveResult | null {
   return state === "loading" || state === undefined ? null : state;
 }
 
@@ -47,14 +70,15 @@ export default function DormPage() {
   >({});
   const [loadingItem, setLoadingItem] = useState<string | null>(null);
 
-  // "loading" while in flight, null once resolved with no match, LiveProduct
-  // once resolved with one. Only fetched for items that name a bestBuyQuery.
+  // "loading" while in flight, LiveResult (possibly source: null) once
+  // resolved. Fetched for every item that names a shoppingQuery or
+  // bestBuyQuery — the route tries SerpApi first, Best Buy second.
   const [liveData, setLiveData] = useState<
-    Record<string, LiveProduct | null | "loading">
+    Record<string, LiveResult | "loading">
   >({});
 
   useEffect(() => {
-    const withLiveQuery = items.filter((i) => i.bestBuyQuery);
+    const withLiveQuery = items.filter((i) => i.shoppingQuery || i.bestBuyQuery);
     setLiveData((prev) => {
       const next = { ...prev };
       for (const item of withLiveQuery) next[item.title] = "loading";
@@ -65,15 +89,21 @@ export default function DormPage() {
       fetch("/api/dorm-item-price", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: item.bestBuyQuery }),
+        body: JSON.stringify({
+          shoppingQuery: item.shoppingQuery,
+          bestBuyQuery: item.bestBuyQuery,
+        }),
       })
         .then((res) => res.json())
-        .then((data) => {
-          setLiveData((prev) => ({ ...prev, [item.title]: data.product ?? null }));
+        .then((data: LiveResult) => {
+          setLiveData((prev) => ({ ...prev, [item.title]: data }));
         })
         .catch((err) => {
           console.error(err);
-          setLiveData((prev) => ({ ...prev, [item.title]: null }));
+          setLiveData((prev) => ({
+            ...prev,
+            [item.title]: { source: null, prices: null, imageUrl: null },
+          }));
         });
     });
   }, []);
@@ -96,7 +126,7 @@ export default function DormPage() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             itemTitle: item.title,
-            prices: mergedPrices(item, resolvedLive(liveData[item.title])).map(
+            prices: effectivePrices(item, resolvedLive(liveData[item.title])).map(
               (p) => ({ ...p, format: null })
             ),
           }),
@@ -114,9 +144,8 @@ export default function DormPage() {
   }
 
   const selectedItem = items.find((i) => i.title === selected) ?? null;
-  const selectedPrices = selectedItem
-    ? mergedPrices(selectedItem, resolvedLive(liveData[selectedItem.title]))
-    : [];
+  const selectedLive = selectedItem ? resolvedLive(liveData[selectedItem.title]) : null;
+  const selectedPrices = selectedItem ? effectivePrices(selectedItem, selectedLive) : [];
 
   return (
     <div className="space-y-6">
@@ -129,10 +158,10 @@ export default function DormPage() {
         </h1>
         <p className="mt-1 text-sm text-ink-soft">
           Everything you need to move into Allison, Bobb-McCulloch, Elder,
-          Sargent, Shepard, or any NU residence hall. The mini fridge and
-          microwave pull a live price and photo from Best Buy&rsquo;s
-          Products API. Everything else is a curated MVP dataset. See the
-          build plan for the v2 data-source approach.
+          Sargent, Shepard, or any NU residence hall. Prices and photos pull
+          live from Google Shopping (and Best Buy for appliances) when
+          available. Anything not found live stays a curated MVP dataset,
+          clearly labeled either way.
         </p>
       </div>
 
@@ -160,11 +189,13 @@ export default function DormPage() {
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
         {filtered.map((item, index) => {
-          const live = liveData[item.title];
-          const prices = mergedPrices(item, live === "loading" ? null : live);
+          const liveState = liveData[item.title];
+          const live = resolvedLive(liveState);
+          const prices = effectivePrices(item, live);
           const cheapest = Math.min(...prices.map((p) => p.price));
           const isSelected = selected === item.title;
-          const isLive = live && live !== "loading";
+          const image = effectiveImage(item, live);
+          const isChecking = liveState === "loading";
 
           return (
             <button
@@ -177,34 +208,28 @@ export default function DormPage() {
               style={{ animationDelay: `${Math.min(index, 8) * 30 + 120}ms` }}
             >
               <div className="relative aspect-[4/3] w-full border-b border-line bg-paper">
-                {isLive && live.imageUrl ? (
+                {image.url ? (
                   <>
                     <Image
-                      src={live.imageUrl}
-                      alt={live.name}
+                      src={image.url}
+                      alt={item.title}
                       fill
                       sizes="(min-width: 640px) 33vw, 50vw"
-                      className="object-contain p-3"
+                      className={image.isLive ? "object-contain p-3" : "object-cover"}
                     />
-                    <span className="absolute left-2 top-2 rounded-full bg-purple px-2 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wide text-paper">
-                      Live &middot; Best Buy
-                    </span>
+                    {image.isLive && (
+                      <span className="absolute left-2 top-2 rounded-full bg-purple px-2 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wide text-paper">
+                        {image.source === "serpapi" ? "Live · Google Shopping" : "Live · Best Buy"}
+                      </span>
+                    )}
                   </>
-                ) : item.imageUrl ? (
-                  <Image
-                    src={item.imageUrl}
-                    alt={item.title}
-                    fill
-                    sizes="(min-width: 640px) 33vw, 50vw"
-                    className="object-cover"
-                  />
                 ) : (
                   <div className="flex h-full w-full flex-col items-center justify-center gap-1">
                     <span className="font-display text-3xl text-ink-faint">
                       {categoryMonogram(item.category)}
                     </span>
                     <span className="font-mono text-[9px] uppercase tracking-wide text-ink-faint">
-                      {live === "loading" ? "Checking live price…" : "Demo data"}
+                      {isChecking ? "Checking live price…" : "Demo data"}
                     </span>
                   </div>
                 )}
@@ -265,7 +290,7 @@ export default function DormPage() {
           <PriceTable
             prices={selectedPrices.map((p) => ({ ...p, format: null }))}
           />
-          {!resolvedLive(liveData[selectedItem.title]) && selectedItem.imageCredit && (
+          {!selectedLive && selectedItem.imageCredit && (
             <p className="font-mono text-[10px] text-ink-faint">
               {selectedItem.imageCredit}
             </p>

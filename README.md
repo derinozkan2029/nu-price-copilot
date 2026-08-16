@@ -44,14 +44,23 @@ add `ANTHROPIC_API_KEY`.
 3. **Anthropic API** (plain-language recommendation explanations). Get a key
    at https://console.anthropic.com and set `ANTHROPIC_API_KEY`.
 
-4. **Best Buy Products API** (live price + photo for two dorm items only:
-   the mini fridge and microwave). Free, self-serve key at
-   https://developer.bestbuy.com/, then set `BESTBUY_API_KEY`. Best Buy
-   doesn't carry most of the dorm catalog (bedding, storage, decor,
-   furniture), so this stays scoped to appliances rather than replacing
-   `data/dorm-items.json` wholesale. See `src/lib/bestbuy.ts` for the
-   lookup and `src/app/dorm/page.tsx` for how the live result merges into
-   the curated vendor list. Their terms only permit temporary caching
+4. **SerpApi (Google Shopping), reused for dorm items.** The same
+   `SERPAPI_KEY` from above powers the dorm catalog too, since Google
+   Shopping search works for any product, not just books. Every item in
+   `data/dorm-items.json` carries a `shoppingQuery`; when SerpApi finds
+   results, its real multi-vendor prices and a real product photo fully
+   replace that item's curated `prices` array (see
+   `lookupShoppingProduct()` in `src/lib/serpapi.ts`).
+
+5. **Best Buy Products API**, secondary fallback for appliances only (mini
+   fridge, microwave, single-serve coffee maker). Tried only when an
+   item's `shoppingQuery` has a `bestBuyQuery` too and SerpApi returns
+   nothing for it. Free, self-serve key at https://developer.bestbuy.com/,
+   then set `BESTBUY_API_KEY`. Unlike SerpApi, Best Buy only swaps that
+   one vendor row rather than replacing the whole array, since it's a
+   single retailer. See `src/lib/bestbuy.ts` for the lookup and
+   `src/app/api/dorm-item-price/route.ts` for how the two sources are
+   tried in order. Best Buy's terms only permit temporary caching
    (response links expire after 7 days), so the fetch uses a short
    `revalidate` window rather than persisting results.
 
@@ -73,12 +82,13 @@ src/app/                 Next.js App Router pages + API routes
   dorm/page.tsx              Dorm item browser
   api/search-textbook/       POST { isbn } -> metadata + prices
   api/recommend/             POST { itemTitle, prices } -> buy-now/wait signal
-  api/dorm-item-price/       POST { query } -> live Best Buy price + photo
+  api/dorm-item-price/       POST { shoppingQuery?, bestBuyQuery? } -> live prices + photo
 src/lib/                  API wrappers + business logic
   openLibrary.ts             ISBN -> metadata (Open Library, no key needed)
-  serpapi.ts                 Title -> real cross-vendor prices (Google Shopping)
-  bookscouter.ts             Orchestrates SerpApi -> BookScouter -> mock fallback
-  bestbuy.ts                 Live price + photo lookup (mini fridge, microwave only)
+  serpapi.ts                 Query -> real cross-vendor prices + photo (Google Shopping);
+                              used for both textbooks and the whole dorm catalog
+  bookscouter.ts             Textbooks: orchestrates SerpApi -> BookScouter -> mock
+  bestbuy.ts                 Dorm appliances: secondary fallback, single-vendor swap
   recommendation.ts         Rule-based signal + LLM explanation
   supabaseClient.ts         Browser + service-role Supabase clients
 src/components/           PriceTable, PriceHistoryChart, RecommendationBadge,
@@ -95,17 +105,16 @@ the Vercel project settings, deploy. Free tier is enough for a demo.
 
 ## Known MVP limitations (intentional scope cuts, see build plan)
 
-- Dorm prices are hand-curated, not live-scraped, with one exception: the
-  mini fridge and microwave pull a live price + photo from the Best Buy
-  Products API when `BESTBUY_API_KEY` is set (see above). There's no clean
-  free API for cross-retailer pricing generally, and scraping vendor pages
-  directly has real ToS/legal risk, so the rest of the catalog stays
-  curated. v2 would extend real coverage via additional affiliate APIs
-  (Amazon Associates, Walmart) once the site has enough traffic to qualify
-  for approval.
+- Dorm prices and photos are hand-curated fallback data, not scraped: real
+  data comes from `SERPAPI_KEY` (whole catalog, via each item's
+  `shoppingQuery`) or `BESTBUY_API_KEY` (appliances only, secondary
+  fallback). Without either key, every item falls back to a curated
+  demo dataset, clearly labeled "Demo data" vs. "Live" in the UI either
+  way. Scraping vendor pages directly has real ToS/legal risk, which is
+  why SerpApi (a commercial data API, not a scraper) is the live source
+  rather than a hand-rolled scraper.
 - Textbook prices are deterministic mock data until `SERPAPI_KEY` is set,
-  clearly labeled "Demo data" vs. "Live" in the UI either way (see
-  `src/app/textbooks/page.tsx`).
+  same "Demo data" vs. "Live" labeling (see `src/app/textbooks/page.tsx`).
 - The buy-now/wait signal compares same-day vendor spread, not a real
   rolling price-history low, since there's no accumulated history yet. Once
   the seed script has run for a few weeks, swap the logic in
