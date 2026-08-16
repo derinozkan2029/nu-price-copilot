@@ -4,7 +4,7 @@
 
 :root {
   --color-paper: 250 246 237;
-  --color-paper-raised: 255 255 255;
+  --color-paper-raised: 253 251 246;
   --color-ink: 27 24 18;
   --color-ink-soft: 114 106 89;
   --color-ink-faint: 167 156 134;
@@ -37,13 +37,11 @@
 body {
   @apply bg-paper text-ink transition-colors duration-200;
   background-image: repeating-linear-gradient(
-      180deg,
-      transparent,
-      transparent 27px,
-      rgb(var(--color-ink) / 0.035) 28px
-    ),
-    radial-gradient(rgb(var(--color-ink) / 0.05) 0.6px, transparent 0.6px);
-  background-size: auto, 13px 13px;
+    180deg,
+    transparent,
+    transparent 27px,
+    rgb(var(--color-ink) / 0.035) 28px
+  );
 }
 
 ::selection {

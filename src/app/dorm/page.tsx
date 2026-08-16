@@ -131,7 +131,7 @@ export default function DormPage() {
           Everything you need to move into Allison, Bobb-McCulloch, Elder,
           Sargent, Shepard, or any NU residence hall. The mini fridge and
           microwave pull a live price and photo from Best Buy&rsquo;s
-          Products API — everything else is a curated MVP dataset. See the
+          Products API. Everything else is a curated MVP dataset. See the
           build plan for the v2 data-source approach.
         </p>
       </div>
@@ -158,7 +158,7 @@ export default function DormPage() {
         ))}
       </div>
 
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
         {filtered.map((item, index) => {
           const live = liveData[item.title];
           const prices = mergedPrices(item, live === "loading" ? null : live);
@@ -171,7 +171,7 @@ export default function DormPage() {
               key={item.title}
               onClick={() => selectItem(item)}
               aria-pressed={isSelected}
-              className={`animate-fade-up group flex flex-col overflow-hidden rounded-lg border bg-paper-raised text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple ${
+              className={`animate-fade-up group flex flex-col overflow-hidden rounded-sm border bg-paper-raised text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple ${
                 isSelected ? "border-purple" : "border-line hover:border-purple/50"
               }`}
               style={{ animationDelay: `${Math.min(index, 8) * 30 + 120}ms` }}
@@ -226,7 +226,7 @@ export default function DormPage() {
       </div>
 
       {selectedItem && (
-        <div className="animate-fade-up space-y-3 rounded-lg border border-line bg-paper-raised p-4">
+        <div className="animate-fade-up space-y-3 rounded-sm border border-line bg-paper-raised p-4">
           <div className="flex items-center justify-between border-b border-dashed border-line pb-3">
             <div>
               <p className="font-mono text-[11px] uppercase tracking-wide text-ink-faint">
@@ -239,7 +239,7 @@ export default function DormPage() {
             <button
               onClick={() => setSelected(null)}
               aria-label="Close comparison"
-              className="rounded-md border border-line px-2 py-1 font-mono text-xs text-ink-soft transition-colors hover:border-purple hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
+              className="rounded-sm border border-line px-2 py-1 font-mono text-xs text-ink-soft transition-colors hover:border-purple hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
             >
               Close
             </button>

@@ -23,15 +23,15 @@ export function PriceHistoryChart({
 }) {
   if (points.length < 2) {
     return (
-      <div className="rounded-lg border border-dashed border-line p-4 font-mono text-xs text-ink-faint">
-        Not enough price history yet to chart a trend — check back after a
+      <div className="rounded-sm border border-dashed border-line p-4 font-mono text-xs text-ink-faint">
+        Not enough price history yet to chart a trend. Check back after a
         few more scans, or seed more historical data via the seed script.
       </div>
     );
   }
 
   return (
-    <div className="rounded-lg border border-line bg-paper-raised p-4">
+    <div className="rounded-sm border border-line bg-paper-raised p-4">
       <div className="h-48">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={points}>

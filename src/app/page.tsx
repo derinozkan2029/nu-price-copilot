@@ -23,7 +23,7 @@ export default function HomePage() {
           <p className="max-w-xl text-base leading-relaxed text-ink-soft">
             One engine, two categories: compare textbook formats and dorm
             essentials across vendors, and get a plain-language read on
-            whether to buy now or wait — built for NU students moving into
+            whether to buy now or wait. Built for NU students moving into
             Evanston, starting small before scaling campus-wide.
           </p>
 
@@ -50,7 +50,7 @@ export default function HomePage() {
       <section className="grid gap-4 sm:grid-cols-2">
         <Link
           href="/textbooks"
-          className="animate-fade-up group relative overflow-hidden rounded-lg border border-line bg-paper-raised p-6 transition-colors hover:border-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
+          className="animate-fade-up relative overflow-hidden rounded-sm border border-line bg-paper-raised p-6 transition-colors hover:border-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
           style={{ animationDelay: "200ms" }}
         >
           <span className="font-mono text-xs text-ink-faint">01</span>
@@ -59,17 +59,14 @@ export default function HomePage() {
             Search by ISBN or title before you buy at Norris or online.
             Compare new, used, rental, and ebook prices in one ledger.
           </p>
-          <span className="mt-5 inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wide text-purple opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
-            Compare now
-            <span className="transition-transform group-hover:translate-x-0.5">
-              &rarr;
-            </span>
+          <span className="mt-5 inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wide text-purple">
+            Compare now &rarr;
           </span>
         </Link>
 
         <Link
           href="/dorm"
-          className="animate-fade-up group relative overflow-hidden rounded-lg border border-line bg-paper-raised p-6 transition-colors hover:border-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
+          className="animate-fade-up relative overflow-hidden rounded-sm border border-line bg-paper-raised p-6 transition-colors hover:border-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
           style={{ animationDelay: "280ms" }}
         >
           <span className="font-mono text-xs text-ink-faint">02</span>
@@ -78,14 +75,11 @@ export default function HomePage() {
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-ink-soft">
             Everything for move-in day at Allison, Elder, Shepard, or any NU
-            residence hall — compare retailers and split costs with a
+            residence hall. Compare retailers and split costs with a
             roommate.
           </p>
-          <span className="mt-5 inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wide text-purple opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
-            Browse items
-            <span className="transition-transform group-hover:translate-x-0.5">
-              &rarr;
-            </span>
+          <span className="mt-5 inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wide text-purple">
+            Browse items &rarr;
           </span>
         </Link>
       </section>

@@ -8,7 +8,7 @@ export function CostSplitCalculator({ price }: { price: number }) {
   const perPerson = price / Math.max(roommates, 1);
 
   return (
-    <div className="rounded-lg border border-line bg-paper-raised p-4">
+    <div className="rounded-sm border border-line bg-paper-raised p-4">
       <h3 className="font-mono text-xs uppercase tracking-wide text-ink-soft">
         Splitting this with roommates?
       </h3>
@@ -25,7 +25,7 @@ export function CostSplitCalculator({ price }: { price: number }) {
           onChange={(e) =>
             setRoommates(Math.max(1, Number(e.target.value) || 1))
           }
-          className="w-16 rounded-md border border-line bg-paper px-2 py-1 font-mono text-sm text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
+          className="w-16 rounded-sm border border-line bg-paper px-2 py-1 font-mono text-sm text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
         />
       </div>
       <p className="mt-3 font-mono text-lg font-semibold tabular-nums text-purple-deep">

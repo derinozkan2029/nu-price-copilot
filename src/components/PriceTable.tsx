@@ -5,7 +5,7 @@ export function PriceTable({ prices }: { prices: VendorPrice[] }) {
   const lowest = sorted[0]?.price;
 
   return (
-    <div className="overflow-hidden rounded-lg border border-line bg-paper-raised">
+    <div className="overflow-hidden rounded-sm border border-line bg-paper-raised">
       <div className="flex items-center gap-4 border-b border-line px-4 py-2 font-mono text-[11px] uppercase tracking-wide text-ink-faint">
         <span className="flex-1">Vendor</span>
         <span className="w-20">Format</span>
@@ -22,10 +22,8 @@ export function PriceTable({ prices }: { prices: VendorPrice[] }) {
               }`}
             >
               <span
-                className={`flex-1 border-l-2 pl-3 ${
-                  isBest
-                    ? "border-purple font-medium text-purple-deep"
-                    : "border-transparent text-ink"
+                className={`flex-1 ${
+                  isBest ? "font-medium text-purple-deep" : "text-ink"
                 }`}
               >
                 {p.vendor}

@@ -10,8 +10,7 @@ const THEME_INIT_SCRIPT = `
 (function () {
   try {
     var stored = localStorage.getItem("theme");
-    var dark = stored ? stored === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
-    if (dark) document.documentElement.classList.add("dark");
+    if (stored === "dark") document.documentElement.classList.add("dark");
   } catch (e) {}
 })();
 `;
@@ -39,12 +38,12 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const DESCRIPTION =
-  "Buy-now-or-wait price comparisons for textbooks and dorm essentials — built for Northwestern Wildcats in Evanston, IL.";
+  "Buy-now-or-wait price comparisons for textbooks and dorm essentials, built for Northwestern Wildcats in Evanston, IL.";
 
 export const metadata: Metadata = {
   title: {
     default: "NU Price Copilot",
-    template: "%s — NU Price Copilot",
+    template: "%s | NU Price Copilot",
   },
   description: DESCRIPTION,
   openGraph: {
@@ -77,17 +76,17 @@ export default function RootLayout({
         />
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-20 focus:rounded-md focus:bg-ink focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:uppercase focus:text-paper"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-20 focus:rounded-sm focus:bg-ink focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:uppercase focus:text-paper"
         >
           Skip to content
         </a>
-        <header className="sticky top-0 z-10 border-b border-line bg-paper/90 backdrop-blur">
-          <div className="mx-auto flex max-w-4xl flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-0">
+        <header className="sticky top-0 z-10 border-b border-line bg-paper">
+          <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-0">
             <Link
               href="/"
               className="group flex items-center gap-2.5 self-start rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
             >
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-ink font-mono text-sm font-semibold text-paper transition-colors group-hover:bg-purple">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-sm bg-ink font-mono text-sm font-semibold text-paper transition-colors group-hover:bg-purple">
                 N
               </span>
               <span className="whitespace-nowrap font-display text-base leading-none text-ink sm:text-lg">
@@ -101,16 +100,16 @@ export default function RootLayout({
           </div>
         </header>
 
-        <main id="main" className="mx-auto w-full max-w-4xl flex-1 px-4 py-10">
+        <main id="main" className="mx-auto w-full max-w-6xl flex-1 px-4 py-10">
           {children}
         </main>
 
         <footer className="border-t border-dashed border-line">
-          <div className="mx-auto flex max-w-4xl flex-col gap-1 px-4 py-6 text-xs text-ink-faint sm:flex-row sm:items-center sm:justify-between">
+          <div className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-6 text-xs text-ink-faint sm:flex-row sm:items-center sm:justify-between">
             <p className="font-mono uppercase tracking-[0.14em]">
               One engine &middot; two categories &middot; zero overpaying
             </p>
-            <p>Built for Wildcats in Evanston, IL — starting at NU before scaling campus-wide.</p>
+            <p>Built for Wildcats in Evanston, IL. Starting at NU before scaling campus-wide.</p>
           </div>
         </footer>
       </body>

@@ -7,7 +7,7 @@ const lines = [
 export function ReceiptPreview() {
   return (
     <div className="hidden select-none justify-self-end sm:block">
-      <div className="relative w-64 rotate-[3deg] rounded-sm bg-paper-raised px-5 pb-8 pt-6 font-mono text-xs text-ink shadow-[0_18px_40px_-14px_rgba(27,24,18,0.35)] tear-edge">
+      <div className="relative w-64 rotate-[3deg] rounded-sm border border-line bg-paper-raised px-5 pb-8 pt-6 font-mono text-xs text-ink tear-edge">
         <p className="text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-ink">
           NU Price Copilot
         </p>

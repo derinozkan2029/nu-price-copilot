@@ -3,8 +3,8 @@
 One comparison engine, two verticals: textbooks (buy/rent/used/ebook across
 vendors) and dorm essentials (curated retailer price comparison + roommate
 cost-splitting). Scoped to Northwestern University students in Evanston, IL
-as the initial launch audience — see "Why Northwestern-only" below. Built as
-a portfolio project for APM internship applications — see the "Product
+as the initial launch audience (see "Why Northwestern-only" below). Built as
+a portfolio project for APM internship applications; see the "Product
 framing" section below for how to talk about it.
 
 ## Quick start (runs with zero API keys)
@@ -23,7 +23,7 @@ templated fallback until you add `ANTHROPIC_API_KEY`.
 
 ## Adding real data sources
 
-1. **Google Books API** (textbook metadata — title, author, cover image).
+1. **Google Books API** (textbook metadata: title, author, cover image).
    Free for fair-use volume, no key strictly required, but add
    `GOOGLE_BOOKS_API_KEY` in Google Cloud Console to raise your rate limit.
    Docs: https://developers.google.com/books/docs/v1/using
@@ -31,7 +31,7 @@ templated fallback until you add `ANTHROPIC_API_KEY`.
 2. **BookScouter API** (cross-vendor textbook prices). Sign up at
    https://bookscouter.com for a developer-tier key, then set
    `BOOKSCOUTER_API_KEY`. The request in `src/lib/bookscouter.ts` is a
-   starting point — confirm the exact endpoint path and response shape
+   starting point. Confirm the exact endpoint path and response shape
    against your dashboard docs once you have a key, since the mapping in
    that file is written from public documentation, not a live-tested
    response.
@@ -39,18 +39,18 @@ templated fallback until you add `ANTHROPIC_API_KEY`.
 3. **Anthropic API** (plain-language recommendation explanations). Get a key
    at https://console.anthropic.com and set `ANTHROPIC_API_KEY`.
 
-4. **Best Buy Products API** (live price + photo for two dorm items only —
+4. **Best Buy Products API** (live price + photo for two dorm items only:
    the mini fridge and microwave). Free, self-serve key at
    https://developer.bestbuy.com/, then set `BESTBUY_API_KEY`. Best Buy
    doesn't carry most of the dorm catalog (bedding, storage, decor,
    furniture), so this stays scoped to appliances rather than replacing
-   `data/dorm-items.json` wholesale — see `src/lib/bestbuy.ts` for the
+   `data/dorm-items.json` wholesale. See `src/lib/bestbuy.ts` for the
    lookup and `src/app/dorm/page.tsx` for how the live result merges into
    the curated vendor list. Their terms only permit temporary caching
    (response links expire after 7 days), so the fetch uses a short
    `revalidate` window rather than persisting results.
 
-5. **Supabase** (persistence — only needed if you want the seed script to
+5. **Supabase** (persistence, only needed if you want the seed script to
    store real historical price data instead of relying on live API calls
    each time):
    - Create a free project at https://supabase.com
@@ -87,7 +87,7 @@ scripts/seed-textbooks.ts Seeds Supabase with a starter ISBN list
 Push to GitHub, import into Vercel, add the env vars from `.env.example` in
 the Vercel project settings, deploy. Free tier is enough for a demo.
 
-## Known MVP limitations (intentional scope cuts — see build plan)
+## Known MVP limitations (intentional scope cuts, see build plan)
 
 - Dorm prices are hand-curated, not live-scraped, with one exception: the
   mini fridge and microwave pull a live price + photo from the Best Buy
@@ -102,7 +102,7 @@ the Vercel project settings, deploy. Free tier is enough for a demo.
   the seed script has run for a few weeks, swap the logic in
   `computeSignal()` (`src/lib/recommendation.ts`) for a real 90-day-low
   comparison against the `prices` table.
-- No accounts/auth — this is a search tool, not a personalized app, by
+- No accounts/auth. This is a search tool, not a personalized app, by
   design for the MVP.
 
 ## Why Northwestern-only
@@ -113,13 +113,13 @@ starting scope than a generic nationwide tool:
 
 - **A defined first audience makes the product decisions concrete.** "Move-in
   day at Elder or Shepard" is a real, checkable scenario; "dorm essentials
-  for any student anywhere" isn't — it just means every decision (which
+  for any student anywhere" isn't. It just means every decision (which
   vendors, which items, what "essential" means) has no anchor.
 - **Distribution is tractable at one school.** Reaching a few hundred NU
   students who search "textbooks Northwestern" or see it shared in a class
   group chat is realistic; reaching students nationally isn't, for a
   single-person project with no marketing budget.
-- **The generalization story is still there for interviews** — the
+- **The generalization story is still there for interviews:** the
   architecture (one recommendation engine over a `category` field) already
   supports adding a second school without a rewrite; expanding is a data and
   distribution problem, not an engineering one. That's a stronger claim to
@@ -129,7 +129,7 @@ starting scope than a generic nationwide tool:
 ## Product framing (for your application)
 
 Lead with the user problem: Northwestern students re-buy the same
-predictable categories — textbooks every term, dorm setup every year — and
+predictable categories (textbooks every term, dorm setup every year) and
 currently have to check 3-4 sites by hand to find the best price/format.
 This product
 is one engine (paste an item, get price comparison + a buy-now/wait signal)
@@ -139,5 +139,5 @@ it shows you can generalize a mechanism, not just build a single feature.
 Worth naming explicitly in interviews: the natural v2 isn't more categories,
 it's a browser extension that surfaces this at the point of purchase
 (on the Amazon/Chegg product page itself) instead of requiring a trip to a
-separate site — but that was deliberately sequenced after validating the
+separate site, but that was deliberately sequenced after validating the
 core engine as a web app, since it's a much bigger engineering lift.

@@ -84,7 +84,7 @@ export default function TextbooksPage() {
       if (recRes.ok) setRecommendation(recData);
     } catch (err) {
       console.error(err);
-      setError("Network error — check your connection and try again.");
+      setError("Network error. Check your connection and try again.");
     } finally {
       setLoading(false);
     }
@@ -125,7 +125,7 @@ export default function TextbooksPage() {
       )}
 
       {loading && (
-        <div className="animate-fade-up space-y-2 overflow-hidden rounded-lg border border-line bg-paper-raised p-4">
+        <div className="animate-fade-up space-y-2 overflow-hidden rounded-sm border border-line bg-paper-raised p-4">
           {[0, 1, 2].map((i) => (
             <div
               key={i}
@@ -136,7 +136,7 @@ export default function TextbooksPage() {
         </div>
       )}
       {error && (
-        <p className="rounded-md border border-amber/40 bg-amber-soft px-3 py-2 font-mono text-xs text-amber-deep">
+        <p className="rounded-sm border border-amber/40 bg-amber-soft px-3 py-2 font-mono text-xs text-amber-deep">
           {error}
         </p>
       )}
@@ -150,7 +150,7 @@ export default function TextbooksPage() {
                 alt={result.metadata.title}
                 width={96}
                 height={144}
-                className="h-24 w-auto rounded-md border border-line"
+                className="h-24 w-auto rounded-sm border border-line"
               />
             )}
             <div>
@@ -178,7 +178,7 @@ export default function TextbooksPage() {
                 result.metadata.isbn,
                 Math.min(...result.prices.map((p) => p.price))
               )}
-              caption="Illustrative 14-day trend (demo data) — real history accrues once the seed script has run for a while."
+              caption="Illustrative 14-day trend (demo data). Real history accrues once the seed script has run for a while."
             />
           )}
         </div>

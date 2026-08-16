@@ -73,7 +73,7 @@ export async function explainRecommendation(
           .map((p) => `${p.vendor} $${p.price} (${p.format ?? "n/a"})`)
           .join(
             ", "
-          )}. In 1-2 short sentences, explain which option to pick and why, addressed directly to the student. Be concrete about the price and vendor.`,
+          )}. In 1-2 short sentences, explain which option to pick and why, addressed directly to the student. Be concrete about the price and vendor. Write in plain prose: no em dashes, use periods or commas instead.`,
       },
     ],
   });
