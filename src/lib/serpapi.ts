@@ -36,7 +36,10 @@ async function fetchShoppingResults(
   });
 
   const res = await fetch(`https://serpapi.com/search.json?${params.toString()}`, {
-    next: { revalidate: 60 * 60 }, // cache results for an hour
+    // 24h rather than 1h: the textbooks grid alone now fires ~40 queries
+    // on every cold page load, and SerpApi's free tier is 250 searches/
+    // month total. Prices don't need to be fresher than a day for a demo.
+    next: { revalidate: 60 * 60 * 24 },
   });
 
   if (!res.ok) {
