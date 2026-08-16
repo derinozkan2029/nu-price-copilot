@@ -8,6 +8,7 @@ import { RecommendationBadge } from "@/components/RecommendationBadge";
 import { CostSplitCalculator } from "@/components/CostSplitCalculator";
 import type { DormItemSeed, RecommendationSignal } from "@/types";
 import type { VendorPrice } from "@/lib/bookscouter";
+import { runWithConcurrencyLimit } from "@/lib/concurrency";
 
 interface Recommendation {
   signal: RecommendationSignal;
@@ -85,26 +86,25 @@ export default function DormPage() {
       return next;
     });
 
-    withLiveQuery.forEach((item) => {
-      fetch("/api/dorm-item-price", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          shoppingQuery: item.shoppingQuery,
-          bestBuyQuery: item.bestBuyQuery,
-        }),
-      })
-        .then((res) => res.json())
-        .then((data: LiveResult) => {
-          setLiveData((prev) => ({ ...prev, [item.title]: data }));
-        })
-        .catch((err) => {
-          console.error(err);
-          setLiveData((prev) => ({
-            ...prev,
-            [item.title]: { source: null, prices: null, imageUrl: null },
-          }));
+    runWithConcurrencyLimit(withLiveQuery, 5, async (item) => {
+      try {
+        const res = await fetch("/api/dorm-item-price", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            shoppingQuery: item.shoppingQuery,
+            bestBuyQuery: item.bestBuyQuery,
+          }),
         });
+        const data: LiveResult = await res.json();
+        setLiveData((prev) => ({ ...prev, [item.title]: data }));
+      } catch (err) {
+        console.error(err);
+        setLiveData((prev) => ({
+          ...prev,
+          [item.title]: { source: null, prices: null, imageUrl: null },
+        }));
+      }
     });
   }, []);
 

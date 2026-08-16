@@ -9,6 +9,7 @@ import { PriceHistoryChart, type HistoryPoint } from "@/components/PriceHistoryC
 import type { BookMetadata } from "@/lib/openLibrary";
 import type { VendorPrice } from "@/lib/bookscouter";
 import type { RecommendationSignal } from "@/types";
+import { runWithConcurrencyLimit } from "@/lib/concurrency";
 
 interface Result {
   metadata: BookMetadata;
@@ -127,20 +128,19 @@ export default function TextbooksPage() {
       return next;
     });
 
-    popularBooks.forEach((book) => {
-      fetch("/api/search-textbook", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ isbn: book.isbn }),
-      })
-        .then(async (res) => ({ ok: res.ok, data: await res.json() }))
-        .then(({ ok, data }) => {
-          setPopularData((prev) => ({ ...prev, [book.isbn]: ok ? data : null }));
-        })
-        .catch((err) => {
-          console.error(err);
-          setPopularData((prev) => ({ ...prev, [book.isbn]: null }));
+    runWithConcurrencyLimit(popularBooks, 5, async (book) => {
+      try {
+        const res = await fetch("/api/search-textbook", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ isbn: book.isbn }),
         });
+        const data = await res.json();
+        setPopularData((prev) => ({ ...prev, [book.isbn]: res.ok ? data : null }));
+      } catch (err) {
+        console.error(err);
+        setPopularData((prev) => ({ ...prev, [book.isbn]: null }));
+      }
     });
   }, []);
 
