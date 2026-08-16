@@ -93,7 +93,7 @@ export default function TextbooksPage() {
   return (
     <div className="space-y-6">
       <div>
-        <p className="font-mono text-xs uppercase tracking-[0.2em] text-emerald">
+        <p className="font-mono text-xs uppercase tracking-[0.2em] text-purple">
           01 &middot; Textbooks
         </p>
         <h1 className="mt-2 font-display text-2xl text-ink">
@@ -101,7 +101,7 @@ export default function TextbooksPage() {
         </h1>
         <p className="mt-1 text-sm text-ink-soft">
           Search by ISBN (13-digit, no dashes needed) to see new, used,
-          rental, and ebook prices side by side.
+          rental, and ebook prices side by side before you buy at Norris.
         </p>
       </div>
 
@@ -116,7 +116,7 @@ export default function TextbooksPage() {
             <button
               key={s.isbn}
               onClick={() => handleSearch(s.isbn)}
-              className="rounded-full border border-line px-3 py-1 font-mono text-xs text-ink-soft transition-colors hover:border-emerald hover:text-emerald-deep"
+              className="rounded-full border border-line px-3 py-1 font-mono text-xs text-ink-soft transition-colors hover:border-purple hover:text-purple-deep"
             >
               {s.label}
             </button>

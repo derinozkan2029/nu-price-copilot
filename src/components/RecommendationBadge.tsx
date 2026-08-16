@@ -12,13 +12,13 @@ export function RecommendationBadge({
   return (
     <div
       className={`flex gap-3 rounded-lg border-l-[3px] bg-paper-raised p-4 ${
-        isBuyNow ? "border-emerald" : "border-amber"
+        isBuyNow ? "border-purple" : "border-amber"
       }`}
     >
       <div className="min-w-0">
         <span
           className={`inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] ${
-            isBuyNow ? "text-emerald-deep" : "text-amber-deep"
+            isBuyNow ? "text-purple-deep" : "text-amber-deep"
           }`}
         >
           <span aria-hidden>{isBuyNow ? "↑" : "→"}</span>

@@ -10,9 +10,9 @@
   --color-ink-faint: 167 156 134;
   --color-line: 230 220 198;
   --color-line-soft: 239 232 216;
-  --color-emerald: 13 110 79;
-  --color-emerald-soft: 225 240 230;
-  --color-emerald-deep: 10 89 64;
+  --color-purple: 78 42 132;
+  --color-purple-soft: 237 231 246;
+  --color-purple-deep: 58 28 100;
   --color-amber: 173 122 22;
   --color-amber-soft: 250 240 217;
   --color-amber-deep: 138 98 16;
@@ -26,9 +26,9 @@
   --color-ink-faint: 124 115 96;
   --color-line: 58 53 39;
   --color-line-soft: 44 40 32;
-  --color-emerald: 52 181 121;
-  --color-emerald-soft: 22 58 42;
-  --color-emerald-deep: 79 203 148;
+  --color-purple: 168 138 217;
+  --color-purple-soft: 45 30 66;
+  --color-purple-deep: 199 178 232;
   --color-amber: 216 155 61;
   --color-amber-soft: 58 46 18;
   --color-amber-deep: 227 181 100;
@@ -47,7 +47,7 @@ body {
 }
 
 ::selection {
-  background-color: rgb(var(--color-emerald));
+  background-color: rgb(var(--color-purple));
   color: rgb(var(--color-paper));
 }
 

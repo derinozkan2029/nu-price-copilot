@@ -25,10 +25,10 @@ export function CostSplitCalculator({ price }: { price: number }) {
           onChange={(e) =>
             setRoommates(Math.max(1, Number(e.target.value) || 1))
           }
-          className="w-16 rounded-md border border-line bg-paper px-2 py-1 font-mono text-sm text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald"
+          className="w-16 rounded-md border border-line bg-paper px-2 py-1 font-mono text-sm text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
         />
       </div>
-      <p className="mt-3 font-mono text-lg font-semibold tabular-nums text-emerald-deep">
+      <p className="mt-3 font-mono text-lg font-semibold tabular-nums text-purple-deep">
         ${perPerson.toFixed(2)}{" "}
         <span className="font-sans text-sm font-normal text-ink-soft">
           per person

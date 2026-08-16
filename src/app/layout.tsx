@@ -39,22 +39,22 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const DESCRIPTION =
-  "Buy-now-or-wait price comparisons for textbooks and dorm essentials.";
+  "Buy-now-or-wait price comparisons for textbooks and dorm essentials — built for Northwestern Wildcats in Evanston, IL.";
 
 export const metadata: Metadata = {
   title: {
-    default: "Student Price Copilot",
-    template: "%s — Student Price Copilot",
+    default: "NU Price Copilot",
+    template: "%s — NU Price Copilot",
   },
   description: DESCRIPTION,
   openGraph: {
-    title: "Student Price Copilot",
+    title: "NU Price Copilot",
     description: DESCRIPTION,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Student Price Copilot",
+    title: "NU Price Copilot",
     description: DESCRIPTION,
   },
 };
@@ -85,13 +85,13 @@ export default function RootLayout({
           <div className="mx-auto flex max-w-4xl flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-0">
             <Link
               href="/"
-              className="group flex items-center gap-2.5 self-start rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald"
+              className="group flex items-center gap-2.5 self-start rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
             >
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-ink font-mono text-sm font-semibold text-paper transition-colors group-hover:bg-emerald">
-                $
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-ink font-mono text-sm font-semibold text-paper transition-colors group-hover:bg-purple">
+                N
               </span>
               <span className="whitespace-nowrap font-display text-base leading-none text-ink sm:text-lg">
-                Student Price <em className="not-italic text-emerald">Copilot</em>
+                NU Price <em className="not-italic text-purple">Copilot</em>
               </span>
             </Link>
             <div className="flex items-center justify-between gap-4 sm:justify-end sm:gap-5">
@@ -110,7 +110,7 @@ export default function RootLayout({
             <p className="font-mono uppercase tracking-[0.14em]">
               One engine &middot; two categories &middot; zero overpaying
             </p>
-            <p>Built as a portfolio project — prices update on search.</p>
+            <p>Built for Wildcats in Evanston, IL — starting at NU before scaling campus-wide.</p>
           </div>
         </footer>
       </body>

@@ -33,7 +33,7 @@ export default function OGImage() {
               fontFamily: "monospace",
             }}
           >
-            $
+            N
           </div>
           <div
             style={{
@@ -43,8 +43,8 @@ export default function OGImage() {
               color: "#1B1812",
             }}
           >
-            <span style={{ display: "flex" }}>Student Price</span>
-            <span style={{ display: "flex", color: "#0D6E4F" }}>Copilot</span>
+            <span style={{ display: "flex" }}>NU Price</span>
+            <span style={{ display: "flex", color: "#4E2A84" }}>Copilot</span>
           </div>
         </div>
 
@@ -73,8 +73,8 @@ export default function OGImage() {
             letterSpacing: 2,
           }}
         >
-          <div style={{ display: "flex" }}>5+ vendors compared</div>
-          <div style={{ display: "flex" }}>Buy-now / wait signal</div>
+          <div style={{ display: "flex" }}>Built for Northwestern</div>
+          <div style={{ display: "flex" }}>Evanston, IL</div>
         </div>
       </div>
     ),

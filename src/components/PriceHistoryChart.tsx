@@ -73,7 +73,7 @@ export function PriceHistoryChart({
             <Line
               type="monotone"
               dataKey="price"
-              stroke="rgb(var(--color-emerald))"
+              stroke="rgb(var(--color-purple))"
               strokeWidth={2}
               dot={false}
               activeDot={{ r: 4 }}

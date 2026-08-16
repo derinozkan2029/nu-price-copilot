@@ -27,10 +27,10 @@ const config: Config = {
           DEFAULT: cssVar("--color-line"),
           soft: cssVar("--color-line-soft"),
         },
-        emerald: {
-          DEFAULT: cssVar("--color-emerald"),
-          soft: cssVar("--color-emerald-soft"),
-          deep: cssVar("--color-emerald-deep"),
+        purple: {
+          DEFAULT: cssVar("--color-purple"),
+          soft: cssVar("--color-purple-soft"),
+          deep: cssVar("--color-purple-deep"),
         },
         amber: {
           DEFAULT: cssVar("--color-amber"),

@@ -21,7 +21,7 @@ export default function Icon() {
           fontFamily: "monospace",
         }}
       >
-        $
+        N
       </div>
     ),
     { ...size }

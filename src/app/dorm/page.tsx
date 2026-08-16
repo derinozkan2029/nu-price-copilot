@@ -121,15 +121,16 @@ export default function DormPage() {
   return (
     <div className="space-y-6">
       <div className="animate-fade-up">
-        <p className="font-mono text-xs uppercase tracking-[0.2em] text-emerald">
+        <p className="font-mono text-xs uppercase tracking-[0.2em] text-purple">
           02 &middot; Dorm essentials
         </p>
         <h1 className="mt-2 font-display text-2xl text-ink">
           Dorm essentials
         </h1>
         <p className="mt-1 text-sm text-ink-soft">
-          Common move-in items with prices across retailers. The mini fridge
-          and microwave pull a live price and photo from Best Buy&rsquo;s
+          Everything you need to move into Allison, Bobb-McCulloch, Elder,
+          Sargent, Shepard, or any NU residence hall. The mini fridge and
+          microwave pull a live price and photo from Best Buy&rsquo;s
           Products API — everything else is a curated MVP dataset. See the
           build plan for the v2 data-source approach.
         </p>
@@ -146,10 +147,10 @@ export default function DormPage() {
             key={c}
             onClick={() => setCategory(c)}
             aria-pressed={category === c}
-            className={`rounded-full px-3 py-1 font-mono text-xs uppercase tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald ${
+            className={`rounded-full px-3 py-1 font-mono text-xs uppercase tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple ${
               category === c
                 ? "bg-ink text-paper"
-                : "border border-line bg-paper-raised text-ink-soft hover:border-emerald hover:text-ink"
+                : "border border-line bg-paper-raised text-ink-soft hover:border-purple hover:text-ink"
             }`}
           >
             {c}
@@ -170,8 +171,8 @@ export default function DormPage() {
               key={item.title}
               onClick={() => selectItem(item)}
               aria-pressed={isSelected}
-              className={`animate-fade-up group flex flex-col overflow-hidden rounded-lg border bg-paper-raised text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald ${
-                isSelected ? "border-emerald" : "border-line hover:border-emerald/50"
+              className={`animate-fade-up group flex flex-col overflow-hidden rounded-lg border bg-paper-raised text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple ${
+                isSelected ? "border-purple" : "border-line hover:border-purple/50"
               }`}
               style={{ animationDelay: `${Math.min(index, 8) * 30 + 120}ms` }}
             >
@@ -185,7 +186,7 @@ export default function DormPage() {
                       sizes="(min-width: 640px) 33vw, 50vw"
                       className="object-contain p-3"
                     />
-                    <span className="absolute left-2 top-2 rounded-full bg-emerald px-2 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wide text-paper">
+                    <span className="absolute left-2 top-2 rounded-full bg-purple px-2 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wide text-paper">
                       Live &middot; Best Buy
                     </span>
                   </>
@@ -215,7 +216,7 @@ export default function DormPage() {
                 <p className="font-mono text-[10px] uppercase tracking-wide text-ink-faint">
                   {item.category}
                 </p>
-                <p className="mt-auto font-mono text-sm font-semibold tabular-nums text-emerald-deep">
+                <p className="mt-auto font-mono text-sm font-semibold tabular-nums text-purple-deep">
                   from ${cheapest.toFixed(2)}
                 </p>
               </div>
@@ -238,7 +239,7 @@ export default function DormPage() {
             <button
               onClick={() => setSelected(null)}
               aria-label="Close comparison"
-              className="rounded-md border border-line px-2 py-1 font-mono text-xs text-ink-soft transition-colors hover:border-emerald hover:text-emerald focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald"
+              className="rounded-md border border-line px-2 py-1 font-mono text-xs text-ink-soft transition-colors hover:border-purple hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
             >
               Close
             </button>

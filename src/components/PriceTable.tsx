@@ -18,19 +18,19 @@ export function PriceTable({ prices }: { prices: VendorPrice[] }) {
             <div
               key={`${p.vendor}-${i}`}
               className={`flex items-center gap-4 border-b border-dashed border-line-soft px-4 py-3 text-sm last:border-b-0 ${
-                isBest ? "bg-emerald-soft" : ""
+                isBest ? "bg-purple-soft" : ""
               }`}
             >
               <span
                 className={`flex-1 border-l-2 pl-3 ${
                   isBest
-                    ? "border-emerald font-medium text-emerald-deep"
+                    ? "border-purple font-medium text-purple-deep"
                     : "border-transparent text-ink"
                 }`}
               >
                 {p.vendor}
                 {isBest && (
-                  <span className="ml-2 font-mono text-[10px] uppercase tracking-wide text-emerald">
+                  <span className="ml-2 font-mono text-[10px] uppercase tracking-wide text-purple">
                     best
                   </span>
                 )}
@@ -40,7 +40,7 @@ export function PriceTable({ prices }: { prices: VendorPrice[] }) {
               </span>
               <span
                 className={`w-20 text-right font-mono tabular-nums ${
-                  isBest ? "font-semibold text-emerald-deep" : "text-ink"
+                  isBest ? "font-semibold text-purple-deep" : "text-ink"
                 }`}
               >
                 ${p.price.toFixed(2)}

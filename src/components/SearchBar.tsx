@@ -29,12 +29,12 @@ export function SearchBar({
         name="isbn"
         autoComplete="off"
         disabled={disabled}
-        className="flex-1 rounded-md border border-line bg-paper-raised px-4 py-2.5 font-mono text-sm text-ink placeholder:text-ink-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald disabled:cursor-not-allowed disabled:opacity-60"
+        className="flex-1 rounded-md border border-line bg-paper-raised px-4 py-2.5 font-mono text-sm text-ink placeholder:text-ink-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple disabled:cursor-not-allowed disabled:opacity-60"
       />
       <button
         type="submit"
         disabled={disabled}
-        className="rounded-md bg-ink px-5 py-2.5 font-mono text-xs uppercase tracking-wide text-paper transition-colors hover:bg-emerald focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald disabled:cursor-not-allowed disabled:opacity-60"
+        className="rounded-md bg-ink px-5 py-2.5 font-mono text-xs uppercase tracking-wide text-paper transition-colors hover:bg-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple disabled:cursor-not-allowed disabled:opacity-60"
       >
         {disabled ? "Searching…" : "Compare"}
       </button>

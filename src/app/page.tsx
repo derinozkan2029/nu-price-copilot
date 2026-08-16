@@ -12,18 +12,19 @@ export default function HomePage() {
     <div className="space-y-14">
       <section className="grid gap-10 sm:grid-cols-[1fr_auto] sm:items-center">
         <div className="animate-fade-up space-y-6">
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-emerald">
-            Price intelligence for students
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-purple">
+            Price intelligence for Northwestern Wildcats
           </p>
           <h1 className="max-w-2xl font-display text-4xl leading-[1.1] text-ink sm:text-5xl">
             Stop overpaying on the
             <br />
-            <em className="text-emerald">same purchases</em>, every semester.
+            <em className="text-purple">same purchases</em>, every semester.
           </h1>
           <p className="max-w-xl text-base leading-relaxed text-ink-soft">
             One engine, two categories: compare textbook formats and dorm
             essentials across vendors, and get a plain-language read on
-            whether to buy now or wait.
+            whether to buy now or wait — built for NU students moving into
+            Evanston, starting small before scaling campus-wide.
           </p>
 
           <div className="flex flex-wrap gap-x-5 gap-y-2 pt-1">
@@ -49,16 +50,16 @@ export default function HomePage() {
       <section className="grid gap-4 sm:grid-cols-2">
         <Link
           href="/textbooks"
-          className="animate-fade-up group relative overflow-hidden rounded-lg border border-line bg-paper-raised p-6 transition-colors hover:border-emerald focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald"
+          className="animate-fade-up group relative overflow-hidden rounded-lg border border-line bg-paper-raised p-6 transition-colors hover:border-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
           style={{ animationDelay: "200ms" }}
         >
           <span className="font-mono text-xs text-ink-faint">01</span>
           <h2 className="mt-3 font-display text-xl text-ink">Textbooks</h2>
           <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-            Search by ISBN or title. Compare new, used, rental, and ebook
-            prices in one ledger.
+            Search by ISBN or title before you buy at Norris or online.
+            Compare new, used, rental, and ebook prices in one ledger.
           </p>
-          <span className="mt-5 inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wide text-emerald opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+          <span className="mt-5 inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wide text-purple opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
             Compare now
             <span className="transition-transform group-hover:translate-x-0.5">
               &rarr;
@@ -68,7 +69,7 @@ export default function HomePage() {
 
         <Link
           href="/dorm"
-          className="animate-fade-up group relative overflow-hidden rounded-lg border border-line bg-paper-raised p-6 transition-colors hover:border-emerald focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald"
+          className="animate-fade-up group relative overflow-hidden rounded-lg border border-line bg-paper-raised p-6 transition-colors hover:border-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
           style={{ animationDelay: "280ms" }}
         >
           <span className="font-mono text-xs text-ink-faint">02</span>
@@ -76,10 +77,11 @@ export default function HomePage() {
             Dorm essentials
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-            Browse common move-in items, compare prices across retailers, and
-            split shared-item costs with a roommate.
+            Everything for move-in day at Allison, Elder, Shepard, or any NU
+            residence hall — compare retailers and split costs with a
+            roommate.
           </p>
-          <span className="mt-5 inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wide text-emerald opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+          <span className="mt-5 inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wide text-purple opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
             Browse items
             <span className="transition-transform group-hover:translate-x-0.5">
               &rarr;

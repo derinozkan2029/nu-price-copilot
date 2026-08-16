@@ -1,9 +1,11 @@
-# Student Price Copilot
+# NU Price Copilot
 
 One comparison engine, two verticals: textbooks (buy/rent/used/ebook across
 vendors) and dorm essentials (curated retailer price comparison + roommate
-cost-splitting). Built as a portfolio project for APM internship applications
-— see the "Product framing" section below for how to talk about it.
+cost-splitting). Scoped to Northwestern University students in Evanston, IL
+as the initial launch audience — see "Why Northwestern-only" below. Built as
+a portfolio project for APM internship applications — see the "Product
+framing" section below for how to talk about it.
 
 ## Quick start (runs with zero API keys)
 
@@ -103,11 +105,33 @@ the Vercel project settings, deploy. Free tier is enough for a demo.
 - No accounts/auth — this is a search tool, not a personalized app, by
   design for the MVP.
 
+## Why Northwestern-only
+
+The product is scoped to one campus (Northwestern, Evanston IL) instead of
+"students everywhere" on purpose. A few concrete reasons this is a better
+starting scope than a generic nationwide tool:
+
+- **A defined first audience makes the product decisions concrete.** "Move-in
+  day at Elder or Shepard" is a real, checkable scenario; "dorm essentials
+  for any student anywhere" isn't — it just means every decision (which
+  vendors, which items, what "essential" means) has no anchor.
+- **Distribution is tractable at one school.** Reaching a few hundred NU
+  students who search "textbooks Northwestern" or see it shared in a class
+  group chat is realistic; reaching students nationally isn't, for a
+  single-person project with no marketing budget.
+- **The generalization story is still there for interviews** — the
+  architecture (one recommendation engine over a `category` field) already
+  supports adding a second school without a rewrite; expanding is a data and
+  distribution problem, not an engineering one. That's a stronger claim to
+  make once there's usage at one school to point to, rather than an
+  unvalidated "works for everyone" claim from day one.
+
 ## Product framing (for your application)
 
-Lead with the user problem: students re-buy the same predictable
-categories — textbooks every term, dorm setup every year — and currently
-have to check 3-4 sites by hand to find the best price/format. This product
+Lead with the user problem: Northwestern students re-buy the same
+predictable categories — textbooks every term, dorm setup every year — and
+currently have to check 3-4 sites by hand to find the best price/format.
+This product
 is one engine (paste an item, get price comparison + a buy-now/wait signal)
 applied to two verticals, which is a stronger story than two one-off tools:
 it shows you can generalize a mechanism, not just build a single feature.

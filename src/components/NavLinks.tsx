@@ -20,13 +20,13 @@ export function NavLinks() {
             key={link.href}
             href={link.href}
             aria-current={active ? "page" : undefined}
-            className={`relative rounded-sm pb-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald ${
+            className={`relative rounded-sm pb-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple ${
               active ? "text-ink" : "text-ink-soft hover:text-ink"
             }`}
           >
             {link.label}
             <span
-              className={`absolute inset-x-0 -bottom-[1px] h-[2px] bg-emerald transition-transform duration-200 ${
+              className={`absolute inset-x-0 -bottom-[1px] h-[2px] bg-purple transition-transform duration-200 ${
                 active ? "scale-x-100" : "scale-x-0"
               }`}
             />
