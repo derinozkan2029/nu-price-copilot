@@ -52,7 +52,14 @@ function toVendorPrices(results: ShoppingResult[]): VendorPrice[] {
   return results
     .filter(
       (r): r is Required<Pick<ShoppingResult, "source" | "extracted_price">> &
-        ShoppingResult => typeof r.extracted_price === "number" && !!r.source
+        ShoppingResult =>
+          typeof r.extracted_price === "number" &&
+          // Google Shopping occasionally mixes in buyback/trade-in quotes
+          // (e.g. a bookstore's "sell us your book for $0.02" listing) among
+          // real offers. No genuine product is ever priced under $1, so this
+          // is a cheap way to drop that noise without a vendor allowlist.
+          r.extracted_price >= 1 &&
+          !!r.source
     )
     .slice(0, 6)
     .map((r) => ({

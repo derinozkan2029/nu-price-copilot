@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { SearchBar } from "@/components/SearchBar";
 import { PriceTable } from "@/components/PriceTable";
@@ -21,11 +21,30 @@ interface Recommendation {
   rationale: string;
 }
 
-const sampleIsbns = [
-  { label: "Clean Code", isbn: "9780132350884" },
-  { label: "CS:APP", isbn: "9780134092669" },
-  { label: "Intro to Algorithms", isbn: "9780262046305" },
+interface PopularBook {
+  label: string;
+  courseTag: string;
+  isbn: string;
+}
+
+// Real gateway-course titles across departments, not just CS, so the grid
+// reads as "built for NU students broadly" rather than one major. ISBNs
+// verified against Open Library before hardcoding (see commit history) so
+// the grid never shows a mismatched cover for the wrong edition.
+const popularBooks: PopularBook[] = [
+  { label: "Clean Code", courseTag: "COMP_SCI 308", isbn: "9780132350884" },
+  { label: "Computer Systems: A Programmer's Perspective", courseTag: "COMP_SCI 213", isbn: "9780134092669" },
+  { label: "Introduction to Algorithms", courseTag: "COMP_SCI 336", isbn: "9780262046305" },
+  { label: "Campbell Biology", courseTag: "BIOL_SCI 217", isbn: "9780134093413" },
+  { label: "Principles of Economics", courseTag: "ECON 201", isbn: "9781305585126" },
+  { label: "Calculus", courseTag: "MATH 220", isbn: "9781285741550" },
+  { label: "Organic Chemistry", courseTag: "CHEM 210-1", isbn: "9781118452288" },
+  { label: "Psychology", courseTag: "PSYCH 110", isbn: "9781464140815" },
 ];
+
+function courseMonogram(courseTag: string) {
+  return courseTag.split(" ")[0].slice(0, 2).toUpperCase();
+}
 
 // Deterministic illustrative trend ending at the real lowest price found —
 // there's no historical data source yet (see seed script), so this exists
@@ -55,6 +74,56 @@ export default function TextbooksPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // "loading" while in flight, Result once resolved, null on failure.
+  // Fetched for every card in the popular-books grid on mount so covers
+  // and prices are already there by the time the user looks at the page.
+  const [popularData, setPopularData] = useState<
+    Record<string, Result | "loading" | null>
+  >({});
+
+  // Open Library sometimes points at a cover id with no actual image (a
+  // near-empty "not found" placeholder), which makes next/image's optimizer
+  // 500 rather than just 404. Track those and fall back to the monogram.
+  const [brokenCovers, setBrokenCovers] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    setPopularData((prev) => {
+      const next = { ...prev };
+      for (const book of popularBooks) next[book.isbn] = "loading";
+      return next;
+    });
+
+    popularBooks.forEach((book) => {
+      fetch("/api/search-textbook", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ isbn: book.isbn }),
+      })
+        .then(async (res) => ({ ok: res.ok, data: await res.json() }))
+        .then(({ ok, data }) => {
+          setPopularData((prev) => ({ ...prev, [book.isbn]: ok ? data : null }));
+        })
+        .catch((err) => {
+          console.error(err);
+          setPopularData((prev) => ({ ...prev, [book.isbn]: null }));
+        });
+    });
+  }, []);
+
+  async function fetchRecommendation(itemTitle: string, prices: VendorPrice[]) {
+    try {
+      const recRes = await fetch("/api/recommend", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ itemTitle, prices }),
+      });
+      const recData = await recRes.json();
+      if (recRes.ok) setRecommendation(recData);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   async function handleSearch(isbn: string) {
     setLoading(true);
     setError(null);
@@ -75,19 +144,24 @@ export default function TextbooksPage() {
       }
 
       setResult(data);
-
-      const recRes = await fetch("/api/recommend", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ itemTitle: data.metadata.title, prices: data.prices }),
-      });
-      const recData = await recRes.json();
-      if (recRes.ok) setRecommendation(recData);
+      await fetchRecommendation(data.metadata.title, data.prices);
     } catch (err) {
       console.error(err);
       setError("Network error. Check your connection and try again.");
     } finally {
       setLoading(false);
+    }
+  }
+
+  function selectPopular(book: PopularBook) {
+    const data = popularData[book.isbn];
+    if (data && data !== "loading") {
+      setError(null);
+      setResult(data);
+      setRecommendation(null);
+      fetchRecommendation(data.metadata.title, data.prices);
+    } else {
+      handleSearch(book.isbn);
     }
   }
 
@@ -109,19 +183,80 @@ export default function TextbooksPage() {
       <SearchBar onSearch={handleSearch} disabled={loading} />
 
       {!result && !loading && !error && (
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="font-mono text-[11px] uppercase tracking-wide text-ink-faint">
-            Try:
-          </span>
-          {sampleIsbns.map((s) => (
-            <button
-              key={s.isbn}
-              onClick={() => handleSearch(s.isbn)}
-              className="rounded-full border border-line px-3 py-1 font-mono text-xs text-ink-soft transition-colors hover:border-purple hover:text-purple-deep"
-            >
-              {s.label}
-            </button>
-          ))}
+        <div className="animate-fade-up space-y-3" style={{ animationDelay: "80ms" }}>
+          <div>
+            <p className="font-mono text-[11px] uppercase tracking-wide text-ink-faint">
+              Popular at Northwestern
+            </p>
+            <p className="mt-1 text-xs text-ink-soft">
+              Common gateway-course titles across departments. Tap one to
+              compare, or search any ISBN above.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+            {popularBooks.map((book, index) => {
+              const data = popularData[book.isbn];
+              const isLoading = data === "loading" || data === undefined;
+              const loaded = data && data !== "loading" ? data : null;
+              const cheapest = loaded?.prices.length
+                ? Math.min(...loaded.prices.map((p) => p.price))
+                : null;
+              const coverOk = loaded?.metadata.imageUrl && !brokenCovers.has(book.isbn);
+
+              return (
+                <button
+                  key={book.isbn}
+                  onClick={() => selectPopular(book)}
+                  className="animate-fade-up group flex flex-col overflow-hidden rounded-sm border border-line bg-paper-raised text-left transition-colors hover:border-purple/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
+                  style={{ animationDelay: `${Math.min(index, 8) * 30 + 120}ms` }}
+                >
+                  <div className="relative aspect-[2/3] w-full border-b border-line bg-paper">
+                    {coverOk ? (
+                      <>
+                        <Image
+                          src={loaded!.metadata.imageUrl!}
+                          alt={book.label}
+                          fill
+                          sizes="(min-width: 640px) 25vw, 50vw"
+                          className="object-cover"
+                          onError={() =>
+                            setBrokenCovers((prev) => new Set(prev).add(book.isbn))
+                          }
+                        />
+                        {loaded!.pricesLive && (
+                          <span className="absolute left-2 top-2 rounded-full bg-purple px-2 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wide text-paper">
+                            Live
+                          </span>
+                        )}
+                      </>
+                    ) : (
+                      <div className="flex h-full w-full flex-col items-center justify-center gap-1">
+                        <span className="font-display text-2xl text-ink-faint">
+                          {courseMonogram(book.courseTag)}
+                        </span>
+                        <span className="font-mono text-[9px] uppercase tracking-wide text-ink-faint">
+                          {isLoading ? "Loading…" : "No cover"}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex flex-1 flex-col gap-1 p-3">
+                    <p className="line-clamp-2 text-sm font-medium leading-snug text-ink">
+                      {book.label}
+                    </p>
+                    <p className="font-mono text-[10px] uppercase tracking-wide text-ink-faint">
+                      {book.courseTag}
+                    </p>
+                    {cheapest !== null && (
+                      <p className="mt-auto font-mono text-sm font-semibold tabular-nums text-purple-deep">
+                        from ${cheapest.toFixed(2)}
+                      </p>
+                    )}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
         </div>
       )}
 
@@ -144,24 +279,40 @@ export default function TextbooksPage() {
 
       {result && (
         <div className="animate-fade-up space-y-4">
-          <div className="flex items-start gap-4 border-b border-dashed border-line pb-4">
-            {result.metadata.imageUrl && (
-              <Image
-                src={result.metadata.imageUrl}
-                alt={result.metadata.title}
-                width={96}
-                height={144}
-                className="h-24 w-auto rounded-sm border border-line"
-              />
-            )}
-            <div>
-              <h2 className="font-display text-lg text-ink">
-                {result.metadata.title}
-              </h2>
-              <p className="text-sm text-ink-soft">
-                {result.metadata.authors.join(", ")}
-              </p>
+          <div className="flex items-start justify-between gap-4 border-b border-dashed border-line pb-4">
+            <div className="flex items-start gap-4">
+              {result.metadata.imageUrl && !brokenCovers.has(result.metadata.isbn) && (
+                <Image
+                  src={result.metadata.imageUrl}
+                  alt={result.metadata.title}
+                  width={96}
+                  height={144}
+                  className="h-24 w-auto rounded-sm border border-line"
+                  onError={() =>
+                    setBrokenCovers((prev) => new Set(prev).add(result.metadata.isbn))
+                  }
+                />
+              )}
+              <div>
+                <h2 className="font-display text-lg text-ink">
+                  {result.metadata.title}
+                </h2>
+                <p className="text-sm text-ink-soft">
+                  {result.metadata.authors.join(", ")}
+                </p>
+              </div>
             </div>
+            <button
+              onClick={() => {
+                setResult(null);
+                setRecommendation(null);
+                setError(null);
+              }}
+              aria-label="Back to popular textbooks"
+              className="shrink-0 rounded-sm border border-line px-2 py-1 font-mono text-xs text-ink-soft transition-colors hover:border-purple hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
+            >
+              Back
+            </button>
           </div>
 
           {recommendation && (
