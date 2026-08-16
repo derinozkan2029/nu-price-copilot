@@ -6,13 +6,14 @@ import { SearchBar } from "@/components/SearchBar";
 import { PriceTable } from "@/components/PriceTable";
 import { RecommendationBadge } from "@/components/RecommendationBadge";
 import { PriceHistoryChart, type HistoryPoint } from "@/components/PriceHistoryChart";
-import type { BookMetadata } from "@/lib/googleBooks";
+import type { BookMetadata } from "@/lib/openLibrary";
 import type { VendorPrice } from "@/lib/bookscouter";
 import type { RecommendationSignal } from "@/types";
 
 interface Result {
   metadata: BookMetadata;
   prices: VendorPrice[];
+  pricesLive: boolean;
 }
 
 interface Recommendation {
@@ -170,6 +171,20 @@ export default function TextbooksPage() {
             />
           )}
 
+          <div className="flex items-center justify-between">
+            <p className="font-mono text-[11px] uppercase tracking-wide text-ink-faint">
+              Vendor prices
+            </p>
+            <span
+              className={`rounded-full px-2 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wide ${
+                result.pricesLive
+                  ? "bg-purple text-paper"
+                  : "border border-line text-ink-faint"
+              }`}
+            >
+              {result.pricesLive ? "Live · Google Shopping" : "Demo data"}
+            </span>
+          </div>
           <PriceTable prices={result.prices} />
 
           {result.prices.length > 0 && (

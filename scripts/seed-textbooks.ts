@@ -5,17 +5,16 @@
  *   npm run seed:textbooks
  *
  * Requires .env.local to have NEXT_PUBLIC_SUPABASE_URL and
- * SUPABASE_SERVICE_ROLE_KEY set (see .env.example). GOOGLE_BOOKS_API_KEY
- * and BOOKSCOUTER_API_KEY are optional — without them you'll get
- * unauthenticated Google Books results and mock BookScouter prices, which
- * is fine for a demo.
+ * SUPABASE_SERVICE_ROLE_KEY set (see .env.example). SERPAPI_KEY is
+ * optional — without it you'll get deterministic mock prices, which is
+ * fine for a demo. Metadata comes from Open Library, no key ever needed.
  */
 
 import { config } from "dotenv";
 config({ path: ".env.local" });
 
 import { getServiceClient } from "../src/lib/supabaseClient";
-import { lookupBookByIsbn } from "../src/lib/googleBooks";
+import { lookupBookByIsbn } from "../src/lib/openLibrary";
 import { lookupTextbookPrices } from "../src/lib/bookscouter";
 
 // Swap this out for ISBNs of your own school's common intro-course textbooks.
@@ -33,15 +32,14 @@ async function main() {
   for (const isbn of STARTER_ISBNS) {
     console.log(`Seeding ${isbn}...`);
 
-    const [metadata, prices] = await Promise.all([
-      lookupBookByIsbn(isbn),
-      lookupTextbookPrices(isbn),
-    ]);
+    const metadata = await lookupBookByIsbn(isbn);
 
     if (!metadata) {
       console.warn(`  No metadata found for ${isbn}, skipping.`);
       continue;
     }
+
+    const { prices } = await lookupTextbookPrices(isbn, metadata.title);
 
     const { data: item, error: itemError } = await supabase
       .from("items")

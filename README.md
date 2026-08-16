@@ -16,25 +16,30 @@ npm run dev
 ```
 
 Open http://localhost:3000. The textbooks search and dorm browser both work
-out of the box: textbook prices come from a deterministic mock generator
-until you add a `BOOKSCOUTER_API_KEY`, and dorm prices come from the curated
-`data/dorm-items.json` file. The "buy now vs wait" explanation uses a
-templated fallback until you add `ANTHROPIC_API_KEY`.
+out of the box: book metadata comes from Open Library (no key ever needed),
+textbook prices come from a deterministic mock generator until you add a
+`SERPAPI_KEY`, and dorm prices come from the curated `data/dorm-items.json`
+file. The "buy now vs wait" explanation uses a templated fallback until you
+add `ANTHROPIC_API_KEY`.
 
 ## Adding real data sources
 
-1. **Google Books API** (textbook metadata: title, author, cover image).
-   Free for fair-use volume, no key strictly required, but add
-   `GOOGLE_BOOKS_API_KEY` in Google Cloud Console to raise your rate limit.
-   Docs: https://developers.google.com/books/docs/v1/using
+1. **Open Library API** (textbook metadata: title, author, cover image).
+   Free, public, no signup or key ever required. Replaced Google Books
+   after unauthenticated requests kept hitting rate limits in testing, and
+   after Google Cloud project creation turned out to be blocked on a
+   Google Workspace-managed (`.edu`) account, an org-level restriction, not
+   something fixable from this project's side. Docs:
+   https://openlibrary.org/dev/docs/api/books
 
-2. **BookScouter API** (cross-vendor textbook prices). Sign up at
-   https://bookscouter.com for a developer-tier key, then set
-   `BOOKSCOUTER_API_KEY`. The request in `src/lib/bookscouter.ts` is a
-   starting point. Confirm the exact endpoint path and response shape
-   against your dashboard docs once you have a key, since the mapping in
-   that file is written from public documentation, not a live-tested
-   response.
+2. **SerpApi (Google Shopping)** (cross-vendor textbook prices). Free tier,
+   250 searches/month, self-serve with no approval wait: sign up at
+   https://serpapi.com/users/sign_up and set `SERPAPI_KEY`. This replaced
+   BookScouter as the primary pricing source after BookScouter's developer
+   application was rejected outright. BookScouter is still tried as a
+   secondary fallback if `BOOKSCOUTER_API_KEY` is set and SerpApi returns
+   nothing; see `src/lib/bookscouter.ts` for the priority chain and
+   `src/lib/serpapi.ts` for the Google Shopping request/parse logic.
 
 3. **Anthropic API** (plain-language recommendation explanations). Get a key
    at https://console.anthropic.com and set `ANTHROPIC_API_KEY`.
@@ -70,8 +75,9 @@ src/app/                 Next.js App Router pages + API routes
   api/recommend/             POST { itemTitle, prices } -> buy-now/wait signal
   api/dorm-item-price/       POST { query } -> live Best Buy price + photo
 src/lib/                  API wrappers + business logic
-  googleBooks.ts            ISBN -> metadata
-  bookscouter.ts            ISBN -> vendor prices (mock fallback included)
+  openLibrary.ts             ISBN -> metadata (Open Library, no key needed)
+  serpapi.ts                 Title -> real cross-vendor prices (Google Shopping)
+  bookscouter.ts             Orchestrates SerpApi -> BookScouter -> mock fallback
   bestbuy.ts                 Live price + photo lookup (mini fridge, microwave only)
   recommendation.ts         Rule-based signal + LLM explanation
   supabaseClient.ts         Browser + service-role Supabase clients
@@ -97,6 +103,9 @@ the Vercel project settings, deploy. Free tier is enough for a demo.
   curated. v2 would extend real coverage via additional affiliate APIs
   (Amazon Associates, Walmart) once the site has enough traffic to qualify
   for approval.
+- Textbook prices are deterministic mock data until `SERPAPI_KEY` is set,
+  clearly labeled "Demo data" vs. "Live" in the UI either way (see
+  `src/app/textbooks/page.tsx`).
 - The buy-now/wait signal compares same-day vendor spread, not a real
   rolling price-history low, since there's no accumulated history yet. Once
   the seed script has run for a few weeks, swap the logic in

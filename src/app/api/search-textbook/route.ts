@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-import { lookupBookByIsbn } from "@/lib/googleBooks";
+import { lookupBookByIsbn } from "@/lib/openLibrary";
 import { lookupTextbookPrices } from "@/lib/bookscouter";
 
 // POST { isbn: string }
-// Looks up book metadata + vendor prices for a given ISBN. Does not persist
-// to Supabase yet — that happens via scripts/seed-textbooks.ts for a
-// curated list, keeping this endpoint fast and free of write-permission
-// concerns for the MVP demo.
+// Looks up book metadata, then vendor prices (which need the book's title
+// to search SerpApi effectively, so this can't run in parallel with the
+// metadata lookup the way it used to). Does not persist to Supabase yet —
+// that happens via scripts/seed-textbooks.ts for a curated list, keeping
+// this endpoint fast and free of write-permission concerns for the MVP demo.
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => null);
   const isbn = typeof body?.isbn === "string" ? body.isbn.replace(/[-\s]/g, "") : null;
@@ -19,10 +20,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const [metadata, prices] = await Promise.all([
-      lookupBookByIsbn(isbn),
-      lookupTextbookPrices(isbn),
-    ]);
+    const metadata = await lookupBookByIsbn(isbn);
 
     if (!metadata) {
       return NextResponse.json(
@@ -31,7 +29,9 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    return NextResponse.json({ metadata, prices });
+    const { prices, isLive } = await lookupTextbookPrices(isbn, metadata.title);
+
+    return NextResponse.json({ metadata, prices, pricesLive: isLive });
   } catch (err) {
     console.error("search-textbook error:", err);
     return NextResponse.json(
