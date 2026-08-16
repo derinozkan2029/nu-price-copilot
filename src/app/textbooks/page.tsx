@@ -26,12 +26,18 @@ interface PopularBook {
   label: string;
   courseTag: string;
   isbn: string;
+  // Hardcoded for most entries (verified against Open Library once, see
+  // commit history) so the grid doesn't have to call Open Library's free,
+  // unauthenticated, rate-limited API ~40 times on every page load — that
+  // burst is what was tripping its rate limiting in production. Only price
+  // (genuinely time-varying) is fetched live, via /api/textbook-price.
+  // Entries without these fall back to the full /api/search-textbook flow.
+  authors?: string[];
+  coverUrl?: string;
 }
 
 // Real gateway-course titles across departments, not just CS, so the grid
-// reads as "built for NU students broadly" rather than one major. ISBNs
-// verified against Open Library before hardcoding (see commit history) so
-// the grid never shows a mismatched cover for the wrong edition.
+// reads as "built for NU students broadly" rather than one major.
 const popularBooks: PopularBook[] = [
   { label: "Clean Code", courseTag: "COMP_SCI 308", isbn: "9780132350884" },
   { label: "Computer Systems: A Programmer's Perspective", courseTag: "COMP_SCI 213", isbn: "9780134092669" },
@@ -41,40 +47,176 @@ const popularBooks: PopularBook[] = [
   { label: "Calculus", courseTag: "MATH 220", isbn: "9781285741550" },
   { label: "Organic Chemistry", courseTag: "CHEM 210-1", isbn: "9781118452288" },
   { label: "Psychology", courseTag: "PSYCH 110", isbn: "9781464140815" },
-  { label: "Design Patterns", courseTag: "COMP_SCI 397", isbn: "9780201633610" },
-  { label: "Discrete Mathematics and Its Applications", courseTag: "COMP_SCI 212", isbn: "9781259676512" },
-  { label: "Operating System Concepts", courseTag: "COMP_SCI 343", isbn: "9781118063330" },
-  { label: "The C Programming Language", courseTag: "COMP_SCI 211", isbn: "9780131103627" },
-  { label: "Structure and Interpretation of Computer Programs", courseTag: "COMP_SCI 111", isbn: "9780262510875" },
-  { label: "Linear Algebra and Its Applications", courseTag: "MATH 240", isbn: "9780321982384" },
-  { label: "University Physics", courseTag: "PHYSICS 135-2", isbn: "9780321973610" },
-  { label: "College Physics", courseTag: "PHYSICS 130-1", isbn: "9781305952300" },
-  { label: "Chemistry: The Central Science", courseTag: "CHEM 101-1", isbn: "9780134414232" },
-  { label: "Molecular Biology of the Cell", courseTag: "BIOL_SCI 350", isbn: "9780815344322" },
-  { label: "Microeconomics", courseTag: "ECON 202", isbn: "9780134184241" },
-  { label: "The Elements of Style", courseTag: "WCAS 101", isbn: "9780205309023" },
-  { label: "Thinking, Fast and Slow", courseTag: "PSYCH 226", isbn: "9780374533557" },
-  { label: "Sapiens", courseTag: "ANTHRO 100", isbn: "9780062316097" },
-  { label: "Freakonomics", courseTag: "ECON 281", isbn: "9780060731335" },
-  { label: "The Selfish Gene", courseTag: "BIOL_SCI 220", isbn: "9780198788607" },
-  { label: "A People's History of the United States", courseTag: "HISTORY 201", isbn: "9780062397348" },
-  { label: "Guns, Germs, and Steel", courseTag: "ANTHRO 214", isbn: "9780393317558" },
-  { label: "The Art of Computer Programming, Vol. 2", courseTag: "COMP_SCI 396", isbn: "9780201896831" },
-  { label: "Computer Networking: A Top-Down Approach", courseTag: "COMP_SCI 340", isbn: "9780133594140" },
-  { label: "Database System Concepts", courseTag: "COMP_SCI 339", isbn: "9780078022159" },
-  { label: "Pattern Recognition and Machine Learning", courseTag: "COMP_SCI 349", isbn: "9780387310732" },
-  { label: "Deep Learning", courseTag: "COMP_SCI 449", isbn: "9780262035613" },
-  { label: "Multivariable Calculus", courseTag: "MATH 230", isbn: "9781305266643" },
-  { label: "Physical Chemistry", courseTag: "CHEM 342", isbn: "9780198769866" },
-  { label: "Lehninger Principles of Biochemistry", courseTag: "BIOL_SCI 331", isbn: "9781464126116" },
-  { label: "Fundamentals of Corporate Finance", courseTag: "ECON 310", isbn: "9781259918957" },
-  { label: "Statistics", courseTag: "STAT 202", isbn: "9780393929720" },
-  { label: "Naked Statistics", courseTag: "STAT 101", isbn: "9780393347777" },
-  { label: "A Brief History of Time", courseTag: "PHYSICS 135-1", isbn: "9780553380163" },
-  { label: "Cosmos", courseTag: "ASTRO 100", isbn: "9780345539434" },
-  { label: "Man's Search for Meaning", courseTag: "PSYCH 215", isbn: "9780807014295" },
-  { label: "Signals and Systems", courseTag: "ELEC_ENG 222", isbn: "9780138147570" },
-  { label: "Computer Organization and Design", courseTag: "COMP_SCI 213", isbn: "9780128122754" },
+  {
+    label: "Design Patterns", courseTag: "COMP_SCI 397", isbn: "9780201633610",
+    authors: ["Erich Gamma", "Richard Helm", "Ralph Johnson", "John Vlissides"],
+    coverUrl: "https://covers.openlibrary.org/b/id/10827044-L.jpg",
+  },
+  {
+    label: "Discrete Mathematics and Its Applications", courseTag: "COMP_SCI 212", isbn: "9781259676512",
+    authors: ["Kenneth H. Rosen"],
+    coverUrl: "https://covers.openlibrary.org/b/id/10375823-L.jpg",
+  },
+  {
+    label: "Operating System Concepts", courseTag: "COMP_SCI 343", isbn: "9781118063330",
+    authors: ["Abraham Silberschatz"],
+    coverUrl: "https://covers.openlibrary.org/b/id/7298708-L.jpg",
+  },
+  {
+    label: "The C Programming Language", courseTag: "COMP_SCI 211", isbn: "9780131103627",
+    authors: ["Brian W. Kernighan", "Dennis M. Ritchie"],
+    coverUrl: "https://covers.openlibrary.org/b/id/5732572-L.jpg",
+  },
+  {
+    label: "Structure and Interpretation of Computer Programs", courseTag: "COMP_SCI 111", isbn: "9780262510875",
+    authors: ["Harold Abelson", "Gerald Jay Sussman", "Julie Sussman"],
+    coverUrl: "https://covers.openlibrary.org/b/id/9325174-L.jpg",
+  },
+  {
+    label: "Linear Algebra and Its Applications", courseTag: "MATH 240", isbn: "9780321982384",
+    authors: ["David C. Lay", "Steven R. Lay", "Judi J. McDonald"],
+    coverUrl: "https://covers.openlibrary.org/b/id/15243302-L.jpg",
+  },
+  {
+    label: "University Physics", courseTag: "PHYSICS 135-2", isbn: "9780321973610",
+    authors: ["Hugh D. Young", "Roger A. Freedman"],
+    coverUrl: "https://covers.openlibrary.org/b/id/9388009-L.jpg",
+  },
+  {
+    label: "College Physics", courseTag: "PHYSICS 130-1", isbn: "9781305952300",
+    authors: ["Raymond A. Serway", "Jerry S. Faughn", "Chris Vuille"],
+    coverUrl: "https://covers.openlibrary.org/b/id/15225119-L.jpg",
+  },
+  {
+    label: "Chemistry: The Central Science", courseTag: "CHEM 101-1", isbn: "9780134414232",
+    authors: ["Theodore L. Brown", "H. Eugene LeMay", "Bruce E. Bursten"],
+    coverUrl: "https://covers.openlibrary.org/b/id/15226098-L.jpg",
+  },
+  {
+    label: "Molecular Biology of the Cell", courseTag: "BIOL_SCI 350", isbn: "9780815344322",
+    authors: ["Bruce Alberts", "Alexander Johnson", "Julian Lewis"],
+    coverUrl: "https://covers.openlibrary.org/b/id/8106927-L.jpg",
+  },
+  {
+    label: "Microeconomics", courseTag: "ECON 202", isbn: "9780134184241",
+    authors: ["Robert S. Pindyck", "Daniel L. Rubinfeld"],
+    coverUrl: "https://covers.openlibrary.org/b/id/10163825-L.jpg",
+  },
+  {
+    label: "The Elements of Style", courseTag: "WCAS 101", isbn: "9780205309023",
+    authors: ["William Strunk Jr.", "E. B. White"],
+    coverUrl: "https://covers.openlibrary.org/b/id/10330495-L.jpg",
+  },
+  {
+    label: "Thinking, Fast and Slow", courseTag: "PSYCH 226", isbn: "9780374533557",
+    authors: ["Daniel Kahneman"],
+    coverUrl: "https://covers.openlibrary.org/b/id/7889800-L.jpg",
+  },
+  {
+    label: "Sapiens", courseTag: "ANTHRO 100", isbn: "9780062316097",
+    authors: ["Yuval Noah Harari"],
+    coverUrl: "https://covers.openlibrary.org/b/id/14369194-L.jpg",
+  },
+  {
+    label: "Freakonomics", courseTag: "ECON 281", isbn: "9780060731335",
+    authors: ["Steven D. Levitt", "Stephen J. Dubner"],
+    coverUrl: "https://covers.openlibrary.org/b/id/7352393-L.jpg",
+  },
+  {
+    label: "The Selfish Gene", courseTag: "BIOL_SCI 220", isbn: "9780198788607",
+    authors: ["Richard Dawkins"],
+    coverUrl: "https://covers.openlibrary.org/b/id/15179535-L.jpg",
+  },
+  {
+    label: "A People's History of the United States", courseTag: "HISTORY 201", isbn: "9780062397348",
+    authors: ["Howard Zinn"],
+    coverUrl: "https://covers.openlibrary.org/b/id/10115742-L.jpg",
+  },
+  {
+    label: "Guns, Germs, and Steel", courseTag: "ANTHRO 214", isbn: "9780393317558",
+    authors: ["Jared Diamond"],
+    coverUrl: "https://covers.openlibrary.org/b/id/12863097-L.jpg",
+  },
+  {
+    label: "The Art of Computer Programming, Vol. 2", courseTag: "COMP_SCI 396", isbn: "9780201896831",
+    authors: ["Donald Knuth"],
+    coverUrl: "https://covers.openlibrary.org/b/id/136600-L.jpg",
+  },
+  {
+    label: "Computer Networking: A Top-Down Approach", courseTag: "COMP_SCI 340", isbn: "9780133594140",
+    authors: ["James F. Kurose", "Keith Ross"],
+    coverUrl: "https://covers.openlibrary.org/b/id/8509058-L.jpg",
+  },
+  {
+    label: "Database System Concepts", courseTag: "COMP_SCI 339", isbn: "9780078022159",
+    authors: ["Abraham Silberschatz"],
+    coverUrl: "https://covers.openlibrary.org/b/id/10385525-L.jpg",
+  },
+  {
+    label: "Pattern Recognition and Machine Learning", courseTag: "COMP_SCI 349", isbn: "9780387310732",
+    authors: ["Christopher M. Bishop"],
+    coverUrl: "https://covers.openlibrary.org/b/id/245089-L.jpg",
+  },
+  {
+    label: "Deep Learning", courseTag: "COMP_SCI 449", isbn: "9780262035613",
+    authors: ["Ian Goodfellow", "Yoshua Bengio", "Aaron Courville"],
+    coverUrl: "https://covers.openlibrary.org/b/id/8183675-L.jpg",
+  },
+  {
+    label: "Multivariable Calculus", courseTag: "MATH 230", isbn: "9781305266643",
+    authors: ["James Stewart"],
+    coverUrl: "https://covers.openlibrary.org/b/id/8964260-L.jpg",
+  },
+  {
+    label: "Physical Chemistry", courseTag: "CHEM 342", isbn: "9780198769866",
+    authors: ["Peter Atkins", "Julio de Paula", "James Keeler"],
+    coverUrl: "https://covers.openlibrary.org/b/id/8258832-L.jpg",
+  },
+  {
+    label: "Lehninger Principles of Biochemistry", courseTag: "BIOL_SCI 331", isbn: "9781464126116",
+    authors: ["David L. Nelson", "Michael M. Cox"],
+    coverUrl: "https://covers.openlibrary.org/b/id/7910076-L.jpg",
+  },
+  {
+    label: "Fundamentals of Corporate Finance", courseTag: "ECON 310", isbn: "9781259918957",
+    authors: ["Stephen Ross", "Randolph Westerfield", "Bradford Jordan"],
+    coverUrl: "https://covers.openlibrary.org/b/id/10409657-L.jpg",
+  },
+  {
+    label: "Statistics", courseTag: "STAT 202", isbn: "9780393929720",
+    authors: ["David Freedman", "Robert Pisani", "Roger Purves"],
+    coverUrl: "https://covers.openlibrary.org/b/id/1196004-L.jpg",
+  },
+  {
+    label: "Naked Statistics", courseTag: "STAT 101", isbn: "9780393347777",
+    authors: ["Charles J. Wheelan"],
+    coverUrl: "https://covers.openlibrary.org/b/id/8778981-L.jpg",
+  },
+  {
+    label: "A Brief History of Time", courseTag: "PHYSICS 135-1", isbn: "9780553380163",
+    authors: ["Stephen Hawking"],
+    coverUrl: "https://covers.openlibrary.org/b/id/14589690-L.jpg",
+  },
+  {
+    label: "Cosmos", courseTag: "ASTRO 100", isbn: "9780345539434",
+    authors: ["Carl Sagan"],
+    coverUrl: "https://covers.openlibrary.org/b/id/8290911-L.jpg",
+  },
+  {
+    label: "Man's Search for Meaning", courseTag: "PSYCH 215", isbn: "9780807014295",
+    authors: ["Viktor E. Frankl"],
+    coverUrl: "https://covers.openlibrary.org/b/id/8513458-L.jpg",
+  },
+  {
+    label: "Signals and Systems", courseTag: "ELEC_ENG 222", isbn: "9780138147570",
+    authors: ["Alan V. Oppenheim", "Alan S. Willsky"],
+    coverUrl: "https://covers.openlibrary.org/b/id/92117-L.jpg",
+  },
+  {
+    label: "Computer Organization and Design", courseTag: "COMP_SCI 213", isbn: "9780128122754",
+    authors: ["David A. Patterson", "John L. Hennessy"],
+    coverUrl: "https://covers.openlibrary.org/b/id/10151148-L.jpg",
+  },
 ];
 
 function courseMonogram(courseTag: string) {
@@ -130,6 +272,30 @@ export default function TextbooksPage() {
 
     runWithConcurrencyLimit(popularBooks, 5, async (book) => {
       try {
+        if (book.authors && book.coverUrl) {
+          // Metadata is hardcoded, so only fetch the (genuinely live) price.
+          const res = await fetch("/api/textbook-price", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ isbn: book.isbn, title: book.label }),
+          });
+          const data = await res.json();
+          const result: Result | null = res.ok
+            ? {
+                metadata: {
+                  isbn: book.isbn,
+                  title: book.label,
+                  authors: book.authors,
+                  imageUrl: book.coverUrl,
+                },
+                prices: data.prices,
+                pricesLive: data.pricesLive,
+              }
+            : null;
+          setPopularData((prev) => ({ ...prev, [book.isbn]: result }));
+          return;
+        }
+
         const res = await fetch("/api/search-textbook", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
