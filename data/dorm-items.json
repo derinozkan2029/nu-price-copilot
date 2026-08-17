@@ -441,5 +441,82 @@
       { "vendor": "Target", "price": 34.99 },
       { "vendor": "Etsy", "price": 39.99 }
     ]
+  },
+  {
+    "title": "LED Vanity Mirror with Lights",
+    "category": "Furniture",
+    "shareable": false,
+    "shoppingQuery": "led vanity mirror with lights hollywood",
+    "prices": [
+      { "vendor": "Target", "price": 39.99 },
+      { "vendor": "Amazon", "price": 34.99 },
+      { "vendor": "Walmart", "price": 29.99 }
+    ]
+  },
+  {
+    "title": "Cork Bulletin Board",
+    "category": "Decor",
+    "shareable": false,
+    "shoppingQuery": "cork bulletin board",
+    "prices": [
+      { "vendor": "Target", "price": 14.99 },
+      { "vendor": "Amazon", "price": 12.99 },
+      { "vendor": "Walmart", "price": 11.99 }
+    ]
+  },
+  {
+    "title": "Canvas Wall Art (Abstract Print Set)",
+    "category": "Decor",
+    "shareable": false,
+    "shoppingQuery": "canvas wall art set abstract",
+    "prices": [
+      { "vendor": "Amazon", "price": 29.99 },
+      { "vendor": "Target", "price": 34.99 },
+      { "vendor": "IKEA", "price": 24.99 }
+    ]
+  },
+  {
+    "title": "Color-Changing Cool-Mist Humidifier",
+    "category": "Appliances",
+    "shareable": false,
+    "shoppingQuery": "color changing humidifier",
+    "prices": [
+      { "vendor": "Amazon", "price": 24.99 },
+      { "vendor": "Target", "price": 27.99 },
+      { "vendor": "Walmart", "price": 22.99 }
+    ]
+  },
+  {
+    "title": "Folding Papasan Chair",
+    "category": "Furniture",
+    "shareable": false,
+    "shoppingQuery": "folding papasan chair",
+    "prices": [
+      { "vendor": "Amazon", "price": 79.99 },
+      { "vendor": "Target", "price": 89.99 },
+      { "vendor": "Walmart", "price": 74.99 }
+    ]
+  },
+  {
+    "title": "Lockable Jewelry Box",
+    "category": "Storage",
+    "shareable": false,
+    "shoppingQuery": "lockable jewelry box",
+    "prices": [
+      { "vendor": "Amazon", "price": 19.99 },
+      { "vendor": "Target", "price": 22.99 },
+      { "vendor": "Etsy", "price": 27.99 }
+    ]
+  },
+  {
+    "title": "Desk Organizer Set",
+    "category": "Storage",
+    "shareable": false,
+    "shoppingQuery": "desk organizer set",
+    "prices": [
+      { "vendor": "Target", "price": 16.99 },
+      { "vendor": "Amazon", "price": 14.99 },
+      { "vendor": "Walmart", "price": 12.99 }
+    ]
   }
 ]
