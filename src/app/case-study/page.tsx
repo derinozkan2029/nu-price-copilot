@@ -3,7 +3,7 @@ import Link from "next/link";
 export const metadata = {
   title: "Case study",
   description:
-    "Why NU Price Copilot exists, how the catalog was researched, and the real tradeoffs behind building it.",
+    "The real story behind NU Price Copilot: a move-in that didn't go as planned, how the catalog was researched, and the tradeoffs behind building it.",
 };
 
 function Section({
@@ -47,42 +47,56 @@ export default function CaseStudyPage() {
           Why I built this
         </h1>
         <p className="mt-3 max-w-2xl text-base leading-relaxed text-ink-soft">
-          NU Price Copilot is a portfolio project for APM applications, but I
-          built it like a real product: real data sources, real tradeoffs
-          under real constraints, and an honest line between what's live and
-          what's a curated fallback. This page is the story behind the
-          decisions, not just the demo.
+          This came out of my own move-in to Northwestern, not a product
+          brainstorm. I forgot things I swore I'd already packed, overpaid
+          for the things I remembered, and never once checked whether
+          renting a textbook was cheaper than buying it. This page is the
+          real story behind the decisions, including how it was actually
+          built.
         </p>
       </div>
 
-      <Section eyebrow="01 · The problem" title="A recurring, checkable decision">
+      <Section
+        eyebrow="01 · The problem"
+        title="Forgetting things, and overpaying for the rest"
+      >
         <p>
-          Northwestern students rebuy the same predictable categories,
-          textbooks every term, dorm setup every year, and currently check
-          three or four sites by hand to find the best price or format. A
+          Move-in week was a blur of late CVS and Target runs for stuff I'd
+          already told myself I had: a shower caddy, extra hangers, a
+          mattress topper I didn't know I'd need until the first night on a
+          dorm mattress. That's the first problem, you don't find out what
+          you're missing until you're already missing it.
+        </p>
+        <p>
+          The second problem showed up every term after: rebuying textbooks
+          without ever checking if a rental or a used copy was cheaper, a
           used-versus-rental choice alone can swing $50 or more on a single
-          book. That's real money and a real repeated decision, and no
-          single tool collapses it into one comparison.
+          book, and buying dorm items from whichever site came up first
+          instead of comparing. Both problems are really the same one: no
+          single place to see what you need and what it actually costs
+          before you're standing in a Target aisle at 9pm.
         </p>
       </Section>
 
-      <Section eyebrow="02 · Scoping" title="One campus, on purpose">
+      <Section
+        eyebrow="02 · Scoping"
+        title="Northwestern first, because that's where I am"
+      >
         <p>
-          I scoped this to Northwestern instead of &quot;students
-          everywhere.&quot; A defined audience makes product decisions
-          concrete: &quot;move-in day at Elder or Shepard&quot; is a
-          checkable scenario, &quot;dorm essentials for any student
-          anywhere&quot; isn&apos;t. Distribution is also tractable at one
-          school, reaching a few hundred NU students is realistic for a
-          single-person project with no marketing budget; reaching students
-          nationally isn&apos;t.
+          I scoped this to Northwestern because I'm a Northwestern student,
+          it's the campus I actually know: the residence halls, what Norris
+          charges versus Amazon, what move-in day into Elder or Shepard
+          actually looks like. Building for &quot;students everywhere&quot;
+          first would have meant guessing at all of that instead of
+          checking it against my own experience.
         </p>
         <p>
-          The generalization story is still there: the architecture (one
-          recommendation engine over a category field) already supports a
-          second school without a rewrite. That's a stronger claim to make
-          once there's real usage at one school to point to, rather than an
-          unvalidated &quot;works for everyone&quot; pitch on day one.
+          The plan is to expand to other campuses once this is working well
+          here. The architecture (one recommendation engine over a category
+          field, not campus-specific logic) already supports a second
+          school without a rewrite, adding one is mostly a data problem:
+          new dorm names, new curated items, a new set of ISBNs. I'd rather
+          prove it out on the campus I can personally validate first.
         </p>
       </Section>
 
@@ -91,10 +105,11 @@ export default function CaseStudyPage() {
         title="Deciding what actually belongs in the catalog"
       >
         <p>
-          I didn't want to guess what incoming freshmen buy. For the dorm
-          catalog, I researched what's actually trending on TikTok and
-          Instagram right now (Dorm Therapy Awards, viral dorm-haul videos,
-          sorority big/little gift trends, aesthetic-decor blog roundups),
+          I didn't want to rely only on my own move-in to decide what goes
+          in the dorm catalog, one person's experience misses a lot. So I
+          researched what's actually trending on TikTok and Instagram right
+          now (Dorm Therapy Awards, viral dorm-haul videos, sorority
+          big/little gift trends, aesthetic-decor blog roundups),
           cross-checked it against what was already in the catalog to avoid
           duplicates, and deliberately left out recurring consumables
           (detergent sheets, water filters) since they don't fit a
@@ -168,7 +183,30 @@ export default function CaseStudyPage() {
         </Callout>
       </Section>
 
-      <Section eyebrow="05 · What I'd measure" title="If this had real users">
+      <Section
+        eyebrow="05 · How this was built"
+        title="Vibecoded, on purpose, and I'll say so"
+      >
+        <p>
+          I built this with Claude Code doing most of the typing, not by
+          hand-writing every line. I'm not going to pretend otherwise. What
+          I actually did: decided what problem this solves and for whom,
+          scoped what goes in the catalog and what doesn't, wrote the
+          research prompts and judged which results were actually good
+          matches, caught the data-integrity bug above by noticing a price
+          looked wrong, diagnosed the production rate-limit failure from
+          real timing data, and decided the structural fix instead of
+          reaching for a quick patch.
+        </p>
+        <p>
+          The AI handled a lot of the implementation. I think that's
+          increasingly just how building works, and I'd rather be upfront
+          about the split than let the polish imply I wrote every line
+          myself.
+        </p>
+      </Section>
+
+      <Section eyebrow="06 · What I'd measure" title="If this had real users">
         <p>
           The site has no usage data yet, so here's what I'd instrument
           first rather than what I've already learned:
@@ -181,7 +219,7 @@ export default function CaseStudyPage() {
         </ul>
       </Section>
 
-      <Section eyebrow="06 · What's next" title="Beyond the web app">
+      <Section eyebrow="07 · What's next" title="Beyond the web app">
         <p>
           The natural v2 isn't more categories, it's a browser extension
           that surfaces this at the point of purchase (on the Amazon or
@@ -195,7 +233,8 @@ export default function CaseStudyPage() {
           Shorter-term: real historical pricing (the seed script exists but
           hasn't accumulated data yet) would let the buy-now/wait signal
           compare against an actual 90-day low instead of same-day vendor
-          spread.
+          spread. Longer-term: expanding past Northwestern once the catalog
+          and recommendation logic have actually been proven here.
         </p>
       </Section>
 
