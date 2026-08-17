@@ -351,5 +351,95 @@
       { "vendor": "Amazon", "price": 29.99 },
       { "vendor": "Walmart", "price": 27.99 }
     ]
+  },
+  {
+    "title": "Wearable Blanket (Oversized Hoodie)",
+    "category": "Bedding",
+    "shareable": false,
+    "shoppingQuery": "oversized wearable hoodie blanket",
+    "prices": [
+      { "vendor": "Target", "price": 34.99 },
+      { "vendor": "Amazon", "price": 29.99 },
+      { "vendor": "Walmart", "price": 27.99 }
+    ]
+  },
+  {
+    "title": "Bed Risers (Set of 4)",
+    "category": "Storage",
+    "shareable": false,
+    "shoppingQuery": "bed risers set of 4",
+    "prices": [
+      { "vendor": "Target", "price": 12.99 },
+      { "vendor": "Amazon", "price": 10.99 },
+      { "vendor": "Walmart", "price": 9.99 }
+    ]
+  },
+  {
+    "title": "3-Tier Rolling Utility Cart",
+    "category": "Storage",
+    "shareable": false,
+    "shoppingQuery": "3 tier rolling utility cart",
+    "prices": [
+      { "vendor": "IKEA", "price": 39.99 },
+      { "vendor": "Amazon", "price": 44.99 },
+      { "vendor": "Target", "price": 49.99 }
+    ]
+  },
+  {
+    "title": "Adjustable Floating Bedside Shelf",
+    "category": "Furniture",
+    "shareable": false,
+    "shoppingQuery": "adjustable floating shelf bedside",
+    "prices": [
+      { "vendor": "Amazon", "price": 19.99 },
+      { "vendor": "Target", "price": 22.99 },
+      { "vendor": "IKEA", "price": 17.99 }
+    ]
+  },
+  {
+    "title": "Insulated 40oz Tumbler",
+    "category": "Bathroom",
+    "shareable": false,
+    "shoppingQuery": "insulated 40 oz tumbler with handle",
+    "prices": [
+      { "vendor": "Target", "price": 24.99 },
+      { "vendor": "Amazon", "price": 21.99 },
+      { "vendor": "Walmart", "price": 19.99 }
+    ]
+  },
+  {
+    "title": "Noise-Cancelling Headphones",
+    "category": "Electronics",
+    "shareable": false,
+    "shoppingQuery": "wireless noise cancelling headphones",
+    "bestBuyQuery": "wireless noise cancelling headphones",
+    "prices": [
+      { "vendor": "Amazon", "price": 79.99 },
+      { "vendor": "Target", "price": 89.99 },
+      { "vendor": "Best Buy", "price": 99.99 }
+    ]
+  },
+  {
+    "title": "Portable Mini Projector",
+    "category": "Electronics",
+    "shareable": true,
+    "shoppingQuery": "portable mini projector",
+    "bestBuyQuery": "portable mini projector",
+    "prices": [
+      { "vendor": "Amazon", "price": 89.99 },
+      { "vendor": "Target", "price": 99.99 },
+      { "vendor": "Best Buy", "price": 129.99 }
+    ]
+  },
+  {
+    "title": "LED Neon Sign (Customizable)",
+    "category": "Decor",
+    "shareable": false,
+    "shoppingQuery": "custom led neon sign",
+    "prices": [
+      { "vendor": "Amazon", "price": 29.99 },
+      { "vendor": "Target", "price": 34.99 },
+      { "vendor": "Etsy", "price": 39.99 }
+    ]
   }
 ]
