@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import dormItems from "../../../data/dorm-items.json";
+import { Modal } from "@/components/Modal";
 import { PriceTable } from "@/components/PriceTable";
 import { RecommendationBadge } from "@/components/RecommendationBadge";
 import { CostSplitCalculator } from "@/components/CostSplitCalculator";
@@ -251,58 +252,60 @@ export default function DormPage() {
       </div>
 
       {selectedItem && (
-        <div className="animate-fade-up space-y-3 rounded-sm border border-line bg-paper-raised p-4">
-          <div className="flex items-center justify-between border-b border-dashed border-line pb-3">
-            <div>
-              <p className="font-mono text-[11px] uppercase tracking-wide text-ink-faint">
-                Comparing
-              </p>
-              <h2 className="font-display text-lg text-ink">
-                {selectedItem.title}
-              </h2>
+        <Modal onClose={() => setSelected(null)} labelledBy="dorm-modal-title">
+          <div className="max-h-[85vh] space-y-3 overflow-y-auto p-4">
+            <div className="flex items-center justify-between border-b border-dashed border-line pb-3">
+              <div>
+                <p className="font-mono text-[11px] uppercase tracking-wide text-ink-faint">
+                  Comparing
+                </p>
+                <h2 id="dorm-modal-title" className="font-display text-lg text-ink">
+                  {selectedItem.title}
+                </h2>
+              </div>
+              <button
+                onClick={() => setSelected(null)}
+                aria-label="Close comparison"
+                className="rounded-sm border border-line px-2 py-1 font-mono text-xs text-ink-soft transition-colors hover:border-purple hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
+              >
+                Close
+              </button>
             </div>
-            <button
-              onClick={() => setSelected(null)}
-              aria-label="Close comparison"
-              className="rounded-sm border border-line px-2 py-1 font-mono text-xs text-ink-soft transition-colors hover:border-purple hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
-            >
-              Close
-            </button>
-          </div>
 
-          {loadingItem === selectedItem.title && (
-            <div className="space-y-2">
-              {[0, 1].map((i) => (
-                <div
-                  key={i}
-                  className="h-8 animate-pulse rounded bg-line-soft"
-                  style={{ animationDelay: `${i * 120}ms` }}
-                />
-              ))}
-            </div>
-          )}
-          {recommendations[selectedItem.title] && (
-            <RecommendationBadge
-              signal={recommendations[selectedItem.title].signal}
-              rationale={recommendations[selectedItem.title].rationale}
+            {loadingItem === selectedItem.title && (
+              <div className="space-y-2">
+                {[0, 1].map((i) => (
+                  <div
+                    key={i}
+                    className="h-8 animate-pulse rounded bg-line-soft"
+                    style={{ animationDelay: `${i * 120}ms` }}
+                  />
+                ))}
+              </div>
+            )}
+            {recommendations[selectedItem.title] && (
+              <RecommendationBadge
+                signal={recommendations[selectedItem.title].signal}
+                rationale={recommendations[selectedItem.title].rationale}
+              />
+            )}
+            <PriceTable
+              prices={selectedPrices.map((p) => ({ ...p, format: null }))}
             />
-          )}
-          <PriceTable
-            prices={selectedPrices.map((p) => ({ ...p, format: null }))}
-          />
-          {!selectedLive && selectedItem.imageCredit && (
-            <p className="font-mono text-[10px] text-ink-faint">
-              {selectedItem.imageCredit}
-            </p>
-          )}
-          {selectedItem.shareable && (
-            <CostSplitCalculator
-              price={Math.min(
-                ...selectedPrices.map((p) => p.price)
-              )}
-            />
-          )}
-        </div>
+            {!selectedLive && selectedItem.imageCredit && (
+              <p className="font-mono text-[10px] text-ink-faint">
+                {selectedItem.imageCredit}
+              </p>
+            )}
+            {selectedItem.shareable && (
+              <CostSplitCalculator
+                price={Math.min(
+                  ...selectedPrices.map((p) => p.price)
+                )}
+              />
+            )}
+          </div>
+        </Modal>
       )}
     </div>
   );

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { SearchBar } from "@/components/SearchBar";
+import { Modal } from "@/components/Modal";
 import { PriceTable } from "@/components/PriceTable";
 import { RecommendationBadge } from "@/components/RecommendationBadge";
 import { PriceHistoryChart, type HistoryPoint } from "@/components/PriceHistoryChart";
@@ -250,6 +251,11 @@ export default function TextbooksPage() {
   );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // The popular-books grid stays visible at all times now; this controls
+  // whether the search outcome (loading/error/result) shows as a modal on
+  // top of it, decoupled from the fetch state itself so closing early
+  // doesn't get reopened by an in-flight request resolving.
+  const [dismissed, setDismissed] = useState(true);
 
   // "loading" while in flight, Result once resolved, null on failure.
   // Fetched for every card in the popular-books grid on mount so covers
@@ -325,6 +331,7 @@ export default function TextbooksPage() {
   }
 
   async function handleSearch(isbn: string) {
+    setDismissed(false);
     setLoading(true);
     setError(null);
     setResult(null);
@@ -356,6 +363,7 @@ export default function TextbooksPage() {
   function selectPopular(book: PopularBook) {
     const data = popularData[book.isbn];
     if (data && data !== "loading") {
+      setDismissed(false);
       setError(null);
       setResult(data);
       setRecommendation(null);
@@ -363,6 +371,10 @@ export default function TextbooksPage() {
     } else {
       handleSearch(book.isbn);
     }
+  }
+
+  function closeModal() {
+    setDismissed(true);
   }
 
   return (
@@ -382,8 +394,7 @@ export default function TextbooksPage() {
 
       <SearchBar onSearch={handleSearch} disabled={loading} />
 
-      {!result && !loading && !error && (
-        <div className="animate-fade-up space-y-3" style={{ animationDelay: "80ms" }}>
+      <div className="animate-fade-up space-y-3" style={{ animationDelay: "80ms" }}>
           <div>
             <p className="font-mono text-[11px] uppercase tracking-wide text-ink-faint">
               Popular at Northwestern
@@ -458,96 +469,104 @@ export default function TextbooksPage() {
             })}
           </div>
         </div>
-      )}
 
-      {loading && (
-        <div className="animate-fade-up space-y-2 overflow-hidden rounded-sm border border-line bg-paper-raised p-4">
-          {[0, 1, 2].map((i) => (
-            <div
-              key={i}
-              className="h-8 animate-pulse rounded bg-line-soft"
-              style={{ animationDelay: `${i * 120}ms` }}
-            />
-          ))}
-        </div>
-      )}
-      {error && (
-        <p className="rounded-sm border border-amber/40 bg-amber-soft px-3 py-2 font-mono text-xs text-amber-deep">
-          {error}
-        </p>
-      )}
-
-      {result && (
-        <div className="animate-fade-up space-y-4">
-          <div className="flex items-start justify-between gap-4 border-b border-dashed border-line pb-4">
-            <div className="flex items-start gap-4">
-              {result.metadata.imageUrl && !brokenCovers.has(result.metadata.isbn) && (
-                <Image
-                  src={result.metadata.imageUrl}
-                  alt={result.metadata.title}
-                  width={96}
-                  height={144}
-                  className="h-24 w-auto rounded-sm border border-line"
-                  onError={() =>
-                    setBrokenCovers((prev) => new Set(prev).add(result.metadata.isbn))
-                  }
-                />
-              )}
-              <div>
-                <h2 className="font-display text-lg text-ink">
-                  {result.metadata.title}
-                </h2>
-                <p className="text-sm text-ink-soft">
-                  {result.metadata.authors.join(", ")}
-                </p>
+      {!dismissed && (loading || error || result) && (
+        <Modal onClose={closeModal} labelledBy="textbook-modal-title">
+          <div className="max-h-[85vh] space-y-4 overflow-y-auto p-4">
+            {loading && (
+              <div className="animate-fade-up space-y-2">
+                {[0, 1, 2].map((i) => (
+                  <div
+                    key={i}
+                    className="h-8 animate-pulse rounded bg-line-soft"
+                    style={{ animationDelay: `${i * 120}ms` }}
+                  />
+                ))}
               </div>
-            </div>
-            <button
-              onClick={() => {
-                setResult(null);
-                setRecommendation(null);
-                setError(null);
-              }}
-              aria-label="Back to popular textbooks"
-              className="shrink-0 rounded-sm border border-line px-2 py-1 font-mono text-xs text-ink-soft transition-colors hover:border-purple hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
-            >
-              Back
-            </button>
+            )}
+            {error && (
+              <div className="space-y-3">
+                <p className="rounded-sm border border-amber/40 bg-amber-soft px-3 py-2 font-mono text-xs text-amber-deep">
+                  {error}
+                </p>
+                <button
+                  onClick={closeModal}
+                  className="rounded-sm border border-line px-2 py-1 font-mono text-xs text-ink-soft transition-colors hover:border-purple hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
+                >
+                  Close
+                </button>
+              </div>
+            )}
+            {result && (
+              <>
+                <div className="flex items-start justify-between gap-4 border-b border-dashed border-line pb-4">
+                  <div className="flex items-start gap-4">
+                    {result.metadata.imageUrl && !brokenCovers.has(result.metadata.isbn) && (
+                      <Image
+                        src={result.metadata.imageUrl}
+                        alt={result.metadata.title}
+                        width={96}
+                        height={144}
+                        className="h-24 w-auto rounded-sm border border-line"
+                        onError={() =>
+                          setBrokenCovers((prev) => new Set(prev).add(result.metadata.isbn))
+                        }
+                      />
+                    )}
+                    <div>
+                      <h2 id="textbook-modal-title" className="font-display text-lg text-ink">
+                        {result.metadata.title}
+                      </h2>
+                      <p className="text-sm text-ink-soft">
+                        {result.metadata.authors.join(", ")}
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={closeModal}
+                    aria-label="Close comparison"
+                    className="shrink-0 rounded-sm border border-line px-2 py-1 font-mono text-xs text-ink-soft transition-colors hover:border-purple hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
+                  >
+                    Close
+                  </button>
+                </div>
+
+                {recommendation && (
+                  <RecommendationBadge
+                    signal={recommendation.signal}
+                    rationale={recommendation.rationale}
+                  />
+                )}
+
+                <div className="flex items-center justify-between">
+                  <p className="font-mono text-[11px] uppercase tracking-wide text-ink-faint">
+                    Vendor prices
+                  </p>
+                  <span
+                    className={`rounded-full px-2 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wide ${
+                      result.pricesLive
+                        ? "bg-purple text-paper"
+                        : "border border-line text-ink-faint"
+                    }`}
+                  >
+                    {result.pricesLive ? "Live · Google Shopping" : "Demo data"}
+                  </span>
+                </div>
+                <PriceTable prices={result.prices} />
+
+                {result.prices.length > 0 && (
+                  <PriceHistoryChart
+                    points={illustrativeHistory(
+                      result.metadata.isbn,
+                      Math.min(...result.prices.map((p) => p.price))
+                    )}
+                    caption="Illustrative 14-day trend (demo data). Real history accrues once the seed script has run for a while."
+                  />
+                )}
+              </>
+            )}
           </div>
-
-          {recommendation && (
-            <RecommendationBadge
-              signal={recommendation.signal}
-              rationale={recommendation.rationale}
-            />
-          )}
-
-          <div className="flex items-center justify-between">
-            <p className="font-mono text-[11px] uppercase tracking-wide text-ink-faint">
-              Vendor prices
-            </p>
-            <span
-              className={`rounded-full px-2 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wide ${
-                result.pricesLive
-                  ? "bg-purple text-paper"
-                  : "border border-line text-ink-faint"
-              }`}
-            >
-              {result.pricesLive ? "Live · Google Shopping" : "Demo data"}
-            </span>
-          </div>
-          <PriceTable prices={result.prices} />
-
-          {result.prices.length > 0 && (
-            <PriceHistoryChart
-              points={illustrativeHistory(
-                result.metadata.isbn,
-                Math.min(...result.prices.map((p) => p.price))
-              )}
-              caption="Illustrative 14-day trend (demo data). Real history accrues once the seed script has run for a while."
-            />
-          )}
-        </div>
+        </Modal>
       )}
     </div>
   );
