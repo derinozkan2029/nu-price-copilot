@@ -36,10 +36,13 @@ async function fetchShoppingResults(
   });
 
   const res = await fetch(`https://serpapi.com/search.json?${params.toString()}`, {
-    // 24h rather than 1h: the textbooks grid alone now fires ~40 queries
-    // on every cold page load, and SerpApi's free tier is 250 searches/
-    // month total. Prices don't need to be fresher than a day for a demo.
-    next: { revalidate: 60 * 60 * 24 },
+    // 14 days: the textbooks grid (~42 items) plus the dorm grid (~31
+    // items) is ~73 unique queries. At a 1-day cache that's ~2,190 calls/
+    // month against SerpApi's 250/month free-tier cap if the site gets
+    // visited daily. At 14 days it's ~156/month, leaving room for ad-hoc
+    // ISBN searches too. Prices don't need to be fresher than that for a
+    // portfolio demo.
+    next: { revalidate: 60 * 60 * 24 * 14 },
   });
 
   if (!res.ok) {

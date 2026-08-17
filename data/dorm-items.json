@@ -274,5 +274,82 @@
       { "vendor": "Amazon", "price": 26.99 },
       { "vendor": "IKEA", "price": 24.99 }
     ]
+  },
+  {
+    "title": "Velvet Non-Slip Hangers (Set of 30)",
+    "category": "Storage",
+    "shareable": false,
+    "shoppingQuery": "velvet non slip hangers set of 30",
+    "prices": [
+      { "vendor": "Target", "price": 19.99 },
+      { "vendor": "Amazon", "price": 16.99 },
+      { "vendor": "Walmart", "price": 14.99 }
+    ]
+  },
+  {
+    "title": "No-Sew Closet Curtain (Tension Rod Panel)",
+    "category": "Storage",
+    "shareable": false,
+    "shoppingQuery": "closet curtain tension rod panel",
+    "prices": [
+      { "vendor": "Amazon", "price": 24.99 },
+      { "vendor": "Target", "price": 27.99 },
+      { "vendor": "Walmart", "price": 22.99 }
+    ]
+  },
+  {
+    "title": "Gallery Wall Picture Frame Set",
+    "category": "Decor",
+    "shareable": false,
+    "shoppingQuery": "gallery wall picture frame set",
+    "prices": [
+      { "vendor": "Target", "price": 39.99 },
+      { "vendor": "Amazon", "price": 34.99 },
+      { "vendor": "IKEA", "price": 29.99 }
+    ]
+  },
+  {
+    "title": "Photo Clip String Lights",
+    "category": "Decor",
+    "shareable": false,
+    "shoppingQuery": "photo clip string lights",
+    "prices": [
+      { "vendor": "Amazon", "price": 12.99 },
+      { "vendor": "Target", "price": 14.99 },
+      { "vendor": "Walmart", "price": 11.99 }
+    ]
+  },
+  {
+    "title": "Woven Wall Tapestry",
+    "category": "Decor",
+    "shareable": false,
+    "shoppingQuery": "woven wall tapestry boho",
+    "prices": [
+      { "vendor": "Amazon", "price": 18.99 },
+      { "vendor": "Target", "price": 21.99 },
+      { "vendor": "Urban Outfitters", "price": 24.99 }
+    ]
+  },
+  {
+    "title": "Greek Letter Throw Pillow",
+    "category": "Decor",
+    "shareable": false,
+    "shoppingQuery": "greek letter throw pillow",
+    "prices": [
+      { "vendor": "Amazon", "price": 22.99 },
+      { "vendor": "Etsy", "price": 27.99 },
+      { "vendor": "Target", "price": 24.99 }
+    ]
+  },
+  {
+    "title": "Full-Length Wall Mirror",
+    "category": "Furniture",
+    "shareable": false,
+    "shoppingQuery": "full length wall mirror",
+    "prices": [
+      { "vendor": "Target", "price": 34.99 },
+      { "vendor": "Amazon", "price": 29.99 },
+      { "vendor": "Walmart", "price": 27.99 }
+    ]
   }
 ]
