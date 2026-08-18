@@ -11,9 +11,16 @@ if (!supabaseUrl || !supabaseAnonKey) {
 }
 
 // Client for use in the browser / server components — read-only via RLS.
+// createClient throws synchronously on an invalid URL, and since this runs
+// at module load time, an empty string here would crash every route that
+// imports anything from this file (including getServiceClient below) the
+// moment Supabase isn't configured, not just the code that actually uses
+// `supabase`. A syntactically valid placeholder keeps the module loadable;
+// any real request against it just fails at call time like any other
+// unconfigured integration in this app.
 export const supabase = createClient(
-  supabaseUrl ?? "",
-  supabaseAnonKey ?? ""
+  supabaseUrl || "https://placeholder.supabase.co",
+  supabaseAnonKey || "placeholder-anon-key"
 );
 
 // Service-role client for server-only code (API routes, seed scripts) that

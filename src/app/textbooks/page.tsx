@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { SearchBar } from "@/components/SearchBar";
 import { Modal } from "@/components/Modal";
+import { SuggestItemButton } from "@/components/SuggestItemButton";
 import { PriceTable } from "@/components/PriceTable";
 import { RecommendationBadge } from "@/components/RecommendationBadge";
 import { PriceHistoryChart, type HistoryPoint } from "@/components/PriceHistoryChart";
@@ -390,6 +391,9 @@ export default function TextbooksPage() {
           Search by ISBN (13-digit, no dashes needed) to see new, used,
           rental, and ebook prices side by side before you buy at Norris.
         </p>
+        <div className="mt-3">
+          <SuggestItemButton page="textbooks" />
+        </div>
       </div>
 
       <SearchBar onSearch={handleSearch} disabled={loading} />

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import dormItems from "../../../data/dorm-items.json";
 import { Modal } from "@/components/Modal";
+import { SuggestItemButton } from "@/components/SuggestItemButton";
 import { PriceTable } from "@/components/PriceTable";
 import { RecommendationBadge } from "@/components/RecommendationBadge";
 import { CostSplitCalculator } from "@/components/CostSplitCalculator";
@@ -164,6 +165,9 @@ export default function DormPage() {
           available. Anything not found live stays a curated MVP dataset,
           clearly labeled either way.
         </p>
+        <div className="mt-3">
+          <SuggestItemButton page="dorm" />
+        </div>
       </div>
 
       <div
