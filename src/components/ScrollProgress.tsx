@@ -1,6 +1,10 @@
 "use client";
 
-// From motion-primitives (https://motion-primitives.com/docs/scroll-progress).
+// From motion-primitives (https://motion-primitives.com/docs/scroll-progress),
+// with `layoutEffect` dropped from the useScroll call below: that option
+// isn't in the type for the `motion` version this project has installed
+// (the upstream source targets a different version), and this project
+// never passes containerRef anyway, so it has no effect either way.
 import { motion, SpringOptions, useScroll, useSpring } from "motion/react";
 import { cn } from "@/lib/utils";
 import { RefObject } from "react";
@@ -24,7 +28,6 @@ export function ScrollProgress({
 }: ScrollProgressProps) {
   const { scrollYProgress } = useScroll({
     container: containerRef,
-    layoutEffect: Boolean(containerRef?.current),
   });
 
   const scaleX = useSpring(scrollYProgress, {
