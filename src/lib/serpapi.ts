@@ -36,13 +36,13 @@ async function fetchShoppingResults(
   });
 
   const res = await fetch(`https://serpapi.com/search.json?${params.toString()}`, {
-    // 14 days: the textbooks grid (~42 items) plus the dorm grid (~31
-    // items) is ~73 unique queries. At a 1-day cache that's ~2,190 calls/
-    // month against SerpApi's 250/month free-tier cap if the site gets
-    // visited daily. At 14 days it's ~156/month, leaving room for ad-hoc
-    // ISBN searches too. Prices don't need to be fresher than that for a
-    // portfolio demo.
-    next: { revalidate: 60 * 60 * 24 * 14 },
+    // 21 days: the catalog has grown to ~76 textbooks + ~55 dorm items,
+    // ~131 unique queries. At 14 days that's already ~281/month at steady
+    // state, over SerpApi's 250/month free-tier cap before counting any
+    // cache-miss burst from adding new items. 21 days brings steady state
+    // to ~187/month, leaving real margin. Prices don't need to be fresher
+    // than that for a portfolio demo.
+    next: { revalidate: 60 * 60 * 24 * 21 },
   });
 
   if (!res.ok) {

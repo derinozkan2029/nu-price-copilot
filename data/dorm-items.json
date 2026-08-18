@@ -518,5 +518,94 @@
       { "vendor": "Amazon", "price": 14.99 },
       { "vendor": "Walmart", "price": 12.99 }
     ]
+  },
+  {
+    "title": "Upholstered Headboard (Twin XL)",
+    "category": "Furniture",
+    "shareable": false,
+    "shoppingQuery": "twin xl upholstered headboard",
+    "prices": [
+      { "vendor": "Target", "price": 59.99 },
+      { "vendor": "Amazon", "price": 54.99 },
+      { "vendor": "Walmart", "price": 49.99 }
+    ]
+  },
+  {
+    "title": "Folding Chair (Compact)",
+    "category": "Furniture",
+    "shareable": false,
+    "shoppingQuery": "compact folding chair",
+    "prices": [
+      { "vendor": "Amazon", "price": 24.99 },
+      { "vendor": "Target", "price": 27.99 },
+      { "vendor": "Walmart", "price": 22.99 }
+    ]
+  },
+  {
+    "title": "Water Filter Pitcher",
+    "category": "Appliances",
+    "shareable": true,
+    "shoppingQuery": "water filter pitcher",
+    "prices": [
+      { "vendor": "Target", "price": 24.99 },
+      { "vendor": "Amazon", "price": 21.99 },
+      { "vendor": "Walmart", "price": 19.99 }
+    ]
+  },
+  {
+    "title": "Shower Flip Flops",
+    "category": "Bathroom",
+    "shareable": false,
+    "shoppingQuery": "shower flip flops",
+    "prices": [
+      { "vendor": "Amazon", "price": 9.99 },
+      { "vendor": "Target", "price": 11.99 },
+      { "vendor": "Walmart", "price": 8.99 }
+    ]
+  },
+  {
+    "title": "Cozy Memory Foam Slippers",
+    "category": "Bathroom",
+    "shareable": false,
+    "shoppingQuery": "cozy memory foam slippers",
+    "prices": [
+      { "vendor": "Amazon", "price": 14.99 },
+      { "vendor": "Target", "price": 16.99 },
+      { "vendor": "Walmart", "price": 12.99 }
+    ]
+  },
+  {
+    "title": "Cordless Handheld Vacuum",
+    "category": "Appliances",
+    "shareable": true,
+    "shoppingQuery": "cordless handheld vacuum",
+    "bestBuyQuery": "cordless handheld vacuum",
+    "prices": [
+      { "vendor": "Amazon", "price": 34.99 },
+      { "vendor": "Target", "price": 39.99 },
+      { "vendor": "Best Buy", "price": 44.99 }
+    ]
+  },
+  {
+    "title": "Ceramic Mug Set",
+    "category": "Decor",
+    "shareable": false,
+    "shoppingQuery": "cute ceramic mug set",
+    "prices": [
+      { "vendor": "Amazon", "price": 16.99 },
+      { "vendor": "Target", "price": 19.99 },
+      { "vendor": "Etsy", "price": 22.99 }
+    ]
+  },
+  {
+    "title": "Microwave-Safe Bowl Set",
+    "category": "Decor",
+    "shareable": false,
+    "shoppingQuery": "microwave safe bowl set",
+    "prices": [
+      { "vendor": "Amazon", "price": 19.99 },
+      { "vendor": "Target", "price": 22.99 },
+      { "vendor": "Walmart", "price": 17.99 }
+    ]
   }
 ]
