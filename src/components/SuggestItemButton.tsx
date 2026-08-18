@@ -39,34 +39,52 @@ export function SuggestItemButton({ page }: { page: "dorm" | "textbooks" }) {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="rounded-sm font-mono text-xs uppercase tracking-wide text-purple underline decoration-dotted underline-offset-4 transition-colors hover:text-purple-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
+        className="inline-flex items-center gap-1.5 rounded-sm font-mono text-xs uppercase tracking-wide text-purple underline decoration-dotted underline-offset-4 transition-colors hover:text-purple-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
       >
-        Don&apos;t see what you need? Suggest an item &rarr;
+        <span aria-hidden>+</span>
+        Don&apos;t see what you need? Suggest an item
       </button>
 
       {open && (
         <Modal onClose={close} labelledBy="suggest-item-title">
-          <div className="space-y-4 p-4">
-            <div className="flex items-center justify-between border-b border-dashed border-line pb-3">
-              <h2 id="suggest-item-title" className="font-display text-lg text-ink">
-                Suggest an item
-              </h2>
+          <div className="space-y-4 p-5">
+            <div className="flex items-start justify-between gap-4 border-b border-dashed border-line pb-4">
+              <div>
+                <p className="font-mono text-[11px] uppercase tracking-wide text-purple">
+                  Suggestion
+                </p>
+                <h2 id="suggest-item-title" className="mt-1 font-display text-lg text-ink">
+                  {page === "dorm" ? "What's missing from the dorm catalog?" : "What's missing from the textbook list?"}
+                </h2>
+              </div>
               <button
                 onClick={close}
                 aria-label="Close"
-                className="rounded-sm border border-line px-2 py-1 font-mono text-xs text-ink-soft transition-colors hover:border-purple hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
+                className="shrink-0 rounded-sm border border-line px-2 py-1 font-mono text-xs text-ink-soft transition-colors hover:border-purple hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
               >
                 Close
               </button>
             </div>
 
             {status === "done" ? (
-              <p className="text-sm text-ink-soft">
-                Thanks, that&apos;s noted. If enough people ask for the same
-                thing, it&apos;s the next item I add.
-              </p>
+              <div className="flex gap-3 rounded-sm border border-line bg-paper-raised p-4">
+                <div className="min-w-0">
+                  <span className="inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-purple-deep">
+                    <span aria-hidden>&#10003;</span>
+                    Noted
+                  </span>
+                  <p className="mt-1.5 font-display text-[15px] italic leading-snug text-ink">
+                    Thanks, that&apos;s saved. If enough people ask for the
+                    same thing, it&apos;s the next item I add.
+                  </p>
+                </div>
+              </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-3">
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <p className="text-sm leading-relaxed text-ink-soft">
+                  Tell me what you couldn&apos;t find and I&apos;ll consider
+                  it for the catalog.
+                </p>
                 <div>
                   <label
                     htmlFor="suggest-title"
@@ -84,7 +102,7 @@ export function SuggestItemButton({ page }: { page: "dorm" | "textbooks" }) {
                         ? "e.g. Egg crate mattress pad"
                         : "e.g. Intro to Statistics, Moore"
                     }
-                    className="mt-1 w-full rounded-sm border border-line bg-paper-raised px-3 py-2 font-mono text-sm text-ink placeholder:text-ink-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
+                    className="mt-1.5 w-full rounded-sm border border-line bg-paper-raised px-3 py-2.5 font-mono text-sm text-ink placeholder:text-ink-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
                   />
                 </div>
                 <div>
@@ -99,13 +117,13 @@ export function SuggestItemButton({ page }: { page: "dorm" | "textbooks" }) {
                     value={note}
                     onChange={(e) => setNote(e.target.value)}
                     rows={2}
-                    className="mt-1 w-full rounded-sm border border-line bg-paper-raised px-3 py-2 font-mono text-sm text-ink placeholder:text-ink-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
+                    className="mt-1.5 w-full rounded-sm border border-line bg-paper-raised px-3 py-2.5 font-mono text-sm text-ink placeholder:text-ink-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
                   />
                 </div>
                 <button
                   type="submit"
                   disabled={status === "submitting" || !itemTitle.trim()}
-                  className="w-full rounded-sm bg-ink px-4 py-2 font-mono text-xs uppercase tracking-wide text-paper transition-colors hover:bg-purple disabled:cursor-not-allowed disabled:opacity-60"
+                  className="w-full rounded-sm bg-ink px-5 py-2.5 font-mono text-xs uppercase tracking-wide text-paper transition-colors hover:bg-purple disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {status === "submitting" ? "Sending…" : "Send suggestion"}
                 </button>
