@@ -1,4 +1,5 @@
 import type { VendorPrice } from "@/lib/bookscouter";
+import { AnimatedPrice } from "@/components/AnimatedPrice";
 
 export function PriceTable({ prices }: { prices: VendorPrice[] }) {
   const sorted = [...prices].sort((a, b) => a.price - b.price);
@@ -36,13 +37,13 @@ export function PriceTable({ prices }: { prices: VendorPrice[] }) {
               <span className="w-20 font-mono text-xs capitalize text-ink-soft">
                 {p.format ?? "—"}
               </span>
-              <span
+              <div
                 className={`w-20 text-right font-mono tabular-nums ${
                   isBest ? "font-semibold text-purple-deep" : "text-ink"
                 }`}
               >
-                ${p.price.toFixed(2)}
-              </span>
+                <AnimatedPrice value={p.price} />
+              </div>
             </div>
           );
         })}

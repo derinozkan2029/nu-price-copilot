@@ -5,6 +5,7 @@ import Image from "next/image";
 import dormItems from "../../../data/dorm-items.json";
 import { Modal } from "@/components/Modal";
 import { SuggestItemButton } from "@/components/SuggestItemButton";
+import { AnimatedPrice } from "@/components/AnimatedPrice";
 import { PriceTable } from "@/components/PriceTable";
 import { RecommendationBadge } from "@/components/RecommendationBadge";
 import { CostSplitCalculator } from "@/components/CostSplitCalculator";
@@ -246,9 +247,9 @@ export default function DormPage() {
                 <p className="font-mono text-[10px] uppercase tracking-wide text-ink-faint">
                   {item.category}
                 </p>
-                <p className="mt-auto font-mono text-sm font-semibold tabular-nums text-purple-deep">
-                  from ${cheapest.toFixed(2)}
-                </p>
+                <div className="mt-auto font-mono text-sm font-semibold tabular-nums text-purple-deep">
+                  from <AnimatedPrice value={cheapest} />
+                </div>
               </div>
             </button>
           );

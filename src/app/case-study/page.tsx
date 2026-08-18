@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ScrollProgress } from "@/components/ScrollProgress";
 
 export const metadata = {
   title: "Case study",
@@ -39,6 +40,7 @@ function Callout({ children }: { children: React.ReactNode }) {
 export default function CaseStudyPage() {
   return (
     <div className="space-y-10">
+      <ScrollProgress className="fixed inset-x-0 top-0 z-50 h-1 bg-purple" />
       <div className="animate-fade-up">
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-purple">
           00 &middot; Case study

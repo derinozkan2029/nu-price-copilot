@@ -5,6 +5,7 @@ import Image from "next/image";
 import { SearchBar } from "@/components/SearchBar";
 import { Modal } from "@/components/Modal";
 import { SuggestItemButton } from "@/components/SuggestItemButton";
+import { AnimatedPrice } from "@/components/AnimatedPrice";
 import { PriceTable } from "@/components/PriceTable";
 import { RecommendationBadge } from "@/components/RecommendationBadge";
 import { PriceHistoryChart, type HistoryPoint } from "@/components/PriceHistoryChart";
@@ -463,9 +464,9 @@ export default function TextbooksPage() {
                       {book.courseTag}
                     </p>
                     {cheapest !== null && (
-                      <p className="mt-auto font-mono text-sm font-semibold tabular-nums text-purple-deep">
-                        from ${cheapest.toFixed(2)}
-                      </p>
+                      <div className="mt-auto font-mono text-sm font-semibold tabular-nums text-purple-deep">
+                        from <AnimatedPrice value={cheapest} />
+                      </div>
                     )}
                   </div>
                 </button>
