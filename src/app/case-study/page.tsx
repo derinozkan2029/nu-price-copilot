@@ -17,7 +17,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="animate-fade-up space-y-3 border-t border-dashed border-line pt-8">
+    <section className="animate-fade-up space-y-4 border-t border-dashed border-line pt-8">
       <p className="font-mono text-[11px] uppercase tracking-wide text-purple">
         {eyebrow}
       </p>
@@ -36,6 +36,163 @@ function Callout({ children }: { children: React.ReactNode }) {
     </div>
   );
 }
+
+function FlowStep({
+  index,
+  title,
+  children,
+}: {
+  index: string;
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex-1 rounded-sm border border-line bg-paper-raised p-4">
+      <p className="font-mono text-[11px] text-ink-faint">{index}</p>
+      <p className="mt-1.5 font-display text-base text-ink">{title}</p>
+      <p className="mt-1.5 text-xs leading-relaxed text-ink-soft">{children}</p>
+    </div>
+  );
+}
+
+function FlowArrow() {
+  return (
+    <div
+      aria-hidden
+      className="flex items-center justify-center py-1 font-mono text-ink-faint sm:px-1 sm:py-0"
+    >
+      <span className="sm:hidden">&darr;</span>
+      <span className="hidden sm:inline">&rarr;</span>
+    </div>
+  );
+}
+
+type PriorityRow = {
+  candidate: string;
+  note: string;
+  trending: boolean;
+  fits: boolean;
+  decision: "Included" | "Excluded";
+};
+
+function PriorityTable({ rows }: { rows: PriorityRow[] }) {
+  return (
+    <div className="max-w-2xl overflow-x-auto rounded-sm border border-line">
+      <table className="w-full min-w-[480px] text-left text-xs">
+        <thead>
+          <tr className="border-b border-line bg-paper-raised font-mono uppercase tracking-wide text-ink-faint">
+            <th className="px-3 py-2 font-normal">Candidate</th>
+            <th className="px-3 py-2 text-center font-normal">Trend signal</th>
+            <th className="px-3 py-2 text-center font-normal">Fits the model</th>
+            <th className="px-3 py-2 text-right font-normal">Decision</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr
+              key={r.candidate}
+              className="border-b border-dashed border-line-soft last:border-b-0"
+            >
+              <td className="px-3 py-2.5 align-top text-ink">
+                {r.candidate}
+                <span className="block font-mono text-[10px] normal-case tracking-normal text-ink-faint">
+                  {r.note}
+                </span>
+              </td>
+              <td className="px-3 py-2.5 text-center align-top">
+                {r.trending ? (
+                  <span aria-label="Yes" className="text-purple-deep">
+                    &#10003;
+                  </span>
+                ) : (
+                  <span aria-label="No" className="text-ink-faint">
+                    &mdash;
+                  </span>
+                )}
+              </td>
+              <td className="px-3 py-2.5 text-center align-top">
+                {r.fits ? (
+                  <span aria-label="Yes" className="text-purple-deep">
+                    &#10003;
+                  </span>
+                ) : (
+                  <span aria-label="No" className="text-ink-faint">
+                    &mdash;
+                  </span>
+                )}
+              </td>
+              <td
+                className={`px-3 py-2.5 text-right align-top font-mono text-[10px] uppercase tracking-wide ${
+                  r.decision === "Included" ? "text-purple-deep" : "text-ink-faint"
+                }`}
+              >
+                {r.decision}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function MetricGroup({ label, metrics }: { label: string; metrics: string[] }) {
+  return (
+    <div className="rounded-sm border border-line bg-paper-raised p-4">
+      <p className="font-mono text-[11px] uppercase tracking-wide text-purple">
+        {label}
+      </p>
+      <ul className="mt-2.5 space-y-2 text-xs leading-relaxed text-ink-soft">
+        {metrics.map((m) => (
+          <li key={m} className="flex gap-1.5">
+            <span aria-hidden className="text-ink-faint">
+              &middot;
+            </span>
+            <span>{m}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+const priorityRows: PriorityRow[] = [
+  {
+    candidate: "Wearable Blanket (Oversized Hoodie)",
+    note: "Viral TikTok/IG dorm-haul item",
+    trending: true,
+    fits: true,
+    decision: "Included",
+  },
+  {
+    candidate: "LED Neon Sign (Customizable)",
+    note: "Growing sorority/dorm-decor trend",
+    trending: true,
+    fits: true,
+    decision: "Included",
+  },
+  {
+    candidate: "Water Filter Pitcher",
+    note: "The durable pitcher, not the recurring filters",
+    trending: true,
+    fits: true,
+    decision: "Included",
+  },
+  {
+    candidate: "Laundry Detergent Sheets",
+    note: "Recurring consumable, not a one-time purchase",
+    trending: true,
+    fits: false,
+    decision: "Excluded",
+  },
+  {
+    candidate: "Adhesive Wall Hooks",
+    note: "Duplicate of the existing Command Strips item",
+    trending: true,
+    fits: false,
+    decision: "Excluded",
+  },
+];
 
 export default function CaseStudyPage() {
   return (
@@ -102,8 +259,37 @@ export default function CaseStudyPage() {
         </p>
       </Section>
 
+      <Section eyebrow="03 · How it works" title="One engine, one path through it">
+        <p>
+          Textbooks and dorm essentials look like different products but
+          run through the same four steps, that&apos;s the actual
+          &quot;engine&quot; part.
+        </p>
+        <div className="flex max-w-2xl flex-col sm:flex-row sm:items-stretch">
+          <FlowStep index="01" title="Search or browse">
+            ISBN search on textbooks, or the category-filtered grid on dorm
+            essentials.
+          </FlowStep>
+          <FlowArrow />
+          <FlowStep index="02" title="Compare vendors">
+            Real multi-vendor prices when live data resolves, a labeled
+            curated fallback when it doesn't.
+          </FlowStep>
+          <FlowArrow />
+          <FlowStep index="03" title="Read the signal">
+            A plain-language buy-now-or-wait recommendation, generated by
+            Claude from the actual price spread.
+          </FlowStep>
+          <FlowArrow />
+          <FlowStep index="04" title="Decide">
+            Click through to the cheapest vendor, or split the cost with a
+            roommate for shareable items.
+          </FlowStep>
+        </div>
+      </Section>
+
       <Section
-        eyebrow="03 · Research"
+        eyebrow="04 · Research"
         title="Deciding what actually belongs in the catalog"
       >
         <p>
@@ -111,12 +297,9 @@ export default function CaseStudyPage() {
           in the dorm catalog, one person's experience misses a lot. So I
           researched what's actually trending on TikTok and Instagram right
           now (Dorm Therapy Awards, viral dorm-haul videos, sorority
-          big/little gift trends, aesthetic-decor blog roundups),
+          big/little gift trends, aesthetic-decor blog roundups) and
           cross-checked it against what was already in the catalog to avoid
-          duplicates, and deliberately left out recurring consumables
-          (detergent sheets, water filters) since they don't fit a
-          one-time-purchase, price-comparison tool the way a mini fridge or
-          a mattress topper does.
+          duplicates.
         </p>
         <p>
           For textbooks, I verified all 42 ISBNs against Open Library before
@@ -125,7 +308,20 @@ export default function CaseStudyPage() {
         </p>
       </Section>
 
-      <Section eyebrow="04 · Tradeoffs" title="Real constraints, real decisions">
+      <Section
+        eyebrow="05 · Prioritization"
+        title="Trending isn't enough on its own"
+      >
+        <p>
+          Every dorm-catalog candidate had to clear two bars, not one:
+          genuine signal that people actually want it, and fit with a
+          one-time-purchase, price-comparison tool. A few real examples from
+          that pass:
+        </p>
+        <PriorityTable rows={priorityRows} />
+      </Section>
+
+      <Section eyebrow="06 · Tradeoffs" title="Real constraints, real decisions">
         <p>
           A few decisions that came from things breaking, not from a clean
           plan:
@@ -186,7 +382,7 @@ export default function CaseStudyPage() {
       </Section>
 
       <Section
-        eyebrow="05 · How this was built"
+        eyebrow="07 · How this was built"
         title="Vibecoded, on purpose, and I'll say so"
       >
         <p>
@@ -208,20 +404,38 @@ export default function CaseStudyPage() {
         </p>
       </Section>
 
-      <Section eyebrow="06 · What I'd measure" title="If this had real users">
+      <Section eyebrow="08 · Success metrics" title="What I'd track with real users">
         <p>
-          The site has no usage data yet, so here's what I'd instrument
-          first rather than what I've already learned:
+          The site has no usage data yet, so this is the framework I&apos;d
+          instrument first, grouped by what each number would actually tell
+          me, rather than a flat list of things to measure.
         </p>
-        <ul className="ml-4 list-disc space-y-1.5 marker:text-purple">
-          <li>Click-through rate from a comparison to a vendor link, the actual conversion moment.</li>
-          <li>Search abandonment on the textbooks page: ISBN typed but no result opened.</li>
-          <li>Category engagement split on the dorm grid, which categories get clicked versus scrolled past.</li>
-          <li>Return-visit rate in the week before move-in, the highest-intent window for the whole product.</li>
-        </ul>
+        <div className="grid max-w-2xl gap-3 sm:grid-cols-3">
+          <MetricGroup
+            label="Discovery"
+            metrics={[
+              "Search abandonment: ISBN typed, no result opened",
+              "Category engagement split on the dorm grid",
+            ]}
+          />
+          <MetricGroup
+            label="Decision quality"
+            metrics={[
+              "Click-through from a comparison to a vendor link",
+              "Share of sessions that open the buy-now/wait signal",
+            ]}
+          />
+          <MetricGroup
+            label="Retention"
+            metrics={[
+              "Return-visit rate in the week before move-in, the highest-intent window for the whole product",
+              "New-versus-returning visitor split overall",
+            ]}
+          />
+        </div>
       </Section>
 
-      <Section eyebrow="07 · What's next" title="Beyond the web app">
+      <Section eyebrow="09 · What's next" title="Beyond the web app">
         <p>
           The natural v2 isn't more categories, it's a browser extension
           that surfaces this at the point of purchase (on the Amazon or
