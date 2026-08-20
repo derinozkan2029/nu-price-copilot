@@ -434,7 +434,7 @@ export default function TextbooksPage() {
                           alt={book.label}
                           fill
                           sizes="(min-width: 640px) 25vw, 50vw"
-                          className="object-cover"
+                          className="object-contain"
                           onError={() =>
                             setBrokenCovers((prev) => new Set(prev).add(book.isbn))
                           }
