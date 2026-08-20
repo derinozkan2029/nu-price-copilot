@@ -227,13 +227,24 @@ export default function CaseStudyPage() {
           you're missing until you're already missing it.
         </p>
         <p>
-          The second problem showed up every term after: rebuying textbooks
+          The second problem was that even the getting-ready part was
+          scattered. Figuring out what to
+          buy meant bouncing between TikTok dorm-haul videos, Pinterest
+          boards, and a dozen &quot;dorm essentials&quot; blog roundups
+          across different tabs, never in one place. By packing day I'd
+          forgotten half of what I'd seen, or remembered an item but not
+          which of three sites actually had it, so what should have been
+          one Target trip turned into two or three.
+        </p>
+        <p>
+          The third problem showed up every term after: rebuying textbooks
           without ever checking if a rental or a used copy was cheaper, a
           used-versus-rental choice alone can swing $50 or more on a single
           book, and buying dorm items from whichever site came up first
-          instead of comparing. Both problems are really the same one: no
-          single place to see what you need and what it actually costs
-          before you're standing in a Target aisle at 9pm.
+          instead of comparing. All of it is really the same problem: no
+          single place to see what you need, remember what you found, and
+          know what it actually costs before you're standing in a Target
+          aisle at 9pm.
         </p>
       </Section>
 
@@ -395,6 +406,19 @@ export default function CaseStudyPage() {
           looked wrong, diagnosed the production rate-limit failure from
           real timing data, and decided the structural fix instead of
           reaching for a quick patch.
+        </p>
+        <p>
+          The process mattered as much as the decisions. I wrote out a
+          framework before opening the editor, what problem this solves,
+          who it's for, what belongs in the catalog, what &quot;done&quot;
+          looks like for a given page, and worked feature by feature inside
+          that framework instead of improvising as I went. Every suggestion
+          Claude Code made got checked against that framework and my own
+          judgment before I accepted it, and every change got tested in the
+          actual browser, not just read as a diff. When something didn't
+          clear the bar, a modal that silently broke under a CSS transform,
+          a book cover cropped so badly it read as a different title, I
+          said so and sent it back instead of shipping it.
         </p>
         <p>
           The AI handled a lot of the implementation. I think that's
