@@ -390,6 +390,32 @@ export default function CaseStudyPage() {
             $1) rather than trusting the API's data blindly.
           </p>
         </Callout>
+        <Callout>
+          <p className="font-medium text-ink">
+            Focus never entered the dialog, one shared bug, three modals.
+          </p>
+          <p className="mt-1">
+            Escape-to-close and body-scroll locking were already in the
+            shared <code>Modal</code> component, but nothing moved keyboard
+            focus into the dialog on open. Confirmed by tabbing through the
+            suggest-an-item form with the mouse untouched: focus stayed on
+            the trigger button, now sitting behind the overlay, Tab walked
+            through the page underneath instead of the fields inside it, and
+            a screen reader announced nothing had changed at all. Because{" "}
+            <code>Modal</code> is shared, that one gap propagated to all
+            three dialogs on the site (the textbook detail view, the dorm
+            detail view, and the suggest-an-item form reused on both catalog
+            pages), not a one-off. Patching each usage separately would have
+            meant fixing the same bug three times and missing it again on
+            the next modal built on top of the component. Instead I fixed it
+            once at the shared layer: a ref on the dialog node moves focus
+            in on mount (<code>tabIndex=&#123;-1&#125;</code> makes the
+            non-form <code>div</code> focusable), and the exact element that
+            had focus before open gets it back on close, instead of getting
+            dropped at the top of the page. One change closed the gap across
+            all three dialogs at once.
+          </p>
+        </Callout>
       </Section>
 
       <Section
