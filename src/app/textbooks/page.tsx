@@ -530,9 +530,9 @@ export default function TextbooksPage() {
                   <button
                     onClick={closeModal}
                     aria-label="Close comparison"
-                    className="shrink-0 rounded-sm border border-line px-2 py-1 font-mono text-xs text-ink-soft transition-colors hover:border-purple hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
+                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line text-base leading-none text-ink-soft transition-colors hover:border-purple hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
                   >
-                    Close
+                    <span aria-hidden>&times;</span>
                   </button>
                 </div>
 
