@@ -60,14 +60,14 @@ export function SuggestItemButton({ page }: { page: "dorm" | "textbooks" }) {
               <button
                 onClick={close}
                 aria-label="Close"
-                className="shrink-0 rounded-sm border border-line px-2 py-1 font-mono text-xs text-ink-soft transition-colors hover:border-purple hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line text-base leading-none text-ink-soft transition-colors hover:border-purple hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
               >
-                Close
+                <span aria-hidden>&times;</span>
               </button>
             </div>
 
             {status === "done" ? (
-              <div className="flex gap-3 rounded-sm border border-line bg-paper-raised p-4">
+              <div className="flex gap-3 rounded-xl border border-line bg-paper-raised p-4">
                 <div className="min-w-0">
                   <span className="inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-purple-deep">
                     <span aria-hidden>&#10003;</span>
@@ -102,7 +102,7 @@ export function SuggestItemButton({ page }: { page: "dorm" | "textbooks" }) {
                         ? "e.g. Egg crate mattress pad"
                         : "e.g. Intro to Statistics, Moore"
                     }
-                    className="mt-1.5 w-full rounded-sm border border-line bg-paper-raised px-3 py-2.5 font-mono text-sm text-ink placeholder:text-ink-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
+                    className="mt-1.5 w-full rounded-xl border border-line bg-paper-raised px-3.5 py-2.5 font-mono text-sm text-ink placeholder:text-ink-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
                   />
                 </div>
                 <div>
@@ -117,13 +117,13 @@ export function SuggestItemButton({ page }: { page: "dorm" | "textbooks" }) {
                     value={note}
                     onChange={(e) => setNote(e.target.value)}
                     rows={2}
-                    className="mt-1.5 w-full rounded-sm border border-line bg-paper-raised px-3 py-2.5 font-mono text-sm text-ink placeholder:text-ink-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
+                    className="mt-1.5 w-full rounded-xl border border-line bg-paper-raised px-3.5 py-2.5 font-mono text-sm text-ink placeholder:text-ink-faint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
                   />
                 </div>
                 <button
                   type="submit"
                   disabled={status === "submitting" || !itemTitle.trim()}
-                  className="w-full rounded-sm bg-ink px-5 py-2.5 font-mono text-xs uppercase tracking-wide text-paper transition-colors hover:bg-purple disabled:cursor-not-allowed disabled:opacity-60"
+                  className="w-full rounded-xl bg-purple px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-wide text-paper transition-colors hover:bg-purple-deep disabled:cursor-not-allowed disabled:bg-ink-faint/20 disabled:text-ink-faint"
                 >
                   {status === "submitting" ? "Sending…" : "Send suggestion"}
                 </button>
