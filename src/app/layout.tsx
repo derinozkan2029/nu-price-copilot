@@ -80,8 +80,16 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <header className="sticky top-0 z-10 border-b border-line bg-paper">
-          <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-0">
+        <header className="sticky top-0 z-10 bg-paper">
+          <div className="border-b border-dashed border-line">
+            <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-ink-faint">
+              <span>Evanston, IL</span>
+              <span className="hidden sm:inline">
+                Wildcat Welcome Edition &middot; Fall 2026
+              </span>
+            </div>
+          </div>
+          <div className="mx-auto flex max-w-6xl flex-col gap-3 border-b border-line px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-0">
             <Link
               href="/"
               className="group flex items-center gap-2.5 self-start rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple"
