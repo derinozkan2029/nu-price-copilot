@@ -1,0 +1,164 @@
+[
+  {
+    "id": "minimalist-chic",
+    "name": "Minimalist Chic",
+    "description": "Warm neutrals, clean lines, nothing extra.",
+    "accent": "#B8AFA0",
+    "items": [
+      { "title": "Black Frame Line Art Print Set", "zone": "wall", "shoppingQuery": "black frame line art print set" },
+      { "title": "Round Wall Mirror (Black Frame)", "zone": "wall", "shoppingQuery": "round wall mirror black frame" },
+      { "title": "Sheer Ivory Curtain Panels", "zone": "wall", "shoppingQuery": "sheer ivory curtain panels" },
+      { "title": "Ribbed Knit Bedding Set (Neutral)", "zone": "bed", "shoppingQuery": "ribbed knit bedding set neutral" },
+      { "title": "Boucle Throw Pillow (Cream)", "zone": "bed", "shoppingQuery": "boucle throw pillow cream" },
+      { "title": "Ribbed Knit Throw Blanket (Cream)", "zone": "bed", "shoppingQuery": "ribbed knit throw blanket cream" },
+      { "title": "Matte Ceramic Desk Organizer", "zone": "desk", "shoppingQuery": "matte ceramic desk organizer" },
+      { "title": "Matte Ceramic Bud Vase", "zone": "desk", "shoppingQuery": "matte ceramic bud vase minimalist" },
+      { "title": "Jute Area Rug (Natural)", "zone": "floor", "shoppingQuery": "jute area rug natural" },
+      { "title": "Boucle Storage Bench (Ivory)", "zone": "floor", "shoppingQuery": "boucle upholstered storage bench ivory" }
+    ]
+  },
+  {
+    "id": "cozy-boho-neutral",
+    "name": "Cozy Boho & Neutral",
+    "description": "Macrame, rattan, and warm earthy texture.",
+    "accent": "#C97C5D",
+    "items": [
+      { "title": "Macrame Wall Hanging", "zone": "wall", "shoppingQuery": "macrame wall hanging boho" },
+      { "title": "Rattan Frame Wall Mirror", "zone": "wall", "shoppingQuery": "rattan mirror boho" },
+      { "title": "Sheer Rust Curtain Panels", "zone": "wall", "shoppingQuery": "sheer rust curtain panels boho" },
+      { "title": "Woven Ribbon Memo Corkboard", "zone": "wall", "shoppingQuery": "woven ribbon memo corkboard boho" },
+      { "title": "Boho Striped Terracotta Bedding Set", "zone": "bed", "shoppingQuery": "boho striped terracotta bedding set" },
+      { "title": "Boho Fringe Throw Pillow", "zone": "bed", "shoppingQuery": "boho fringe throw pillow" },
+      { "title": "Cream Boucle Lumbar Pillow", "zone": "bed", "shoppingQuery": "cream boucle lumbar pillow" },
+      { "title": "Faux Fur Throw Blanket (Cream)", "zone": "bed", "shoppingQuery": "faux fur throw blanket cream" },
+      { "title": "Dried Pampas Grass (Vase Set)", "zone": "desk", "shoppingQuery": "dried pampas grass vase" },
+      { "title": "Rattan Trinket Tray", "zone": "desk", "shoppingQuery": "rattan trinket tray boho" },
+      { "title": "Jute Area Rug (Boho)", "zone": "floor", "shoppingQuery": "jute area rug boho pattern" },
+      { "title": "Rust Woven Storage Bench", "zone": "floor", "shoppingQuery": "rust woven upholstered storage bench" },
+      { "title": "Natural Rattan Laundry Hamper", "zone": "floor", "shoppingQuery": "natural rattan laundry hamper" }
+    ]
+  },
+  {
+    "id": "coastal-cowgirl",
+    "name": "Coastal Cowgirl",
+    "description": "Gold-framed mirrors, blue-and-white toile, and rattan warmth by the shore.",
+    "accent": "#8CA2B5",
+    "items": [
+      { "title": "Gold Ornate Wall Mirror", "zone": "wall", "shoppingQuery": "gold ornate vintage wall mirror" },
+      { "title": "Sailboat & Ocean Wave Art Print Set", "zone": "wall", "shoppingQuery": "sailboat ocean wave coastal art print set" },
+      { "title": "Straw Sun Hat Wall Decor", "zone": "wall", "shoppingQuery": "straw sun hat wall decor" },
+      { "title": "Warm White Curtain String Lights", "zone": "wall", "shoppingQuery": "warm white curtain string lights" },
+      { "title": "Sheer Lace Curtain Panels", "zone": "wall", "shoppingQuery": "sheer lace curtain panels cream" },
+      { "title": "Capiz Shell Wall Hanging", "zone": "wall", "shoppingQuery": "capiz shell wall hanging garland" },
+      { "title": "Woven Wall Basket Set", "zone": "wall", "shoppingQuery": "woven wall basket decor set" },
+      { "title": "Ribbon Memo Corkboard", "zone": "wall", "shoppingQuery": "ribbon memo corkboard photo display" },
+      { "title": "Blue & White Floral Toile Bedding Set", "zone": "bed", "shoppingQuery": "blue and white floral toile bedding set" },
+      { "title": "Sheer Bed Canopy", "zone": "bed", "shoppingQuery": "sheer bed canopy netting cream" },
+      { "title": "Blue Ticking Stripe Throw Pillow", "zone": "bed", "shoppingQuery": "blue white ticking stripe throw pillow" },
+      { "title": "Cream Gingham Ruffle Throw Pillow", "zone": "bed", "shoppingQuery": "cream gingham ruffle throw pillow" },
+      { "title": "Scalloped Shell Throw Pillow", "zone": "bed", "shoppingQuery": "scalloped shell shaped throw pillow cream" },
+      { "title": "Chunky Knit Throw Blanket", "zone": "bed", "shoppingQuery": "chunky knit throw blanket cream" },
+      { "title": "Rattan Base Table Lamp", "zone": "desk", "shoppingQuery": "rattan base table lamp cream shade" },
+      { "title": "Lighted Hollywood Vanity Mirror", "zone": "desk", "shoppingQuery": "lighted hollywood vanity mirror tabletop" },
+      { "title": "Woven Seagrass Desk Storage Basket", "zone": "desk", "shoppingQuery": "woven seagrass desk storage basket" },
+      { "title": "Dried Pampas Grass Bouquet", "zone": "desk", "shoppingQuery": "dried pampas grass bouquet vase" },
+      { "title": "Natural Jute & Wool Area Rug", "zone": "floor", "shoppingQuery": "natural jute wool area rug" },
+      { "title": "Ticking Stripe Storage Bench", "zone": "floor", "shoppingQuery": "blue ticking stripe upholstered storage bench" },
+      { "title": "Woven Rattan Laundry Hamper", "zone": "floor", "shoppingQuery": "woven rattan laundry hamper basket" }
+    ]
+  },
+  {
+    "id": "pink-preppy",
+    "name": "Pink Preppy",
+    "description": "Gingham, checkerboard, and hot pink polish.",
+    "accent": "#EFA8C4",
+    "items": [
+      { "title": "Pink Preppy Wall Art Print Set", "zone": "wall", "shoppingQuery": "pink preppy wall art print set" },
+      { "title": "Pink Scalloped Wall Mirror", "zone": "wall", "shoppingQuery": "pink scalloped wall mirror" },
+      { "title": "Sheer Pink Curtain Panels", "zone": "wall", "shoppingQuery": "sheer pink curtain panels preppy" },
+      { "title": "Pink Ribbon Memo Corkboard", "zone": "wall", "shoppingQuery": "pink ribbon memo corkboard" },
+      { "title": "Pink Gingham Bedding Set", "zone": "bed", "shoppingQuery": "pink gingham bedding set" },
+      { "title": "Pink Checkerboard Throw Pillow", "zone": "bed", "shoppingQuery": "pink checkerboard throw pillow" },
+      { "title": "Hot Pink Ruffle Lumbar Pillow", "zone": "bed", "shoppingQuery": "hot pink ruffle lumbar pillow" },
+      { "title": "Pink Chunky Knit Throw Blanket", "zone": "bed", "shoppingQuery": "pink chunky knit throw blanket" },
+      { "title": "Pink Desk Lamp", "zone": "desk", "shoppingQuery": "pink desk lamp dorm" },
+      { "title": "Pink Ceramic Bud Vase", "zone": "desk", "shoppingQuery": "pink ceramic bud vase" },
+      { "title": "Pink & Cream Checkerboard Rug", "zone": "floor", "shoppingQuery": "pink cream checkerboard rug" },
+      { "title": "Hot Pink Velvet Storage Bench", "zone": "floor", "shoppingQuery": "hot pink velvet upholstered storage bench" }
+    ]
+  },
+  {
+    "id": "sage-green-botanical",
+    "name": "Sage Green Botanical",
+    "description": "Calming greens and pressed-leaf prints.",
+    "accent": "#A3B18A",
+    "items": [
+      { "title": "Botanical Leaf Print Wall Art Set", "zone": "wall", "shoppingQuery": "botanical leaf print wall art set" },
+      { "title": "Sage Green Fairy Lights", "zone": "wall", "shoppingQuery": "sage green fairy lights" },
+      { "title": "Sheer Sage Curtain Panels", "zone": "wall", "shoppingQuery": "sheer sage green curtain panels" },
+      { "title": "Sage Green Bedding Set", "zone": "bed", "shoppingQuery": "sage green bedding set" },
+      { "title": "Sage Green Velvet Throw Pillow", "zone": "bed", "shoppingQuery": "sage green velvet throw pillow" },
+      { "title": "Cream Botanical Print Lumbar Pillow", "zone": "bed", "shoppingQuery": "cream botanical print lumbar pillow" },
+      { "title": "Sage Green Chunky Knit Throw Blanket", "zone": "bed", "shoppingQuery": "sage green chunky knit throw blanket" },
+      { "title": "Sage Green Desk Organizer", "zone": "desk", "shoppingQuery": "sage green desk organizer" },
+      { "title": "Eucalyptus Stems in Ceramic Vase", "zone": "desk", "shoppingQuery": "eucalyptus stems ceramic vase" },
+      { "title": "Sage Green Area Rug", "zone": "floor", "shoppingQuery": "sage green area rug" },
+      { "title": "Sage Green Storage Bench", "zone": "floor", "shoppingQuery": "sage green upholstered storage bench" }
+    ]
+  },
+  {
+    "id": "vintage-sport-retro-athletic",
+    "name": "Vintage Sport & Retro Athletic",
+    "description": "Varsity stripes and old-school stadium energy.",
+    "accent": "#8C3B3B",
+    "items": [
+      { "title": "Vintage Sports Poster Print Set", "zone": "wall", "shoppingQuery": "vintage sports poster print set" },
+      { "title": "Felt Sports Pennant Flag", "zone": "wall", "shoppingQuery": "felt sports pennant flag vintage" },
+      { "title": "Vintage Varsity Letterman Patch Print Set", "zone": "wall", "shoppingQuery": "vintage varsity letterman patch print set" },
+      { "title": "Red & Navy Varsity Stripe Bedding Set", "zone": "bed", "shoppingQuery": "red navy varsity stripe bedding set" },
+      { "title": "Varsity Letter Throw Pillow", "zone": "bed", "shoppingQuery": "varsity letter throw pillow" },
+      { "title": "Navy Waffle Knit Throw Blanket", "zone": "bed", "shoppingQuery": "navy waffle knit throw blanket" },
+      { "title": "Retro Boombox Desk Lamp", "zone": "desk", "shoppingQuery": "retro boombox desk lamp" },
+      { "title": "Vintage Trophy Desk Accent", "zone": "desk", "shoppingQuery": "vintage trophy desk accent gold" },
+      { "title": "Vintage Sports Team Area Rug", "zone": "floor", "shoppingQuery": "vintage sports team area rug" },
+      { "title": "Red Varsity Stripe Storage Bench", "zone": "floor", "shoppingQuery": "red varsity stripe upholstered storage bench" }
+    ]
+  },
+  {
+    "id": "moody-mid-century-modern",
+    "name": "Moody Mid-Century Modern",
+    "description": "Starburst clocks, mustard, and walnut tones.",
+    "accent": "#C08A3E",
+    "items": [
+      { "title": "Mid-Century Starburst Wall Clock", "zone": "wall", "shoppingQuery": "mid century starburst wall clock" },
+      { "title": "Abstract Geometric Wall Art Print", "zone": "wall", "shoppingQuery": "abstract geometric wall art print mid century" },
+      { "title": "Sheer Mustard Curtain Panels", "zone": "wall", "shoppingQuery": "sheer mustard curtain panels" },
+      { "title": "Teal Velvet Bedspread", "zone": "bed", "shoppingQuery": "teal velvet bedspread" },
+      { "title": "Mustard Yellow Throw Pillow", "zone": "bed", "shoppingQuery": "mustard yellow throw pillow" },
+      { "title": "Burnt Orange Lumbar Pillow", "zone": "bed", "shoppingQuery": "burnt orange lumbar pillow" },
+      { "title": "Walnut Brown Chunky Throw Blanket", "zone": "bed", "shoppingQuery": "walnut brown chunky throw blanket" },
+      { "title": "Walnut Wood Desk Organizer", "zone": "desk", "shoppingQuery": "walnut wood desk organizer" },
+      { "title": "Ceramic Bud Vase (Mustard)", "zone": "desk", "shoppingQuery": "mustard ceramic bud vase" },
+      { "title": "Geometric Area Rug (Mid-Century)", "zone": "floor", "shoppingQuery": "geometric area rug mid century" },
+      { "title": "Mustard Velvet Storage Bench", "zone": "floor", "shoppingQuery": "mustard velvet upholstered storage bench" }
+    ]
+  },
+  {
+    "id": "industrial-minimalist",
+    "name": "Industrial Minimalist",
+    "description": "Black metal, exposed bulbs, raw texture.",
+    "accent": "#4A4A48",
+    "items": [
+      { "title": "Black Metal Wall Shelf", "zone": "wall", "shoppingQuery": "black metal wall shelf industrial" },
+      { "title": "Edison Bulb String Lights", "zone": "wall", "shoppingQuery": "edison bulb string lights" },
+      { "title": "Charcoal Canvas Curtain Panels", "zone": "wall", "shoppingQuery": "charcoal canvas curtain panels industrial" },
+      { "title": "Charcoal Waffle Knit Bedding Set", "zone": "bed", "shoppingQuery": "charcoal waffle knit bedding set" },
+      { "title": "Black Canvas Throw Pillow", "zone": "bed", "shoppingQuery": "black canvas throw pillow" },
+      { "title": "Gray Ribbed Lumbar Pillow", "zone": "bed", "shoppingQuery": "gray ribbed lumbar pillow" },
+      { "title": "Black Metal Desk Lamp (Industrial)", "zone": "desk", "shoppingQuery": "black metal desk lamp industrial" },
+      { "title": "Black Metal Mesh Pen Cup", "zone": "desk", "shoppingQuery": "black metal mesh pen cup industrial" },
+      { "title": "Black Wire Storage Basket", "zone": "floor", "shoppingQuery": "black wire storage basket" },
+      { "title": "Charcoal Canvas Storage Bench", "zone": "floor", "shoppingQuery": "charcoal canvas upholstered storage bench" }
+    ]
+  }
+]
