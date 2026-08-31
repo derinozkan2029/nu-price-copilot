@@ -9,8 +9,10 @@ import { AnimatedPrice } from "@/components/AnimatedPrice";
 import { PriceTable } from "@/components/PriceTable";
 import { RecommendationBadge } from "@/components/RecommendationBadge";
 import { CostSplitCalculator } from "@/components/CostSplitCalculator";
+import { RelatedProducts } from "@/components/RelatedProducts";
 import type { DormItemSeed, RecommendationSignal } from "@/types";
 import type { VendorPrice } from "@/lib/bookscouter";
+import type { SimilarProduct } from "@/lib/serpapi";
 import { runWithConcurrencyLimit } from "@/lib/concurrency";
 
 interface Recommendation {
@@ -73,6 +75,15 @@ export default function DormPage() {
     Record<string, Recommendation>
   >({});
   const [loadingItem, setLoadingItem] = useState<string | null>(null);
+
+  // PROTOTYPE: "you might also like" grid, fetched lazily per item (only
+  // on open, only for items with a relatedQuery) rather than upfront for
+  // the whole catalog, to keep it cheap on the SerpApi free-tier budget
+  // while validating the look.
+  const [relatedProducts, setRelatedProducts] = useState<
+    Record<string, SimilarProduct[] | null>
+  >({});
+  const [loadingRelated, setLoadingRelated] = useState<string | null>(null);
 
   // "loading" while in flight, LiveResult (possibly source: null) once
   // resolved. Fetched for every item that names a shoppingQuery or
@@ -142,6 +153,30 @@ export default function DormPage() {
         console.error(err);
       } finally {
         setLoadingItem(null);
+      }
+    }
+
+    if (item.relatedQuery && relatedProducts[item.title] === undefined) {
+      setLoadingRelated(item.title);
+      try {
+        const res = await fetch("/api/related-products", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query: item.relatedQuery }),
+        });
+        const data = await res.json();
+        // Only cache the result (including a genuine "found nothing" null)
+        // when the lookup actually succeeded. A failed lookup (SerpApi
+        // rate/concurrency cap colliding with the price-fetch burst on page
+        // load) leaves this item's entry unset, so the next time its modal
+        // opens, it retries instead of staying permanently blank.
+        if (data.ok !== false) {
+          setRelatedProducts((prev) => ({ ...prev, [item.title]: data.products ?? null }));
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoadingRelated((prev) => (prev === item.title ? null : prev));
       }
     }
   }
@@ -308,6 +343,23 @@ export default function DormPage() {
                   ...selectedPrices.map((p) => p.price)
                 )}
               />
+            )}
+            {loadingRelated === selectedItem.title && (
+              <div className="border-t border-dashed border-line pt-3">
+                <div className="h-3 w-32 animate-pulse rounded bg-line-soft" />
+                <div className="mt-2 flex gap-1.5">
+                  {[0, 1, 2, 3].map((i) => (
+                    <div
+                      key={i}
+                      className="h-9 w-9 animate-pulse rounded-sm bg-line-soft sm:h-11 sm:w-11"
+                      style={{ animationDelay: `${i * 100}ms` }}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+            {relatedProducts[selectedItem.title] && (
+              <RelatedProducts products={relatedProducts[selectedItem.title]!} />
             )}
           </div>
         </Modal>

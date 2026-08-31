@@ -416,6 +416,53 @@ export default function CaseStudyPage() {
             all three dialogs at once.
           </p>
         </Callout>
+        <Callout>
+          <p className="font-medium text-ink">
+            Product photos refused to render onto the 3D room, then rendered
+            wrong once they did.
+          </p>
+          <p className="mt-1">
+            three.js&apos;s <code>TextureLoader</code> requests images with{" "}
+            <code>crossOrigin=&quot;anonymous&quot;</code>, and the Google
+            Shopping thumbnail hosts don&apos;t answer with CORS headers, so
+            the browser refused to hand WebGL the pixel data: every placed
+            item fell back to a flat placeholder square instead of the actual
+            product photo. Re-hosting all ~98 catalog items&apos; photos
+            server-side would have meant a new storage and caching layer just
+            for a decorate feature; routing texture and canvas-sampling
+            requests through Next&apos;s own <code>/_next/image</code>{" "}
+            endpoint instead made them same-origin (it was already allowlisted
+            for these vendor hosts in <code>next.config.js</code>), sidestepping
+            CORS with one proxied URL instead of a pipeline. The photos then
+            rendered, but wrong in a second way: drei&apos;s{" "}
+            <code>&lt;Image&gt;</code> primitive draws with an unlit shader
+            built for gallery display, so photos ignored the room&apos;s
+            directional light while every other mesh around them shaded and
+            caught shadow, next to real furniture it read as a sticker glued
+            onto the scene. Swapping it for a plain lit mesh (
+            <code>meshStandardMaterial</code> with the texture as its map) let
+            photos dim in corners and catch shadow exactly like the geometry
+            around them.
+          </p>
+        </Callout>
+        <Callout>
+          <p className="font-medium text-ink">
+            A flat photo can&apos;t wrap a pillow, so I stopped trying to fake
+            it.
+          </p>
+          <p className="mt-1">
+            Texture-mapping a flat product photo onto a curved 3D pillow,
+            vase, or lamp warps it into something that reads as obviously
+            fake, closer to a sticker than an object. Instead of chasing a
+            better UV map, I sample the photo&apos;s own dominant color (an
+            offscreen canvas read, same-origin through the proxy above) and
+            use that to color an actual 3D shape, so the item a student picked
+            shows up in roughly the right color rather than pretending a flat
+            image is a solid. It&apos;s a real tradeoff, less literal fidelity
+            to the exact product photo, in exchange for objects that actually
+            look like they belong in the room instead of a warped decal.
+          </p>
+        </Callout>
       </Section>
 
       <Section

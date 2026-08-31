@@ -5,6 +5,7 @@
     "shareable": true,
     "shoppingQuery": "3.2 cu ft mini fridge",
     "bestBuyQuery": "3.2 cu ft mini fridge",
+    "relatedQuery": "mini fridge dorm",
     "prices": [
       { "vendor": "Target", "price": 149.99 },
       { "vendor": "Walmart", "price": 129.0 },
@@ -18,6 +19,7 @@
     "shareable": true,
     "shoppingQuery": "0.7 cu ft microwave",
     "bestBuyQuery": "0.7 cu ft microwave",
+    "relatedQuery": "compact microwave dorm",
     "imageUrl": "https://live.staticflickr.com/2766/13069290114_c33c4ca6dd_c.jpg",
     "imageCredit": "Photo by Goedeker's, CC BY 2.0",
     "prices": [
@@ -32,6 +34,7 @@
     "category": "Bedding",
     "shareable": false,
     "shoppingQuery": "twin xl fitted sheet set",
+    "relatedQuery": "twin xl sheet set dorm",
     "prices": [
       { "vendor": "Target", "price": 29.99 },
       { "vendor": "Amazon", "price": 24.99 },
@@ -43,6 +46,7 @@
     "category": "Bedding",
     "shareable": false,
     "shoppingQuery": "twin xl comforter",
+    "relatedQuery": "twin xl comforter dorm",
     "prices": [
       { "vendor": "Target", "price": 39.99 },
       { "vendor": "Amazon", "price": 34.99 },
@@ -54,6 +58,7 @@
     "category": "Bedding",
     "shareable": false,
     "shoppingQuery": "twin xl mattress topper",
+    "relatedQuery": "twin xl mattress topper",
     "prices": [
       { "vendor": "Target", "price": 49.99 },
       { "vendor": "Amazon", "price": 44.99 },
@@ -65,6 +70,7 @@
     "category": "Bedding",
     "shareable": false,
     "shoppingQuery": "fleece throw blanket",
+    "relatedQuery": "fleece throw blanket",
     "prices": [
       { "vendor": "Target", "price": 19.99 },
       { "vendor": "Amazon", "price": 16.99 },
@@ -76,6 +82,7 @@
     "category": "Storage",
     "shareable": false,
     "shoppingQuery": "under bed storage bins set of 2",
+    "relatedQuery": "under bed storage bins",
     "prices": [
       { "vendor": "Target", "price": 24.99 },
       { "vendor": "Walmart", "price": 19.99 },
@@ -87,6 +94,7 @@
     "category": "Storage",
     "shareable": false,
     "shoppingQuery": "closet organizer shelves",
+    "relatedQuery": "closet organizer shelves dorm",
     "prices": [
       { "vendor": "Amazon", "price": 22.99 },
       { "vendor": "Target", "price": 26.99 },
@@ -98,6 +106,7 @@
     "category": "Storage",
     "shareable": false,
     "shoppingQuery": "command strips hooks variety pack",
+    "relatedQuery": "wall hooks command strips dorm",
     "prices": [
       { "vendor": "Target", "price": 14.99 },
       { "vendor": "Amazon", "price": 12.99 },
@@ -109,6 +118,7 @@
     "category": "Decor",
     "shareable": true,
     "shoppingQuery": "area rug 5x7",
+    "relatedQuery": "area rug dorm",
     "prices": [
       { "vendor": "Target", "price": 79.99 },
       { "vendor": "Amazon", "price": 69.99 },
@@ -120,6 +130,7 @@
     "category": "Decor",
     "shareable": true,
     "shoppingQuery": "led string lights 33ft",
+    "relatedQuery": "led string lights dorm room",
     "imageUrl": "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcHgxMTYyNTYzLWltYWdlLWt3dnc4aHV6LmpwZw.jpg",
     "prices": [
       { "vendor": "Amazon", "price": 15.99 },
@@ -132,6 +143,7 @@
     "category": "Decor",
     "shareable": false,
     "shoppingQuery": "decorative throw pillows set of 2",
+    "relatedQuery": "decorative throw pillows",
     "prices": [
       { "vendor": "Target", "price": 24.99 },
       { "vendor": "Amazon", "price": 21.99 },
@@ -143,6 +155,7 @@
     "category": "Electronics",
     "shareable": false,
     "shoppingQuery": "desk lamp with usb port",
+    "relatedQuery": "desk lamp usb dorm",
     "imageUrl": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9zdGF0aWMvaW1hZ2Uvd2Vic2l0ZS8yMDIyLTA0L2xyL25zODAxOS1pbWFnZS1rd3Z3azV3dS5qcGc.jpg",
     "prices": [
       { "vendor": "Target", "price": 24.99 },
@@ -155,6 +168,7 @@
     "category": "Electronics",
     "shareable": false,
     "shoppingQuery": "power strip surge protector",
+    "relatedQuery": "power strip surge protector dorm",
     "prices": [
       { "vendor": "Amazon", "price": 18.99 },
       { "vendor": "Target", "price": 21.99 },
@@ -166,6 +180,7 @@
     "category": "Electronics",
     "shareable": true,
     "shoppingQuery": "portable bluetooth speaker",
+    "relatedQuery": "portable bluetooth speaker",
     "imageUrl": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA0L2JzMzYxLWltYWdlLmpwZw.jpg",
     "prices": [
       { "vendor": "Best Buy", "price": 49.99 },
@@ -178,6 +193,7 @@
     "category": "Bathroom",
     "shareable": false,
     "shoppingQuery": "shower caddy",
+    "relatedQuery": "shower caddy dorm",
     "prices": [
       { "vendor": "Target", "price": 16.99 },
       { "vendor": "Amazon", "price": 14.99 },
@@ -189,6 +205,7 @@
     "category": "Furniture",
     "shareable": false,
     "shoppingQuery": "memory foam desk chair cushion",
+    "relatedQuery": "desk chair cushion",
     "prices": [
       { "vendor": "Amazon", "price": 19.99 },
       { "vendor": "Target", "price": 22.99 },
@@ -200,6 +217,7 @@
     "category": "Furniture",
     "shareable": true,
     "shoppingQuery": "folding storage ottoman",
+    "relatedQuery": "storage ottoman dorm",
     "prices": [
       { "vendor": "Target", "price": 34.99 },
       { "vendor": "Amazon", "price": 29.99 },
@@ -211,6 +229,7 @@
     "category": "Furniture",
     "shareable": true,
     "shoppingQuery": "small rolling bar cart",
+    "relatedQuery": "rolling bar cart dorm",
     "prices": [
       { "vendor": "Target", "price": 89.99 },
       { "vendor": "Amazon", "price": 79.99 },
@@ -222,6 +241,7 @@
     "category": "Storage",
     "shareable": false,
     "shoppingQuery": "collapsible laundry hamper",
+    "relatedQuery": "collapsible laundry hamper",
     "prices": [
       { "vendor": "Target", "price": 14.99 },
       { "vendor": "Amazon", "price": 12.49 },
@@ -233,6 +253,7 @@
     "category": "Appliances",
     "shareable": true,
     "shoppingQuery": "electric kettle",
+    "relatedQuery": "electric kettle dorm",
     "imageUrl": "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvZnJlbGVjdHJpY19rZXR0bGVfcGxhc3RpY193aGl0ZS1pbWFnZS1reWNoOGlieC5qcGc.jpg",
     "prices": [
       { "vendor": "Target", "price": 24.99 },
@@ -246,6 +267,7 @@
     "shareable": true,
     "shoppingQuery": "single serve coffee maker compact",
     "bestBuyQuery": "single serve coffee maker compact",
+    "relatedQuery": "single serve coffee maker dorm",
     "prices": [
       { "vendor": "Target", "price": 34.99 },
       { "vendor": "Amazon", "price": 29.99 },
@@ -258,6 +280,7 @@
     "category": "Decor",
     "shareable": true,
     "shoppingQuery": "whiteboard calendar wall mount",
+    "relatedQuery": "whiteboard calendar dorm",
     "prices": [
       { "vendor": "Amazon", "price": 18.99 },
       { "vendor": "Target", "price": 21.99 },
@@ -269,6 +292,7 @@
     "category": "Bedding",
     "shareable": false,
     "shoppingQuery": "blackout curtains",
+    "relatedQuery": "blackout curtains dorm window",
     "prices": [
       { "vendor": "Target", "price": 29.99 },
       { "vendor": "Amazon", "price": 26.99 },
@@ -280,6 +304,7 @@
     "category": "Storage",
     "shareable": false,
     "shoppingQuery": "velvet non slip hangers set of 30",
+    "relatedQuery": "velvet hangers",
     "prices": [
       { "vendor": "Target", "price": 19.99 },
       { "vendor": "Amazon", "price": 16.99 },
@@ -291,6 +316,7 @@
     "category": "Storage",
     "shareable": false,
     "shoppingQuery": "closet curtain tension rod panel",
+    "relatedQuery": "closet curtain tension rod dorm",
     "prices": [
       { "vendor": "Amazon", "price": 24.99 },
       { "vendor": "Target", "price": 27.99 },
@@ -302,6 +328,7 @@
     "category": "Decor",
     "shareable": false,
     "shoppingQuery": "gallery wall picture frame set",
+    "relatedQuery": "gallery wall frame set dorm",
     "prices": [
       { "vendor": "Target", "price": 39.99 },
       { "vendor": "Amazon", "price": 34.99 },
@@ -313,6 +340,7 @@
     "category": "Decor",
     "shareable": false,
     "shoppingQuery": "photo clip string lights",
+    "relatedQuery": "photo clip string lights dorm",
     "prices": [
       { "vendor": "Amazon", "price": 12.99 },
       { "vendor": "Target", "price": 14.99 },
@@ -324,6 +352,7 @@
     "category": "Decor",
     "shareable": false,
     "shoppingQuery": "woven wall tapestry boho",
+    "relatedQuery": "boho wall tapestry dorm",
     "prices": [
       { "vendor": "Amazon", "price": 18.99 },
       { "vendor": "Target", "price": 21.99 },
@@ -335,6 +364,7 @@
     "category": "Decor",
     "shareable": false,
     "shoppingQuery": "greek letter throw pillow",
+    "relatedQuery": "greek letter throw pillow sorority",
     "prices": [
       { "vendor": "Amazon", "price": 22.99 },
       { "vendor": "Etsy", "price": 27.99 },
@@ -346,6 +376,7 @@
     "category": "Furniture",
     "shareable": false,
     "shoppingQuery": "full length wall mirror",
+    "relatedQuery": "full length wall mirror dorm",
     "prices": [
       { "vendor": "Target", "price": 34.99 },
       { "vendor": "Amazon", "price": 29.99 },
@@ -357,6 +388,7 @@
     "category": "Bedding",
     "shareable": false,
     "shoppingQuery": "oversized wearable hoodie blanket",
+    "relatedQuery": "oversized wearable hoodie blanket",
     "prices": [
       { "vendor": "Target", "price": 34.99 },
       { "vendor": "Amazon", "price": 29.99 },
@@ -368,6 +400,7 @@
     "category": "Storage",
     "shareable": false,
     "shoppingQuery": "bed risers set of 4",
+    "relatedQuery": "bed risers dorm",
     "prices": [
       { "vendor": "Target", "price": 12.99 },
       { "vendor": "Amazon", "price": 10.99 },
@@ -379,6 +412,7 @@
     "category": "Storage",
     "shareable": false,
     "shoppingQuery": "3 tier rolling utility cart",
+    "relatedQuery": "rolling utility cart dorm",
     "prices": [
       { "vendor": "IKEA", "price": 39.99 },
       { "vendor": "Amazon", "price": 44.99 },
@@ -390,6 +424,7 @@
     "category": "Furniture",
     "shareable": false,
     "shoppingQuery": "adjustable floating shelf bedside",
+    "relatedQuery": "floating bedside shelf dorm",
     "prices": [
       { "vendor": "Amazon", "price": 19.99 },
       { "vendor": "Target", "price": 22.99 },
@@ -401,6 +436,7 @@
     "category": "Bathroom",
     "shareable": false,
     "shoppingQuery": "insulated 40 oz tumbler with handle",
+    "relatedQuery": "insulated tumbler with handle",
     "prices": [
       { "vendor": "Target", "price": 24.99 },
       { "vendor": "Amazon", "price": 21.99 },
@@ -413,6 +449,7 @@
     "shareable": false,
     "shoppingQuery": "wireless noise cancelling headphones",
     "bestBuyQuery": "wireless noise cancelling headphones",
+    "relatedQuery": "wireless noise cancelling headphones",
     "prices": [
       { "vendor": "Amazon", "price": 79.99 },
       { "vendor": "Target", "price": 89.99 },
@@ -425,6 +462,7 @@
     "shareable": true,
     "shoppingQuery": "portable mini projector",
     "bestBuyQuery": "portable mini projector",
+    "relatedQuery": "portable mini projector dorm",
     "prices": [
       { "vendor": "Amazon", "price": 89.99 },
       { "vendor": "Target", "price": 99.99 },
@@ -436,6 +474,7 @@
     "category": "Decor",
     "shareable": false,
     "shoppingQuery": "custom led neon sign",
+    "relatedQuery": "led neon sign dorm room",
     "prices": [
       { "vendor": "Amazon", "price": 29.99 },
       { "vendor": "Target", "price": 34.99 },
@@ -447,6 +486,7 @@
     "category": "Furniture",
     "shareable": false,
     "shoppingQuery": "led vanity mirror with lights hollywood",
+    "relatedQuery": "led vanity mirror hollywood dorm",
     "prices": [
       { "vendor": "Target", "price": 39.99 },
       { "vendor": "Amazon", "price": 34.99 },
@@ -458,6 +498,7 @@
     "category": "Decor",
     "shareable": false,
     "shoppingQuery": "cork bulletin board",
+    "relatedQuery": "cork bulletin board dorm",
     "prices": [
       { "vendor": "Target", "price": 14.99 },
       { "vendor": "Amazon", "price": 12.99 },
@@ -469,6 +510,7 @@
     "category": "Decor",
     "shareable": false,
     "shoppingQuery": "canvas wall art set abstract",
+    "relatedQuery": "dorm canvas wall art print",
     "prices": [
       { "vendor": "Amazon", "price": 29.99 },
       { "vendor": "Target", "price": 34.99 },
@@ -480,6 +522,7 @@
     "category": "Appliances",
     "shareable": false,
     "shoppingQuery": "color changing humidifier",
+    "relatedQuery": "color changing humidifier dorm",
     "prices": [
       { "vendor": "Amazon", "price": 24.99 },
       { "vendor": "Target", "price": 27.99 },
@@ -491,6 +534,7 @@
     "category": "Furniture",
     "shareable": false,
     "shoppingQuery": "folding papasan chair",
+    "relatedQuery": "papasan chair dorm",
     "prices": [
       { "vendor": "Amazon", "price": 79.99 },
       { "vendor": "Target", "price": 89.99 },
@@ -502,6 +546,7 @@
     "category": "Storage",
     "shareable": false,
     "shoppingQuery": "lockable jewelry box",
+    "relatedQuery": "lockable jewelry box",
     "prices": [
       { "vendor": "Amazon", "price": 19.99 },
       { "vendor": "Target", "price": 22.99 },
@@ -513,6 +558,7 @@
     "category": "Storage",
     "shareable": false,
     "shoppingQuery": "desk organizer set",
+    "relatedQuery": "desk organizer set dorm",
     "prices": [
       { "vendor": "Target", "price": 16.99 },
       { "vendor": "Amazon", "price": 14.99 },
@@ -524,6 +570,7 @@
     "category": "Furniture",
     "shareable": false,
     "shoppingQuery": "twin xl upholstered headboard",
+    "relatedQuery": "twin xl upholstered headboard dorm",
     "prices": [
       { "vendor": "Target", "price": 59.99 },
       { "vendor": "Amazon", "price": 54.99 },
@@ -535,6 +582,7 @@
     "category": "Furniture",
     "shareable": false,
     "shoppingQuery": "compact folding chair",
+    "relatedQuery": "compact folding chair dorm",
     "prices": [
       { "vendor": "Amazon", "price": 24.99 },
       { "vendor": "Target", "price": 27.99 },
@@ -546,6 +594,7 @@
     "category": "Appliances",
     "shareable": true,
     "shoppingQuery": "water filter pitcher",
+    "relatedQuery": "water filter pitcher",
     "prices": [
       { "vendor": "Target", "price": 24.99 },
       { "vendor": "Amazon", "price": 21.99 },
@@ -557,6 +606,7 @@
     "category": "Bathroom",
     "shareable": false,
     "shoppingQuery": "shower flip flops",
+    "relatedQuery": "shower flip flops dorm",
     "prices": [
       { "vendor": "Amazon", "price": 9.99 },
       { "vendor": "Target", "price": 11.99 },
@@ -568,6 +618,7 @@
     "category": "Bathroom",
     "shareable": false,
     "shoppingQuery": "cozy memory foam slippers",
+    "relatedQuery": "memory foam slippers",
     "prices": [
       { "vendor": "Amazon", "price": 14.99 },
       { "vendor": "Target", "price": 16.99 },
@@ -580,6 +631,7 @@
     "shareable": true,
     "shoppingQuery": "cordless handheld vacuum",
     "bestBuyQuery": "cordless handheld vacuum",
+    "relatedQuery": "cordless handheld vacuum dorm",
     "prices": [
       { "vendor": "Amazon", "price": 34.99 },
       { "vendor": "Target", "price": 39.99 },
@@ -591,6 +643,7 @@
     "category": "Decor",
     "shareable": false,
     "shoppingQuery": "cute ceramic mug set",
+    "relatedQuery": "cute ceramic mug set dorm",
     "prices": [
       { "vendor": "Amazon", "price": 16.99 },
       { "vendor": "Target", "price": 19.99 },
@@ -602,6 +655,7 @@
     "category": "Decor",
     "shareable": false,
     "shoppingQuery": "microwave safe bowl set",
+    "relatedQuery": "microwave safe bowl set dorm",
     "prices": [
       { "vendor": "Amazon", "price": 19.99 },
       { "vendor": "Target", "price": 22.99 },

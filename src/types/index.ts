@@ -53,6 +53,13 @@ export interface DormItemSeed {
   // only when shoppingQuery is unset or SerpApi returns nothing; Best Buy
   // only carries a fraction of the catalog (mostly appliances/electronics).
   bestBuyQuery?: string;
+  // PROTOTYPE: if set, the modal fetches a "you might also like" grid of
+  // similar-but-different products (see src/lib/serpapi.ts's
+  // lookupSimilarProducts) using this broader, category-level query —
+  // e.g. "canvas wall art dorm" rather than the item's own exact title —
+  // so results are genuinely different designs, not the same item at
+  // different stores.
+  relatedQuery?: string;
   // A real, freely-licensed representative photo (not the live vendor's own
   // listing image — those are copyrighted). CC0 sources need no credit;
   // CC-BY sources must set imageCredit.
@@ -63,4 +70,24 @@ export interface DormItemSeed {
     price: number;
     url?: string;
   }[];
+}
+
+// Curated shape for data/room-themes.json — powers the "decorate your room"
+// page. Each theme item names the room zone it renders in and a Google
+// Shopping query for a live price + photo (reuses lookupShoppingProduct,
+// same as dorm items).
+export type RoomZone = "wall" | "bed" | "desk" | "floor";
+
+export interface RoomThemeItem {
+  title: string;
+  zone: RoomZone;
+  shoppingQuery: string;
+}
+
+export interface RoomTheme {
+  id: string;
+  name: string;
+  description: string;
+  accent: string;
+  items: RoomThemeItem[];
 }

@@ -16,11 +16,20 @@ import type { PriceFormat } from "../types";
 import type { VendorPrice } from "./bookscouter";
 
 interface ShoppingResult {
+  title?: string;
   source?: string;
   extracted_price?: number;
   product_link?: string;
   link?: string;
   thumbnail?: string;
+}
+
+export interface SimilarProduct {
+  title: string;
+  price: number;
+  vendor: string;
+  thumbnail: string;
+  url: string;
 }
 
 async function fetchShoppingResults(
@@ -104,4 +113,90 @@ export async function lookupShoppingProduct(
 
   const imageUrl = results.find((r) => r.thumbnail)?.thumbnail ?? null;
   return { prices, imageUrl };
+}
+
+export interface SimilarProductsResult {
+  // false only means the request itself failed (network error, SerpApi
+  // rate/concurrency cap) — retryable. true + empty products means the
+  // request succeeded and genuinely found nothing worth showing.
+  ok: boolean;
+  products: SimilarProduct[] | null;
+}
+
+function toSimilarProducts(results: ShoppingResult[]): SimilarProduct[] | null {
+  const products = results
+    .filter(
+      (r): r is Required<Pick<ShoppingResult, "title" | "source" | "extracted_price" | "thumbnail">> &
+        ShoppingResult =>
+          typeof r.extracted_price === "number" &&
+          r.extracted_price >= 1 &&
+          !!r.source &&
+          !!r.thumbnail &&
+          !!r.title
+    )
+    .slice(0, 8)
+    .map((r) => ({
+      title: r.title!,
+      price: r.extracted_price!,
+      vendor: r.source!,
+      thumbnail: r.thumbnail!,
+      url: r.product_link ?? r.link ?? "#",
+    }));
+
+  return products.length ? products : null;
+}
+
+async function fetchShoppingResultsOnce(
+  query: string
+): Promise<{ ok: true; results: ShoppingResult[] } | { ok: false }> {
+  const apiKey = process.env.SERPAPI_KEY;
+  if (!apiKey) return { ok: true, results: [] };
+
+  const params = new URLSearchParams({
+    engine: "google_shopping",
+    q: query,
+    api_key: apiKey,
+  });
+
+  try {
+    const res = await fetch(`https://serpapi.com/search.json?${params.toString()}`, {
+      next: { revalidate: 60 * 60 * 24 * 21 },
+    });
+    if (!res.ok) {
+      console.error(`SerpApi error (${res.status}) for related-products query "${query}"`);
+      return { ok: false };
+    }
+    const data = await res.json();
+    return { ok: true, results: data.shopping_results ?? [] };
+  } catch (err) {
+    console.error(`SerpApi network error for related-products query "${query}":`, err);
+    return { ok: false };
+  }
+}
+
+// "You might also like" results for dorm decor items — a broader,
+// category-level query (e.g. "canvas wall art dorm" rather than one
+// specific print) so Google Shopping returns genuinely different
+// products/designs instead of the same item across vendors. Deliberately
+// a separate query from lookupShoppingProduct's exact-item query, and
+// deliberately category-level so many items can share one cached call.
+//
+// The dorm page fires up to 54 of lookupShoppingProduct's exact-item
+// requests concurrently on page load (see src/lib/concurrency.ts). If a
+// visitor opens an item's modal — firing this lookup — while that burst
+// is still in flight, the combined request volume can trip SerpApi's
+// per-key concurrency cap on the free tier. Since that's usually a
+// transient collision, one retry after a short delay resolves most of
+// them without the caller needing to know anything went wrong.
+export async function lookupSimilarProducts(
+  query: string
+): Promise<SimilarProductsResult> {
+  let attempt = await fetchShoppingResultsOnce(query);
+  if (!attempt.ok) {
+    await new Promise((resolve) => setTimeout(resolve, 900));
+    attempt = await fetchShoppingResultsOnce(query);
+  }
+  if (!attempt.ok) return { ok: false, products: null };
+
+  return { ok: true, products: toSimilarProducts(attempt.results) };
 }

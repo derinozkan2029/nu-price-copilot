@@ -8,6 +8,7 @@ const nextConfig = {
       { protocol: "https", hostname: "live.staticflickr.com" },
       { protocol: "https", hostname: "images.rawpixel.com" },
       { protocol: "https", hostname: "encrypted-tbn*.gstatic.com" },
+      { protocol: "https", hostname: "serpapi.com" },
     ],
   },
 };
