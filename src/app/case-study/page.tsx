@@ -463,6 +463,37 @@ export default function CaseStudyPage() {
             look like they belong in the room instead of a warped decal.
           </p>
         </Callout>
+        <Callout>
+          <p className="font-medium text-ink">
+            &quot;Similar products&quot; needed to feel like discovery, not a
+            duplicate listing.
+          </p>
+          <p className="mt-1">
+            Each of the 54 dorm items carries a hand-authored{" "}
+            <code>relatedQuery</code>, deliberately broader than the item&apos;s
+            own search term (<code>&quot;mini fridge dorm&quot;</code>, not the
+            exact SKU) so scrolling past a product surfaces genuinely
+            different designs at other price points instead of the same
+            item re-listed at a second vendor. Results get filtered to
+            listings with a title, source, and thumbnail, and priced at
+            $1 or more (the same buyback-listing filter from the textbook
+            fix above), then capped to the first 8.
+          </p>
+          <p className="mt-1">
+            The catalog grid already fires up to 54 concurrent SerpApi price
+            lookups on page load, so opening an item modal mid-burst competes
+            with that same burst for SerpApi&apos;s per-key concurrency cap,
+            and a genuinely fine query could come back empty. Rather than
+            fetch every item&apos;s related products upfront (expensive on
+            the free-tier budget, and mostly wasted since most items never
+            get opened), each modal fetches its own related products lazily
+            on open, with one retry after a 900ms delay if the first call
+            gets rate-limited. The cache also keeps a failed lookup
+            (<code>undefined</code>) distinct from a confirmed-empty one
+            (<code>null</code>), so a modal reopened later retries instead of
+            staying blank forever on a transient limit.
+          </p>
+        </Callout>
       </Section>
 
       <Section
